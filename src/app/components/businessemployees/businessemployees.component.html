@@ -1,0 +1,30 @@
+<div class="wrap">
+  <div class="cnt">
+      <div class="header">
+        <div class="title-text">My Employees</div>
+      </div> 
+      <div class="center">
+        <div routerLink="/business/user/{{item.Id}}/{{item.userType}}"  *ngFor="let item of merchantEmployees; let i = index" class="row row-items">
+          <div class="row-wrapper">
+            <div class="row-left">
+              <div *ngIf="item.BusinessName !== null">
+                {{item.BusinessName}}
+              </div>
+              <div *ngIf="item.CustomerName !== null">
+                {{item.CustomerName}}
+              </div>
+            </div>
+            <div class="row-right">
+              <div class="certified-col">
+                <!-- <i class="material-icons">
+                  done
+                </i><br /> -->
+                <span *ngIf="item.granted == 0 " class="certified-txt">Awaiting Authorization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+      </div>
+    </div>
+  </div>

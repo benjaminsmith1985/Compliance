@@ -1,0 +1,275 @@
+<div class="wrap">
+  <div class="cnt">
+    <form [formGroup]="searchForm" (ngSubmit)="searchUser()">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li class="breadcrumb-item grey-txt-active">Search</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+        <div class="section">
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Search
+            </div>
+            <div class="section-input-area">
+              <select class="custom-select" formControlName="search">
+                <option value="all">All</option>
+                <option value="user">User</option>
+                <option value="transactions">Transaction</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Begin Search All -->
+
+          <div *ngIf="searchForm.value.search == 'all'" class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Enter keyword
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="keyword" type="text" />
+            </div>
+          </div>
+
+          <!-- End Search all -->
+
+          <!-- Begin Search User -->
+          <div *ngIf="searchForm.value.search == 'user'">
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                User type
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="userType">
+                  <option value="">All</option>
+                  <option value="natural">Natural Person</option>
+                  <option value="legal">Legal Entity</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="searchForm.value.userType == 'natural'" class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Gender
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="gender">
+                  <option value="">All</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                User ICS-No.
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="icsNo" type="text" />
+              </div>
+            </div>
+            <!-- Begin Natural Person -->
+            <div *ngIf="searchForm.value.userType == 'natural'">
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Firstname
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="firstName" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Lastname
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="lastName" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Address
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="address" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Email
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="email" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Identification Type
+                </div>
+                <div class="section-input-area">
+                  <select class="custom-select" formControlName="idType">
+                    <option value="">Select Type</option>
+                    <option value="legal">Paspoort</option>
+                    <option value="legal">Drivings License</option>
+                    <option value="legal">ID Card</option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="searchForm.value.idType != ''" class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Document No
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="docNo" type="text" />
+                </div>
+              </div>
+            </div>
+            <!-- End Natural Person -->
+
+            <!-- Begin Legal Entity -->
+            <div *ngIf="searchForm.value.userType == 'legal'">
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Chamber Of Commerce No.
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="chamberNo" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Company Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="companyName" type="text" />
+                </div>
+              </div>
+            </div>
+            <!-- End Legal Entity -->
+
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Risk Rating
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="risk">
+                  <option value="">Select Rating</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Unkown">Unkown</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- End Search User -->
+
+          <!-- Begin Transactions -->
+
+          <div *ngIf="searchForm.value.search == 'transactions'">
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Type
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="transactionType">
+                  <option value="">All</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Giro">Giro-Based</option>
+                </select>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Island
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="island">
+                  <option value="">All</option>
+                  <option value="Curacao">Cura&ccedil;ao</option>
+                  <option value="Aruba">Aruba</option>
+                  <option value="Bonaire">Bonaire</option>
+                  <option value="St.Maarten">St.Maarten</option>
+                  <option value="Saba">Saba</option>
+                  <option value="St.Eustatius">St.Eustatius</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Has Report
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="hasReport">
+                  <option value="">All</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Reported To FIU
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="fiuReported">
+                  <option value="">All</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Id
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="transactionId" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Amount
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="amount" type="number" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Customer Name
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="customerName" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Date
+              </div>
+              <div class="section-input-area">
+                <input (click)="d.toggle()" formControlName="transactionDate" class="input" ngbDatepicker #d="ngbDatepicker"
+                  type="text" />
+              </div>
+            </div>
+          </div>
+
+          <!-- End Transactions -->
+        </div>
+        <button class="button lime-green">Search</button>
+      </div>
+    </form>
+    <div style="height: 50px;">
+      &nbsp;
+    </div>
+  </div>
+</div>

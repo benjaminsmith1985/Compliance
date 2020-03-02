@@ -1,0 +1,79 @@
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          CUSTOMER PORTAL
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit('customer')">
+          <input formControlName="icsNo" placeholder="ICS-No." type="text" />
+          <input formControlName="password" type="password" name="password" required placeholder="Password" />
+          <button class="button light-blue">Sign In</button>
+        </form>
+        <div class="text">Forgot Password?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginBusinessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          BUSINESS PORTAL
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit('business')">
+          <input formControlName="email" placeholder="Email" type="text" />
+          <input formControlName="icsNo" placeholder="Merchant ICS-No." type="text" />
+          <input formControlName="password" type="password" name="password" required placeholder="Password" />
+          <button class="button light-blue">Sign In</button>
+        </form>
+        <!-- <div class="text">Forgot Password?</div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <div class="modal fade" id="fpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          TROUBLE ACCESSING YOUR ACCOUNT?
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="fpForm" (ngSubmit)="onSubmit('business')">
+          <input formControlName="email" name="email" placeholder="Email" type="email" email="true" />
+          <button class="button light-blue">Send me a reset link</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->

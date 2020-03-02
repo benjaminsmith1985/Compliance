@@ -1,0 +1,168 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="header">
+      <div *ngIf="userType == 'natural'" class="title-text">User Information</div>
+      <div *ngIf="userType == 'legal'" class="title-text">Company Information</div>
+    </div>
+
+    <div *ngIf="userType == 'natural' && user">
+      <div class="row">
+        <div class="col col2">
+          <div class="details">
+            <div>
+              Email:<span class="txt-spacing">{{user.firstname}}</span>
+            </div>
+            <div>
+              First Name:<span class="txt-spacing">{{user.firstname}}</span>
+            </div>
+            <div>
+              Last Name: <span class="txt-spacing">{{user.lastname}}</span>
+            </div>
+            <div>
+              Date of Birth: <span class="txt-spacing">{{user.birthDate}}</span>
+            </div>
+            <div>
+              Birth Country: <span class="txt-spacing">Cura&ccedil;ao</span>
+            </div>
+            <div>
+              Nationality: <span class="txt-spacing">{{user.nationality}}</span>
+            </div>
+            <div>&nbsp;</div>
+            <div>
+              Address: <span class="txt-spacing">{{user.address}}</span>
+            </div>
+            <div>
+              Place: <span class="txt-spacing">{{user.place}}</span>
+            </div>
+            <div>
+              Country: <span class="txt-spacing">{{user.country}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col3">
+          <div data-toggle="modal" data-target="#changeEmailModal">
+            &nbsp;
+          </div>
+          <div data-toggle="modal" data-target="#changePasswordModal">
+
+          </div>
+          <div class="details">
+            <div data-toggle="modal" data-target="#changeDetailsModal">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div class="header">
+        <div class="title-text">Objective Indicators</div>
+      </div>
+      <div class="center">
+        <div *ngFor="let item of indicators.objective; let i = index" class="row row-items">
+          <div style="font-size: 14px; padding: 10px;" class="row-wrapper">
+            <div style="font-weight: 600">
+              {{item.indicator}}
+            </div>
+            <div>
+              {{item.definition}}
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+    <div>
+      &nbsp;
+    </div>
+    <div class="header">
+      <div class="title-text">Subjective Indicators</div>
+    </div>
+    <div class="center">
+      <div *ngFor="let item of indicators.subjective; let i = index" class="row row-items">
+        <div style="font-size: 14px; padding: 10px;" class="row-wrapper">
+          <div style="font-weight: 600">
+            {{item.indicator}}
+          </div>
+          <div>
+            {{item.definition}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>&nbsp;</div>
+      <div class="header">
+        <div class="title-text">Additional Information</div>
+      </div>
+      <div class="center">
+        <div style="font-size: 14px; ">
+          <textarea style="width: 100%; padding: 10px; margin: 0; height: 100px; border: 0 solid;">Type here Additional Information</textarea>
+        </div>
+        <div style="width: 150px; margin: 0 auto;">
+          <button (click)="createTransaction()" class="button light-blue">Report</button>
+        </div>
+      </div>
+    <div *ngIf="userType == 'legal'">
+      <div class="row">
+        <div class="col col2">
+          <div class="details">
+            <div>
+              Name:<span class="txt-spacing">{{user.name}}</span>
+            </div>
+            <div>
+              Email:<span class="txt-spacing">{{user.email}}</span>
+            </div>
+            <div>
+              Trade Name:<span class="txt-spacing">{{user.tradeName}}</span>
+            </div>
+            <div>
+              Chamber No: <span class="txt-spacing">{{user.chamberNo}}</span>
+            </div>
+            <div>
+              Address: <span class="txt-spacing">{{user.address}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col3">
+          <div data-toggle="modal" data-target="#changeEmailModal">
+            REPORT COMPANY
+          </div>
+          <div data-toggle="modal" data-target="#changePasswordModal">
+
+          </div>
+          <div class="details">
+            <div data-toggle="modal" data-target="#changeDetailsModal">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="identificationDocuments">
+        <div>&nbsp;</div>
+        <div class="header">
+          <div class="title-text">Company Documents</div>
+        </div>
+        <div *ngFor="let item of identificationDocuments; let i = index" class="row row-items">
+          <div class="row-wrapper">
+            <div class="row-left">
+              {{item.documentType}}
+            </div>
+            <div class="row-right">
+              <div class="certified-col">
+                <i class="material-icons">
+                  done
+                </i><br />
+                <span class="certified-txt">Certified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+
+    <div style="height: 150px;">
+      &nbsp;
+    </div>
+  </div>
+</div>
+

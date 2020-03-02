@@ -1,0 +1,56 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li class="breadcrumb-item grey-txt-active">Billing History</li>
+              </ol>
+            </nav>
+          </div>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="fas fa-file-excel"></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-file-pdf"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="row-header">
+        <div class="row-cols col-invNo">Invoice No</div>
+        <div class="row-cols col-summary">Summary</div>
+        <div class="row-cols col-date">Due Date</div>
+        <div class="row-cols col-date">Date Paid</div>
+        <div class="row-cols col-balance">Balance</div>
+        <div class="row-cols col-total">Total</div>
+        
+      </div>
+      <div routerLink="/billing/invoice/{{item.invoiceNo}}" *ngFor="let item of invoices; let i = index" class="row row-items">
+        <div class="row-wrapper small-col">
+          <div class="row-cols col-invNo">
+            {{item.invoiceNo}}
+          </div>
+          <div class="row-cols col-summary">
+            {{item.summary}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.dueDate}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.datePaid}}
+          </div>
+          <div class="row-cols col-balance">
+            {{item.balance}}
+          </div>
+          <div class="row-cols col-total">
+            {{item.total}}
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+<div class="wrapper">
+
+  <div>
+    <nav  id="sidebar">
+      <div class="sidebar-header lime-green">
+        <div class="sidebar-txt">BUSINESS PORTAL</div>
+        <div class="sidebar-username" *ngIf="currentUser">{{currentUser.merchantname}}</div>
+      </div>
+      <ul class="list-unstyled components">
+        <li>
+          <a routerLink="/search"><i class="fas fa-search icons"></i>Search</a>
+        </li>
+        <li>
+          <a href="#customersSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-exchange-alt icons"></i>Customers</a>
+          <ul class="collapse list-unstyled" id="customersSubmenu">
+            <li>
+              <a routerLink="/business/customers/1/10">My Customers</a>
+            </li>
+            <li>
+              <a routerLink="/business/addcustomer">Add New Customer</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#transactionsSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-exchange-alt icons"></i>Transaction</a>
+          <ul class="collapse list-unstyled" id="transactionsSubmenu">
+            <li>
+              <a routerLink="/business/transactions/1/10">My Transactions</a>
+            </li>
+            <!-- <li>
+              <a routerLink="/business/newtransaction">Create Transaction</a>
+            </li> -->
+          </ul>
+        </li>
+        <li>
+          <a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-flag icons"></i>Report</a>
+          <ul class="collapse list-unstyled" id="reportsSubmenu">
+            <li>
+              <a routerLink="/business/reports/1/10">Saved Reports</a>
+            </li>
+            <li>
+              <a routerLink="/business/fiureports/1/10">FIU Reports</a>
+            </li>
+            <!-- <li>
+              <a routerLink="/business/newreport">Create Report</a>
+            </li> -->
+          </ul>
+        </li>
+        <li>
+          <a routerLink="/merchantaccount"><i class="fas fa-file-user icons"></i>Merchant Account</a>
+        </li>
+        <li>
+          <a href="#billingSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-money-bill-alt icons"></i>Billing</a>
+          <ul class="collapse list-unstyled" id="billingSubmenu">
+            <li>
+              <a routerLink="/billing/history">Billing History</a>
+            </li>
+            <li>
+              <a routerLink="/billing/payment">Make a Payment</a>
+            </li>
+            <li>
+              <a routerLink="/billing/payment">Credit Card(s)</a>
+            </li>
+            <li>
+              <a routerLink="/billing/payment">Paypal</a>
+            </li>
+          </ul>
+        </li>
+        <!-- <li>
+          <a routerLink="/business/accounts">
+            <i class="fas fa-building icons"></i>Admin Accounts</a>
+        </li>
+        <li>
+          <a routerLink="/billing"><i class="fas fa-cog icons"></i>Billing</a>
+        </li> -->
+        <li>
+          <a (click)="logout()"><i class="fas fa-sign-out-alt icons"></i>Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- <div>
+    <nav id="sidebar">
+      <div class="sidebar-header blue">
+        <div class="sidebar-txt">CUSTOMER PORTAL</div>
+      </div>
+      <ul class="list-unstyled components">
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-user icons"></i>My
+            Profile</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <a routerLink="/customer">Personal Information</a>
+            </li>
+            <li>
+              <a routerLink="/customerbusiness">Business Information</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#shareSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-user icons"></i>Data
+            Sharing</a>
+          <ul class="collapse list-unstyled" id="shareSubmenu">
+            <li>
+              <a routerLink="/datashare">My Sharings</a>
+            </li>
+            <li>
+              <a routerLink="/datashare/request">Requests</a>
+            </li>
+            <li>
+              <a routerLink="/datashare/options">Options</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a routerLink="/privacy"><i class="fas fa-cog icons"></i>Privacy Policy</a>
+        </li>
+        <li>
+          <a routerLink="/terms"><i class="fas fa-cog icons"></i>Terms and Conditions</a>
+        </li>
+        <li>
+          <a (click)="logout()"><i class="fas fa-sign-out-alt icons"></i>Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </div> -->
+</div>
+
+
+<div class="modal fade" id="searchCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          SEARCH CUSTOMER
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="searchForm" (ngSubmit)="searchUser()">
+          <select formControlName="userType">
+            <option value="">Select Customer Type</option>
+            <option value="natural">Natural Person</option>
+            <option value="legal">Legal Person</option>
+          </select>
+          <!-- <div *ngIf="customerType == 'legal'"> -->
+          <input formControlName="icsNo" placeholder="ICS No." type="text" />
+          <input formControlName="chamberNo" placeholder="Chamber Of Commerce No." type="text" />
+          <!-- <input [(ngModel)]="companyName" name="company" placeholder="Company Name" type="text " /> -->
+          <!-- </div> -->
+          <!-- <div *ngIf="customerType == 'natural'">
+            <input name="email" placeholder="ID" type="email" email="true" />
+            <input name="email" placeholder="First Name" type="email" email="true" />
+            <input name="password" required placeholder="Last Name" />
+            <input name="password" required placeholder="Email" />
+          </div> -->
+
+          <button class="button light-blue">Search Customer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

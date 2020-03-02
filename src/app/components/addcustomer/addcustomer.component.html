@@ -1,0 +1,245 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li class="breadcrumb-item grey-txt-active">Add New Customer</li>
+              </ol>
+            </nav>
+          </div>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="far fa-qrcode"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="fromWrapper">
+        <form [formGroup]="insertCustomerForm" (ngSubmit)="submitForm()">
+          <div class="section">
+            <div class="section-title">Personal Information</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Select User Type
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="userType">
+                  <option value="natural">Natural Person</option>
+                  <option value="legal">Legal Person</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="insertCustomerForm.value.userType == 'natural'">
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Is this person politcally exposed?
+                </div>
+                <div class="section-input-area">
+                  <select class="custom-select" formControlName="ispep">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">Unkown</option>
+                  </select>
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  First Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="firstName" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Last Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="lastName" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Initials
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="initials" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Married Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="marriedName" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Gender
+                </div>
+                <div class="section-input-area">
+                  <select class="custom-select" formControlName="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Email
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="email" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Telephone No.
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="phone" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Date of Birth
+                </div>
+                <div class="section-input-area">
+                  <input (click)="d.toggle()" formControlName="birthDate" class="input" ngbDatepicker #d="ngbDatepicker"
+                    type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Birth Country
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="birthCountry" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Nationality
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="nationality" type="text" />
+                </div>
+              </div>
+              <div>
+                &nbsp;
+              </div>
+            </div>
+            <div *ngIf="insertCustomerForm.value.userType == 'legal'">
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Business Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="companyname" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Trade Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="tradename" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Legal Form
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="legalForm" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Chamber Of Commerce No.
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="chamberno" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Email
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="email" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Telephone
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="phone" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Sector
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="occgroup" type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="section">
+            <div class="section-title">Address Information</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Street Name
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="streetName" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Street Number
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="streetNumber" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Place
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="place" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Country
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="country" type="text" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="button lime-green">Add Customer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div style="height: 150px;">
+      &nbsp;
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="wrap">
+  <div class="cnt">
+    <div *ngIf="merchantUsers" class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li class="breadcrumb-item grey-txt-active">My Customers ({{amountCustomers}})</li>
+              </ol>
+            </nav>
+          </div>
+        </nav>
+      </div>
+      <div class="row-header">
+        <div class="row-cols col-icsno">ICS-No</div>
+        <div class="row-cols col-customer">Customer</div>
+      </div>
+      <div (click)="userClick(item, action)" *ngFor="let item of merchantUsers; let i = index" class="row row-items">
+        <div class="row-wrapper small-col">
+          <div class="row-cols col-icsno">
+            {{item.icsNo}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.customername}}
+          </div>
+          <div class="right-col">
+            <span *ngIf="item.granted == 0 " class="grey-txt">Pending Authorization</span>
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div>
+        <div *ngIf="amountPages > 1" class="pagination-wrapper">
+          <span *ngFor='let in of counter(amountPages);let i = index; let last = last'>
+            <span class="span" routerLink="/business/customers/{{i+1}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
+          </span>
+          <span (click)="open(searchPage)" *ngIf="amountPagingBtns < amountPages" class="span">
+            ...
+          </span>
+          <span class="span" routerLink="/business/customers/{{amountPages}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #action let-modal>
+  <div class="my-modal-header">
+    <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
+  </div>
+  <div class="my-modal-body">
+    <div class="my-modal-title">PLEASE WAIT ON USER AUTHORIZATION</div>
+    <div (click)="modal.dismiss('click')" class="my-modal-btn">
+      OK
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #searchPage let-modal>
+  <form [formGroup]="searchPageForm">
+    <div class="my-modal-header">
+      <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
+    </div>
+    <div class="my-modal-body">
+      <div class="my-modal-title">PLEASE TYPE IN PAGE NUMBER</div>
+      <div><input formControlName="pageNr" /></div>
+      <div (click)="goToPage()" class="my-modal-btn">
+        GO
+      </div>
+    </div>
+  </form>
+
+</ng-template>

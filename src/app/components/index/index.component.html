@@ -1,0 +1,147 @@
+<div class="center">
+  <div class="login-type-container">
+    <div class="type-container left">
+      <div class="icons-area">
+        <i class="fal fa-user"></i>
+      </div>
+      <div class="text-area">
+        <div>CUSTOMER PORTAL</div>
+        <div>
+          &nbsp;
+        </div>
+        <div data-toggle="modal" data-target="#loginModal" class="button blue">
+          LOGIN
+        </div>
+        <div (click)="registerCustomerDialog();" class="button grey">
+          REGISTER
+        </div>
+      </div>
+    </div>
+    <div class="type-container right">
+      <div class="icons-area">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <div class="text-area">
+        <div>BUSINESS PORTAL</div>
+        <div>
+          &nbsp;
+        </div>
+        <div data-toggle="modal" data-target="#loginBusinessModal" class="button blue">
+          LOGIN
+        </div>
+        <div (click)="registerMerchantDialog();" class="button grey">
+          REGISTER
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          CUSTOMER REGISTER
+        </div>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="registerCustomerForm">
+          <span *ngIf="customerPage == '1'">
+            <!-- <span class="modal-subtitle">STEP 1 OF 3</span> -->
+            <input name="firstname" formControlName="firstname" placeholder="First Name" />
+            <input name="lastname" formControlName="lastname" placeholder="Last Name" />
+            <input name="initials" formControlName="initials" placeholder="Initials" />
+            <input name="nationality" formControlName="nationality" required placeholder="Nationality" />
+
+            <select class="custom-select" formControlName="gender">
+              <option value="">Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <div (click)="page(2, 'customer')" class="button light-blue">NEXT STEP</div>
+          </span>
+          <span *ngIf="customerPage == '2'">
+            <!-- <span class="modal-subtitle">STEP OF 3</span> -->
+            <input name="telephone" formControlName="telephoneNo" placeholder="Telephone" type="email" email="true" />
+            <input name="address" formControlName="address" required placeholder="Address" />
+            <input name="place" formControlName="place" required placeholder="Place" />
+            <input name="country" formControlName="country" required placeholder="Country" />
+            <div (click)="page(3, 'customer')" class="button light-blue">NEXT STEP</div>
+            <div (click)="page(1, 'customer')" class="button light-brown">PREVIOUS STEP</div>
+
+          </span>
+          <span *ngIf="customerPage == '3'">
+            <!-- <span class="modal-subtitle">FINAL STEP</span> -->
+            <input name="email" formControlName="email" placeholder="Email" type="email" email="true" />
+            <input name="password" formControlName="password" required placeholder="Password" />
+            <input name="retypepassword" formControlName="retypepassword" required placeholder="Retype Password" />
+            <div (click)="registerCustomer()" class="button light-blue">REGISTER</div>
+            <div (click)="page(2, 'customer')" class="button light-brown">PREVIOUS STEP</div>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerBusinessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          BUSINESS REGISTER
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registerMerchantForm">
+          <span *ngIf="merchantPage == '1'">
+            <!-- <span class="modal-subtitle">STEP 1 OF 3</span> -->
+            <input name="firstname" formControlName="firstname" placeholder="Statutory Name" />
+            <input name="lastname" formControlName="lastname" placeholder="Business Name" />
+            <input name="initials" formControlName="initials" placeholder="Legal Form" />
+            <select class="custom-select" formControlName="gender">
+              <option value="">Sector</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <div (click)="page(2, 'merchant')" class="button light-blue">NEXT STEP</div>
+          </span>
+          <span *ngIf="merchantPage == '2'">
+            <!-- <span class="modal-subtitle">STEP OF 3</span> -->
+            <input name="telephone" formControlName="telephoneNo" placeholder="Street Name" type="email" email="true" />
+            <input name="address" formControlName="address" required placeholder="Street Number" />
+            <input name="place" formControlName="place" required placeholder="Place" />
+            <input name="country" formControlName="country" required placeholder="Country" />
+            <div (click)="page(3, 'merchant')" class="button light-blue">NEXT STEP</div>
+            <div (click)="page(1, 'merchant')" class="button light-brown">PREVIOUS STEP</div>
+
+          </span>
+          <span *ngIf="merchantPage == '3'">
+            <!-- <span class="modal-subtitle">FINAL STEP</span> -->
+            <input name="firstname" formControlName="firstname" placeholder="First Name" />
+            <input name="lastname" formControlName="lastname" placeholder="Last Name" />
+            <input name="email" formControlName="email" placeholder="Email" type="email" email="true" />
+            <input name="password" formControlName="password" required placeholder="Password" />
+            <input name="retypepassword" formControlName="retypepassword" required placeholder="Retype Password" />
+            <div (click)="registerCustomer()" class="button light-blue">REGISTER</div>
+            <div (click)="page(2, 'merchant')" class="button light-brown">PREVIOUS STEP</div>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="wrap">
+  <div class="cnt">
+    <div *ngIf="user && transactions" class="center">
+      <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li routerLink="/business/customers" class="breadcrumb-item breadcrumb-off">My Customers</li>
+          <li *ngIf="user.icsNo" routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item breadcrumb-off">{{user.customerName}}</li>
+          <li class="breadcrumb-item active" aria-current="page">Transactions ({{transactions.length}})</li>
+        </ol>
+      </nav> -->
+
+      <div *ngIf="user" class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/business/customers" class="breadcrumb-item grey-txt underline cursor">My Customers</li>
+                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt underline cursor">{{user.customerName}}</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">Transactions ({{transactions.length}})</li>
+              </ol>
+            </nav>
+          </div>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="fas fa-file-excel"></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-file-pdf"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="row-header">
+        <div class="row-cols col-date">Transaction Id</div>
+        <div class="row-cols col-date">Date</div>
+        <div class="row-cols col-indicator">Type</div>
+        <div class="row-cols col-type">Amount</div>
+        <div class="row-cols col-type">Reported</div>
+      </div>
+      <div routerLink="/usertransaction/{{item.uuid}}" *ngFor="let item of transactions; let i = index" class="row row-items">
+        <div class="row-wrapper small-col">
+          <div class="row-cols col-date">
+            {{item.uuid}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.formattedDate}}
+          </div>
+          <div class="row-cols col-indicator">
+            {{item.transactionType}}
+          </div>
+          <div class="row-cols col-type">
+            {{item.amount}}
+          </div>
+          <div class="row-cols col-type">
+            <span *ngIf="item.reported == '1'">Yes</span><span *ngIf="item.reported == '0'">No</span>
+          </div>
+        </div>
+        <!-- <div class="row-wrapper small-col">
+          <div class="row-cols col-date">
+            {{item.formattedDate}}
+          </div>
+          <div class="row-cols col-indicator">
+            {{item.transactionType}}
+          </div>
+          <div class="row-cols col-type">
+            {{item.amount}}
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

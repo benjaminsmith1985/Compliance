@@ -1,0 +1,70 @@
+<div *ngIf="reports" class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li class="breadcrumb-item grey-txt-active">Saved Reports ({{amountReports}})</li>
+              </ol>
+            </nav>
+          </div>
+          <!-- <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="fas fa-search"></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-file-excel"></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-file-pdf"></i>
+            </li>
+          </ul> -->
+        </nav>
+      </div>
+      <div class="row-header">
+        <div class="row-cols col-date">Transaction Id</div>
+        <div class="row-cols col-date">Date</div>
+        <div class="row-cols col-date">Customer</div>
+        <div class="row-cols col-date">Reported to FIU</div>
+      </div>
+      <!-- <div routerLink="/userreport/{{item.reportuuid}}" *ngFor="let item of reports; let i = index" class="row row-items"> -->
+      <div routerLink="/usertransaction/{{item.uuid}}" *ngFor="let item of reports; let i = index" class="row row-items">
+        <div class="row-wrapper small-col">
+          <div class="row-cols col-date">
+            {{item.uuid}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.formattedDate ? item.formattedDate : ''}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.customername}}
+          </div>
+          <div class="row-cols col-date">
+            {{item.fiuReported == '1' ? 'Yes' : 'No'}}
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div>
+        <div *ngIf="amountPages > 1" class="pagination-wrapper">
+          <span *ngFor='let in of counter(amountPages);let i = index; let last = last'>
+              <span class="span" routerLink="/business/reports/{{i+1}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
+          </span>
+          <span *ngIf="amountPagingBtns < amountPages" class="span">
+            ...
+          </span>
+          <span class="span" routerLink="/business/reports/{{amountPages}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!reports" class="wrap">
+  <div class="cnt">
+    <div class="center noInfo">
+      No reports saved
+    </div>
+  </div>
+</div>

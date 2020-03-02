@@ -1,0 +1,196 @@
+<!-- <div class="wrap">
+    <div class="cnt">
+        <div class="header">
+            <div class="title"><i class="fal fa-user"></i></div>
+            <div class="title-text">My Business Accounts</div>
+            <button style="float: right;" type="button" class="btn btn-dark">Add Account</button>
+        </div>
+        <div class="center">
+            <div id="accordion">
+                <div *ngFor="let item of merchantAccounts; let i = index" class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#merchant' + i"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                {{item.name}}<i style="color: green;" *ngIf="item.name == 'Rolling Rock Technologies'" class="material-icons">
+                                        check_circle
+                                        </i>
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="{{'merchant' + i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col col2">
+                                    <div class="bold">{{item.email}}</div>
+                                    <div class="details">
+                                        <div>
+                                            Official Name:<span class="txt-spacing">{{item.name}}</span>
+                                        </div>
+                                        <div>
+                                            Trade Name: <span class="txt-spacing">{{item.tradeName}}</span>
+                                        </div>
+                                        <div>
+                                            Chamber of Commerce no.: <span class="txt-spacing">{{item.chamberNo}}</span>
+                                        </div>
+                                        <div>
+                                            Business Address: <span class="txt-spacing">{{item.address}}</span>
+                                        </div>
+                                        <div>
+                                            Telephone Number: <span class="txt-spacing">{{item.telephone}}</span>
+                                        </div>
+                                        <div>
+                                            Occupational Group: <span class="txt-spacing">{{item.OccupationalGroup}}</span>
+                                        </div>
+                                        <div>
+                                            Status: <span class="txt-spacing">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col3">
+                                    <div>
+                                        <button type="button" data-toggle="modal" data-target="#changeEmailModal" class="btn btn-light btn-sm">Change
+                                            Email
+                                        </button>
+                                    </div>
+                                    <div class="details">
+                                        <div>
+                                            <button type="button" data-toggle="modal" data-target="#changeDetailsModal"
+                                                class="btn btn-light btn-sm">Change
+                                                Details
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px 55px;">
+                            <div style="font-weight: 600; margin-bottom: 10px;" class="title-text">Business Documents</div>
+                            <div class="list-group">
+                                <button type="button" class="list-group-item list-group-item-action">
+                                    <a href="../../../assets/incor.pdf" target="_blank">Articles of Incorporation</a>
+                                </button>
+                                <button type="button" class="list-group-item list-group-item-action">
+                                    <a href="../../../assets/chamber.pdf" target="_blank">Chamber of Commerce</a>
+                                </button>
+                                <button type="button" class="list-group-item list-group-item-action">
+                                    <a href="../../../assets/share.pdf" target="_blank"> Shareholders register</a>
+                                </button>
+                                <button type="button" class="list-group-item list-group-item-action">
+                                    <a href="../../../assets/esta.pdf" target="_blank">Application establishment permit</a>
+                                </button>
+                            </div>
+                        </div>
+                        <div style="height: 40px;">&nbsp;</div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 50px;">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE PASSWORD
+                </div>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit('customer')">
+                    <input name="email" placeholder="Old Password" type="email" email="true" />
+                    <input name="email" placeholder="New Password" type="email" email="true" />
+                    <input name="password" required placeholder="Retype New Password" />
+                    <button class="button light-blue">Change Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE EMAIL
+                </div>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit('customer')">
+                    <input name="email" placeholder="New Email Address" type="email" email="true" />
+                    <input name="password" required placeholder="Confirm New Email Address" />
+                    <button class="button light-blue">Send Confirmation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE DETAILS
+                </div>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit('customer')">
+                    <input name="email" placeholder="New Address" type="email" email="true" />
+                    <input name="password" required placeholder="New Place" />
+                    <input name="password" required placeholder="New Country" />
+                    <button class="button light-blue">Save Details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="wrap">
+        <div class="cnt">
+            <div class="header">
+                <div class="title-text">Admin Accounts</div>
+                <div routerLink="/customerbusiness/add" style="float:right; line-height: 50px; margin-left: 5px; font-size: 12px;">
+                    Add Account
+                </div>
+                <div data-toggle="modal" data-target="#addAccountModal" style="float:right; line-height: 50px; padding-top: 8px; font-size: 12px;"><i
+                        class="material-icons">
+                        add_circle
+                    </i>
+                </div>
+            </div>
+            <div class="center">
+                <div class="row row-items">
+                    <div class="row-wrapper">
+                        <div class="row-left">
+                            Sherman Smith
+                        </div>
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>

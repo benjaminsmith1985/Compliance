@@ -1,0 +1,98 @@
+.modal .modal-content {
+  border-width: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+.modal .modal-content .modal-h1 {
+  overflow: hidden;
+}
+.modal .modal-content .modal-h1 .model-close-container {
+  padding: 10px 15px 0 0;
+  text-align: right;
+}
+.modal .modal-content .modal-h1 .model-close-container .fa-times {
+  font-size: 20px;
+  cursor: pointer;
+}
+.modal .modal-content .modal-h1 .model-close-container .fa-times:hover {
+  color: #fff;
+}
+.modal .modal-content .modal-h {
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.modal .modal-content .modal-h .modal-icon-container {
+  float: left;
+  height: 30px;
+  width: 50px;
+  line-height: 30px;
+  text-align: center;
+  padding-left: 8px;
+}
+.modal .modal-content .modal-h .modal-title {
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  line-height: 30px;
+  height: 30px;
+  padding-left: 4px;
+}
+.modal .modal-content .modal-h .model-close-container {
+  float: right;
+  width: 25px;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+}
+.modal .modal-content .modal-h .model-close-container .fa-times {
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 50px;
+}
+.modal .modal-content .modal-body {
+  padding: 10px 80px 80px 80px;
+}
+.modal .modal-content .modal-body input {
+  width: 100%;
+  background-color: #333333;
+  border: 0;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+.modal .modal-content .modal-body .light-blue {
+  background-color: #339af0;
+}
+.modal .modal-content .modal-body .dark-blue {
+  background-color: #3b579d;
+}
+.modal .modal-content .modal-body .button {
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+}
+.modal .modal-content .modal-body .button .fa-facebook-square {
+  font-size: 18px;
+}
+.modal .modal-content .modal-body .text {
+  cursor: pointer;
+  line-height: 50px;
+  font-size: 13px;
+}
+.modal .modal-content .modal-body .text:hover {
+  text-decoration: underline;
+}

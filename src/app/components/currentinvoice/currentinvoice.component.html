@@ -1,0 +1,125 @@
+<div *ngIf="invoice" class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/billing/history" class="breadcrumb-item grey-txt cursor underline">Billing History</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">Invoice No: {{invoice.invoiceNo}}</li>
+              </ol>
+            </nav>
+          </div>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="fas fa-file-pdf"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+
+      <div class="section">
+        <div class="section-title">Invoice</div>
+        <div class="sub-text">ORDER / INVOICE NO. {{invoice.invoiceNo}}</div>
+        <div class="invoice-wrapper">
+          <div class="invoice-bill-to">
+            <div>{{merchant.name}}</div>
+            <div>{{merchant.address}}</div>
+
+          </div>
+          <div class="invoice-bill-from">
+            <div>Rolling Rock Technologies B.V.</div>
+            <div>Margrietlaan 24</div>
+            <div>Willemstad, Cura&ccedil;ao</div>
+          </div>
+
+        </div>
+        <div style="padding-top: 50px;">
+          <table width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="height: 50px;" width="200">
+                <div class="head">Date</div>
+              </td>
+              <td>
+                <div class="head">Description</div>
+              </td>
+              <td>
+                <div class="head">Term</div>
+              </td>
+              <td style="text-align: right;">
+                <div class="head">Price</div>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">
+                {{invoice.dueDate}}
+              </td>
+              <td valign="top">
+                <div>{{invoice.summary}}</div>
+                <div>License and a year of updates/services (valid from Aug 22, 2018 until Aug 22, 2019)</div>
+              </td>
+              <td valign="top">
+                1 Year
+              </td>
+              <td valign="top" style="text-align: right;">
+                {{invoice.total}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <td>
+                &nbsp;
+              </td>
+              <td style="height: 30px;">
+                Sub Total:
+              </td>
+              <td style="text-align: right;">
+                {{invoice.total}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <td>
+                &nbsp;
+              </td>
+              <td style="height: 30px;">
+                <div [ngClass]="{'green-text' : invoice.balance == 0}" class="head">Paid:</div>
+              </td>
+              <td style="text-align: right;">
+                <div [ngClass]="{'green-text' : invoice.balance == 0}"  class="head">{{invoice.total - invoice.balance}}</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <td>
+                &nbsp;
+              </td>
+              <td style="height: 30px;">
+                <div [ngClass]="{'red-txt' : invoice.balance != 0}" class="head">Amount Due:</div>
+              </td>
+              <td style="text-align: right;">
+                <div [ngClass]="{'red-txt' : invoice.balance != 0}" class="head">{{invoice.balance}}</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <button *ngIf="invoice.balance != 0" routerLink="/billing/payment" class="button lime-green">Pay Invoice</button>
+      </div>
+    </div>
+  </div>
+</div>

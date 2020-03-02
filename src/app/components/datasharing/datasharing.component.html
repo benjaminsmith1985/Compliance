@@ -1,0 +1,23 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="header">
+      <div class="title-text">My Sharings</div>
+    </div>
+    <div *ngIf="dataShares" class="row">
+      <div  *ngFor="let item of dataShares" class="row-wrapper">
+        <div class="row-left">
+          {{item.name}}
+        </div>
+        <!-- <div class="row-right">
+          <div class="certified-col">
+            <i class="material-icons">
+              check_circle
+            </i><br />
+            <span *ngIf="item.grandType == 'given'" class="certified-txt">Permission Granted By User</span>
+            <span *ngIf="item.grandType == 'auto'" class="certified-txt">Permission Automatically Granted</span>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

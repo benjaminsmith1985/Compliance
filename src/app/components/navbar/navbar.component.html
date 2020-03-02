@@ -1,0 +1,9 @@
+<nav class="navbar navbar-light">
+  <div style="padding-left: 300px">
+    <img src="../../../assets/logo.jpg" height="80" alt="Card image cap">
+  </div>
+  <div class="right">
+      <div style="float:left; line-height: 30px; padding: 0 10px 0 0;"><i class="fad fa-user-circle"></i></div>
+      <div *ngIf="currentUser" style="float:left; line-height: 30px;">{{currentUser.nameuser}}</div>
+  </div>
+</nav>

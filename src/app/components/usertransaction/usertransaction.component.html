@@ -1,0 +1,292 @@
+<div class="wrap">
+  <form [formGroup]="reportCustomerForm" (ngSubmit)="submitForm()">
+    <div class="cnt">
+      <div *ngIf="transaction && operation" class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/business/transactions/1/10" class="breadcrumb-item grey-txt underline cursor">My
+                    Transactions</li>
+                  <li class="breadcrumb-item grey-txt-active" aria-current="page">{{transaction.uuid}}</li>
+                </ol>
+              </nav>
+            </div>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+              <!-- <li class="nav-item">
+                <i class="fas fa-file-excel"></i>
+              </li>
+              <li class="nav-item">
+                <i class="fas fa-file-pdf"></i>
+              </li> -->
+              <li *ngIf="operation.fiuReported == '1'" class="nav-item">
+                <i class="fas fa-lock"></i>
+              </li>
+              <li *ngIf="operation.fiuReported == '0'" class="nav-item">
+                <i class="fas fa-lock-open"></i>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div [ngClass]="{'alert-danger': operation.fiuReported == '0' && operation.thresholdex == '1' ||  operation.fiuReported == '0' && operation.suspicious == '1'}"
+          class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Operation Information </h4>
+          <div *ngIf="operation">On {{operation.formattedDateCreated}}, an operation was <span class="alert-link">created
+              by
+              {{operation.createdByName}}</span>.&nbsp;The operation consists of 1 transaction and
+            {{operation.amountReports}} report<span *ngIf="operation.amountReports != '0'">s</span>. <br />
+            <span *ngIf="operation.suspicious == '0'">{{operation.createdByName}} stated that the customer
+              has not behaved unusual. </span><span *ngIf="operation.suspicious == '1'">{{transaction.createdByName}}
+              stated that the <span class="alert-link">customer has an unusual behaviour</span>. </span><span *ngIf="operation.fiuReported == '1'">The
+              transaction attached to this operation has been reported to FIU
+              Cura&ccedil;ao.</span><span *ngIf="operation.fiuReported == '0'">This <span [ngClass]="{'alert-link': operation.reported == '0' && operation.thresholdex == '1' || operation.suspicious == '1'}">operation
+                is not reported</span> to FIU Cura&ccedil;ao. </span> <span *ngIf="operation.thresholdex == '1'">The
+              <span class="alert-link">transaction amount exceeded</span> the threshold. </span> <span *ngIf="operation.thresholdex == '0'">
+              The
+              transaction amount did not exceed the threshold. </span>Below you will find
+            more information about the transaction<span *ngIf="operation.reported == '1'"> and the report<span *ngIf="operation.amountReports != '0'">s</span></span>.
+          </div>
+        </div>
+
+        <div *ngIf="operation" class="section">
+          <div class="section-title">Customer Information</div>
+          <div class="section-item"><span class="topic">ICS-No:</span><span routerLink="/business/user/{{operation.userIcsNo}}"
+              class="hyperlink txt-spacing">{{operation.userIcsNo}}</span></div>
+          <div class="section-item">
+            <span class="topic">Customer Name:</span><span class="txt-spacing">{{operation.customername}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Suspicious Behaviour:</span><span class="txt-spacing">{{operation.suspicious == '1' ?
+              'Yes' : 'No'}}</span>
+          </div>
+          <div class="section-item" *ngFor="let item of attachedDocs; let i = index">
+            <div *ngIf="item.documentType == 'id'"><span class="topic">Identification:</span>
+              <span class="hyperlink" routerLink="/business/userid/{{operation.userIcsNo}}/{{item.documentId}}">{{item.documentName}}</span></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Transaction Details</div>
+          <!-- <div class="section-item">Customer Name: {{transaction.customername}}</div> -->
+          <!-- <div class="section-item">Suspicious Behaviour: {{transaction.suspicious == '1' ? 'Yes' : 'No'}}</div> -->
+          <div class="section-item">Transaction Id: <span routerLink="/usertransaction/{{transaction.uuid}}" class="link">{{transaction.uuid}}</span></div>
+          <div class="section-item">Transaction Date: {{transaction.formattedDate}}</div>
+          <div class="section-item">Phase: {{operation.hastransaction == '0' ? 'Intended' : 'Executed'}}</div>
+          <div class="section-item">Place: {{transaction.island}}</div>
+          <div class="section-item">Amount: {{transaction.amount}}</div>
+          <div class="section-item">Transaction Type: {{transaction.transactionType}}</div>
+          <div *ngIf="transaction.transactionType == 'Giro'" class="section-item">From Account:
+            {{transaction.fromAccount}}</div>
+          <div class="section-item">To Account: {{transaction.toAccount}}</div>
+          
+          <div class="section-item">Funds Source: {{transaction.fundsSrc}}</div>
+          <div class="section-item">Service: {{transaction.service}}</div>
+          <div class="section-item">Description: {{transaction.description}}</div>
+          <div *ngIf="transaction.reported == 'yes'">Reported: Yes</div>
+          <div *ngIf="transaction.reported == 'no'">
+            <button>Report</button>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- <div *ngIf="attachedDocs">
+          <div class="row-block set-cursor" *ngFor="let item of attachedDocs; let i = index">
+            <a download="{{item.documentName}}.jpg" href="data:image/png;base64,{{item.path}}">
+              <div class="row-block-single">
+                {{item.documentName}}
+              </div>
+            </a>
+          </div>
+        </div> -->
+
+        <div *ngIf="operation" class="section">
+          <div class="section-title">Case Description</div>
+          <div>{{operation.casedescription ? operation.casedescription : 'No case description.'}}</div>
+        </div>
+
+        <div *ngIf="operation" class="section">
+          <div class="section-title">Additional Information</div>
+          <div>{{operation.additional ? operation.additional : 'No additional information.'}}</div>
+        </div>
+
+        <div *ngIf="transactionReports" class="center">
+          <div class="row-header">
+            Reports attached to the transaction ({{transactionReports.length}})
+          </div>
+          <div *ngFor="let item of transactionReports; let i = index" class="row row-items">
+            <div class="row-wrapper">
+              <div class="row-single">
+                <span style="font-weight: 600;">Reporting Date:</span> {{item.formattedDate}}<br /><span style="font-weight: 600;">Reported
+                  By:</span> {{item.reportedByName}}
+              </div>
+              <div class="row-single">
+                <span style="font-weight: 600;">Type:</span> {{item.indicatorType}}
+              </div>
+              <div class="row-single">
+                <span style="font-weight: 600;">Indicator:</span> {{item.indicator}}<br />
+                {{item.definition}}
+              </div>
+              <div class="row-single" *ngIf="item.subindicatorId != '0' && item.subindicatorId != null"><span style="font-weight: 600;">Subindicator:</span>
+                {{item.subindicatorId}}<br />
+                {{item.subdefinition}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="operation.fiuReported != '1'" class="section">
+          <div *ngIf="indicators && operation.fiuReported != '1'">
+            <div class="section-label">
+              <!-- {{transactionReports.length > 0 ? 'Do you want to attach more report(s) to this transaction?' : 'Do you still want to save a report to the transaction?'}}  -->
+              Add additional indicator(s) to transaction?
+            </div>
+            <div>
+              <select class="custom-select" formControlName="hasreport">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="operation.fiuReported != '1'">
+            <div class="section-label">
+              Send report to FIU?
+            </div>
+            <div>
+              <select class="custom-select" formControlName="fiureport">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div *ngIf="reportCustomerForm.value.hasreport == '1' && indicators.objective">
+          <div class="row-header">Objective Indicators</div>
+          <div *ngFor="let item of indicators.objective; let i = index" class="row">
+            <div style="padding: 0px;" class="row-wrapper">
+              <table width="100%" cellspacing="0" cellpadding="15">
+                <tr>
+                  <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''" [ngClass]="{'on': item.selected, 'off': !item.selected }"
+                    style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                    valign="middle" width="30">
+                    <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                      <i style="color:#fff;" class="fas fa-check"></i>
+                    </div>
+                  </td>
+                  <td (click)="!item.subIndicator ? test(item, i) : ''">
+                    <div style="font-weight: 600">
+                      {{item.indicator}}
+                    </div>
+                    <div>
+                      {{item.definition}}
+                    </div>
+                    <div style="margin-top: 15px;" *ngIf="item.subIndicator">
+                      <div style="font-weight: 600;">Sub Indicators</div>
+                      <div *ngFor="let subInd of item.subIndicator; let a = index" style="padding: 5px 0;">
+                        <table cellspacing="15" cellpadding="0" width="100%">
+                          <tr>
+                            <td valign="top" width="30">
+                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="subInd.selected"
+                                class="radiobutton">
+                                <div class="checked">&nbsp;</div>
+                              </div>
+                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
+                                class="radiobutton">
+                                &nbsp;
+                              </div>
+                            </td>
+                            <td valign="top" width="20">
+                              {{subInd.indicatorNr}}
+                            </td>
+                            <td>
+                              {{subInd.definition}}
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="reportCustomerForm.value.hasreport == '1' && indicators.subjective">
+          <div class="row-header">Subjective Indicators</div>
+          <div *ngFor="let item of indicators.subjective; let i = index" class="row">
+            <div style="padding: 0px;" class="row-wrapper">
+              <table width="100%" cellspacing="0" cellpadding="15">
+                <tr>
+                  <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''" [ngClass]="{'on': item.selected, 'off': !item.selected }"
+                    style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                    valign="middle" width="30">
+                    <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                      <i style="color:#fff;" class="fas fa-check"></i>
+                    </div>
+                  </td>
+                  <td (click)="!item.subIndicator ? test(item, i) : ''">
+                    <div style="font-weight: 600">
+                      {{item.indicator}}
+                    </div>
+                    <div>
+                      {{item.definition}}
+                    </div>
+                    <div style="margin-top: 15px;" *ngIf="item.subIndicator">
+                      <div style="font-weight: 600;">Sub Indicators</div>
+                      <div *ngFor="let subInd of item.subIndicator; let a = index" style="padding: 5px 0;">
+                        <table cellspacing="15" cellpadding="0" width="100%">
+                          <tr>
+                            <td valign="top" width="30">
+                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="subInd.selected"
+                                class="radiobutton">
+                                <div class="checked">&nbsp;</div>
+                              </div>
+                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
+                                class="radiobutton">
+                                &nbsp;
+                              </div>
+                            </td>
+                            <td valign="top" width="20">
+                              {{subInd.indicatorNr}}
+                            </td>
+                            <td>
+                              {{subInd.definition}}
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div *ngIf="reportCustomerForm.value.hasreport == '1' || reportCustomerForm.value.fiureport == '1'" style="text-align: center; padding: 0 0 20px 0;">
+          <button class="button lime-green">
+            <span *ngIf="reportCustomerForm.value.fiureport == '1'">Save</span>
+            <span *ngIf="reportCustomerForm.value.fiureport != '1'">Submit report to FIU</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

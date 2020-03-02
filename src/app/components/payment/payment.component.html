@@ -1,0 +1,127 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li class="breadcrumb-item grey-txt-active">Make a Payment</li>
+              </ol>
+            </nav>
+          </div>
+        </nav>
+      </div>
+
+
+      <div *ngIf="currentInvoices" class="row-header">
+        <div class="row-cols col-invNo">Current Invoices</div>
+        <div class="row-cols col-date">
+          Due Date
+        </div>
+        <div class="row-cols amount-due">
+          Amount Due
+        </div>
+      </div>
+      <div routerLink="/billing/invoice/{{item.invoiceNo}}" *ngFor="let item of currentInvoices; let i = index" class="row row-items">
+        <div class="row-wrapper small-col">
+          <div class="row-cols col-invNo">
+            Invoice No. {{item.invoiceNo}}
+          </div>
+          <div class="row-cols col-summary">
+            {{item.dueDate}}
+          </div>
+          <div class="row-cols amount-due">
+            {{item.balance}}
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentInvoices" style="height: 50px;">&nbsp;</div>
+
+      <div class="row-header">
+        <div class="row-cols col-invNo">Pre-Pay Packages</div>
+        <div class="row-cols col-date">
+          Term
+        </div>
+        <div class="row-cols amount-due">
+          Price
+        </div>
+      </div>
+      <div *ngFor="let item of packages; let i = index" class="row">
+        <div style="padding: 0px;" class="row-wrapper">
+          <table width="100%" cellspacing="0" cellpadding="15">
+            <tr (click)="setPackage(item)">
+              <td [ngClass]="{'on': item.selected, 'off': !item.selected}" style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                valign="middle" width="30">
+                <div style="float:left; width: 30px;">
+                  <i style="color:#fff;" class="fas fa-check"></i>
+                </div>
+              </td>
+              <td width="170">
+                {{item.summary}}
+              </td>
+              <td>
+                {{item.term}}
+              </td>
+              <td style="text-align: right;">
+                {{item.balance}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div style="height: 50px;">&nbsp;</div>
+
+      <div class="section">
+        <div class="section-title">Payment Totals</div>
+        <table width="100%" cellspacing="0" cellpadding="0">
+          <tr *ngFor="let item of payments; let i = index">
+            <td class="padding" width="150">
+              <div *ngIf="item.invoiceNo" style="width: 150px;">
+                Invoice No. {{item.invoiceNo}}
+              </div>
+              <div *ngIf="item.type == 'packages'" style="width: 150px;">
+                {{item.summary}}
+              </div>
+            </td>
+            <td class="padding">
+              <div *ngIf="item.invoiceNo">
+                {{item.summary}}
+              </div>
+              <div *ngIf="item.type == 'packages'">
+                {{item.term}}
+              </div>
+            </td>
+            <td class="padding" width="170">
+              &nbsp;
+            </td>
+            <td class="padding" width="150" style="text-align: right;">
+              {{item.balance}}
+            </td>
+          </tr>
+          <tr>
+            <td class="padding">
+              &nbsp;
+            </td>
+            <td class="padding">
+              &nbsp;
+            </td>
+            <td style="font-weight: 600;" class="padding" width="170">
+              Selected Total:
+            </td>
+            <td class="padding" width="100" style="text-align: right;">
+              <div style="font-weight: 600;" *ngIf="totalDue">{{totalDue}}</div>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <button class="button lime-green">Make Payment</button>
+      <div style="height: 150px">
+        &nbsp;
+      </div>
+    </div>
+  </div>
+</div>

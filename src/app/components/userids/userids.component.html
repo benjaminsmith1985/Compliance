@@ -1,0 +1,142 @@
+<div *ngIf="user" class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My
+                  Customers</li>
+                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">{{user.customerName}}</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">ID Documents <span *ngIf="userDocuments && userDocuments.id">({{userDocuments.id.length}})</span></li>
+              </ol>
+            </nav>
+          </div>
+        </nav>
+      </div>
+
+      <!-- <div *ngIf="userDocuments && userDocuments.id" class="center">
+        <div class="row-header">
+          <div class="row-cols col-doc-name">Identification Document</div>
+          <div class="row-cols col-date">Document No</div>
+          <div class="row-cols col-date">Expiration Date</div>
+          <div class="row-cols col-date">Upload By</div>
+          <div class="row-cols col-indicator">Verified</div>
+          <div class="row-cols col-date">Permission</div>
+          <div class="add-btn"><i (click)="open(docContent)" class="fad fa-plus-circle"></i></div>
+        </div>
+        <div *ngIf="!identificationDocuments">
+          <div style="padding: 15px;" class="row row-items">
+            No documents available
+          </div>
+        </div>
+        <div *ngIf="identificationDocuments">
+          <div *ngFor="let item of identificationDocuments; let i = index" class="row row-items">
+            <table [ngClass]="{'grey-txt': item.permission != '1'}" width="100%">
+              <tr>
+                <td (click)="openDoc(item, action)" width="264" style="height: 75px; padding: 0 15px;">
+                  {{item.documentName}}
+                </td>
+                <td (click)="openDoc(item, action)" width="200">
+                  <span>
+                    <span *ngIf="item.permission == '1'">{{item.documentNr}}</span>
+                  </span>
+                </td>
+                <td (click)="openDoc(item, action)" width="200">
+                  <span>
+                    <span *ngIf="item.permission == '1'">{{item.formattedExpirationDate}}</span>
+                  </span>
+                </td>
+                <td width="200" (click)="openDoc(item, action)">
+                  <span>{{item.uploadAccount}}</span>
+                </td>
+                <td width="150">
+                  <span>{{item.verified == '1' ? 'Yes' : 'No'}}</span>
+                </td>
+                <td width="150">
+                  <span *ngIf="item.permission == '1'">Yes</span>
+                  <span *ngIf="item.permission == '0'">Pending</span>
+                  <span *ngIf="item.permission == null">No</span>
+                </td>
+                <td style="text-align: right; padding: 0 20px;">
+                  <span *ngIf="item.expired == '1'" [ngClass]="{'red-txt': true}"><i class="fas fa-exclamation-circle"></i></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div routerLink="/business/userids/{{user.icsNo}}" class="row-footer">
+            <i class="far fa-ellipsis-h"></i>
+          </div>
+        </div>
+      </div> -->
+
+      <div *ngIf="userDocuments && userDocuments.id">
+        <div class="row-header">
+          <div class="row-cols col-doc-name">Identification Document</div>
+          <div class="row-cols col-date">Document No</div>
+          <div class="row-cols col-date">Expiration Date</div>
+          <div class="row-cols col-date">Upload By</div>
+          <div class="row-cols col-indicator">Verified</div>
+          <!-- <div class="row-cols col-date">Permission</div> -->
+          <div class="add-btn"><i (click)="open(docContent)" class="fad fa-plus-circle"></i></div>
+        </div>
+        <div *ngFor="let item of userDocuments.id; let i = index" class="row row-items">
+          <table width="100%">
+            <tr>
+              <td (click)="openDoc(item, action)" width="264" style="height: 75px; padding: 0 15px;">
+                {{item.documentName}}
+              </td>
+              <td (click)="openDoc(item, action)" width="200">
+                <span>
+                  <span>{{item.documentNr}}</span>
+                </span>
+              </td>
+              <td (click)="openDoc(item, action)" width="200">
+                <span>
+                  <span>{{item.formattedExpirationDate}}</span>
+                </span>
+              </td>
+              <td width="200" (click)="openDoc(item, action)">
+                <span>{{item.uploadAccount}}</span>
+              </td>
+              <td width="150">
+                <span>{{item.verified == '1' ? 'Yes' : 'No'}}</span>
+              </td>
+              <!-- <td width="150">
+                <span *ngIf="item.permission == '1'">Yes</span>
+                <span *ngIf="item.permission == '0'">Pending</span>
+                <span *ngIf="item.permission == null">No</span>
+              </td> -->
+              <td style="text-align: right; padding: 0 20px;">
+                <!-- <span *ngIf="item.expired == '1'" [ngClass]="{'red-txt': true}"><i class="fas fa-exclamation-circle"></i></span> -->&nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #action let-modal>
+  <div class="my-modal-header">
+    <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
+  </div>
+  <div class="my-modal-body">
+    <div *ngIf="currentDocument.permission == '0'" class="my-modal-title">PLEASE WAIT ON USER AUTHORIZATION</div>
+    <div *ngIf="currentDocument.permission == null" class="my-modal-title">REQUEST USER PERMISSION TO VIEW THIS
+      DOCUMENT?</div>
+    <div *ngIf="currentDocument.permission == null" (click)="requestpermission(currentDocument.documentId, currentDocument.userIcsNo);modal.dismiss('click')"
+      class="my-modal-btn">
+      YES
+    </div>
+    <div *ngIf="currentDocument.permission == null" (click)="modal.dismiss('click')" class="my-modal-btn">
+      NO
+    </div>
+    <div *ngIf="currentDocument.permission == '0'" (click)="modal.dismiss('click')" class="my-modal-btn">
+      OK
+    </div>
+  </div>
+</ng-template>

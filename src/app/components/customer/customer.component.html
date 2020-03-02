@@ -1,0 +1,235 @@
+<div class="wrap">
+    <div class="cnt">
+        <div class="header">
+            <!-- <div class="title">&nbsp;</div> -->
+            <div class="title-text">Personal Information</div>
+        </div>
+        <div class="row">
+            <div *ngIf="user" class="col col2">
+                <div class="bold">{{user.email}}</div>
+                <div>Password: ******</div>
+                <div class="details">
+                    <div>
+                        First Name:<span class="txt-spacing">{{user.firstname}}</span>
+                    </div>
+                    <div>
+                        Last Name: <span class="txt-spacing">{{user.lastname}}</span>
+                    </div>
+                    <div>
+                        Date of Birth: <span class="txt-spacing">{{user.birthDate}}</span>
+                    </div>
+                    <div>
+                        Birth Country: <span class="txt-spacing">Cura&ccedil;ao</span>
+                    </div>
+                    <div>
+                        Nationality: <span class="txt-spacing">{{user.nationality}}</span>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div>
+                        Address: <span class="txt-spacing">{{user.address}}</span>
+                    </div>
+                    <div>
+                        Place: <span class="txt-spacing">{{user.place}}</span>
+                    </div>
+                    <div>
+                        Country: <span class="txt-spacing">{{user.country}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col col3">
+                <div data-toggle="modal" data-target="#changeEmailModal">
+                    CHANGE EMAIL
+                </div>
+                <div data-toggle="modal" data-target="#changePasswordModal">
+                    CHANGE PASSWORD
+                </div>
+                <div class="details">
+                    <div data-toggle="modal" data-target="#changeDetailsModal">
+                        CHANGE LOCATION DETAILS
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="header">
+            <!-- <div class="title">&nbsp;</div> -->
+            <div class="title-text">Identification Documents</div>
+            <div data-toggle="modal" data-target="#identificationDocModal" style="float:right; line-height: 50px; margin-left: 5px; font-size: 12px;">
+                Add Document
+            </div>
+            <div data-toggle="modal" data-target="#identificationDocModal" style="float:right; line-height: 50px; padding-top: 8px; font-size: 12px;"><i
+                    class="material-icons">
+                    add_circle
+                </i>
+            </div>
+        </div>
+        <div *ngFor="let item of identificationDocuments; let i = index" class="row row-items">
+            <div  class="row-wrapper">
+                <div class="row-left">
+                    {{item.documentName}}
+                </div>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="header">
+            <div class="title-text">Personal Documents</div>
+            <div data-toggle="modal" data-target="#personalDocModal" style="float:right; line-height: 50px; margin-left: 5px; font-size: 12px;">
+                Add Document
+            </div>
+            <div data-toggle="modal" data-target="#personalDocModal" style="float:right; line-height: 50px; padding-top: 8px; font-size: 12px;"><i class="material-icons">
+                    add_circle
+                </i>
+            </div>
+        </div>
+        <div class="row row-items">
+            <div class="row-wrapper">
+                <div class="row-left">
+                    Aqualectra Bill
+                </div>
+            </div>
+        </div>
+        <div style="height: 150px;">
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE EMAIL
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <form (ngSubmit)="onSubmit('customer')">
+                    <input name="email" placeholder="New Email" type="email" email="true" />
+                    <input name="email" placeholder="Retype Email" type="email" email="true" />
+                    <button class="button light-blue">Change Email</button>
+                </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE PASSWORD
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <form (ngSubmit)="onSubmit('customer')">
+                    <input name="email" placeholder="Old Password" type="email" email="true" />
+                    <input name="email" placeholder="New Password" type="email" email="true" />
+                    <input name="password" required placeholder="Retype New Password" />
+                    <button class="button light-blue">Change Password</button>
+                </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="identificationDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    UPLOAD IDENTIFICATON DOCUMENT
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <div style="color:#fff;">
+                    {{uploadResponse.message}}%
+                </div> -->
+                <form [formGroup]="uploadIdForm" (ngSubmit)="onSubmit()">
+                    <select formControlName="idName">
+                        <option value="">Select Identification Type</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Drivings License">Drivings License</option>
+                        <option value="Id Card">Id Card</option>
+                    </select>
+                    <input formControlName="expirationDate" type="text" name="idType" placeholder="Expiration Date" />
+                    <input type="file" name="document" (change)="onFileChange($event)" />
+                    <button class="button light-blue">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="personalDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    UPLOAD PERSONAL DOCUMENT
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- <div style="color:#fff;">
+                    {{uploadResponse.message}}%
+                </div> -->
+                <form [formGroup]="uploadIdForm" (ngSubmit)="onSubmit()">                    
+                    <input formControlName="expirationDate" type="text" name="idType" placeholder="Document Name" />
+                    <input type="file" name="document" (change)="onFileChange($event)" />
+                    <button class="button light-blue">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE LOCATION DETAILS
+                </div>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="detailsForm" (ngSubmit)="changeDetails()">
+                    <input formControlName="address" name="address" placeholder="New Address" type="text" />
+                    <input formControlName="place" name="place" required placeholder="New Place" />
+                    <input formControlName="country" name="country" required placeholder="New Country" />
+                    <button class="button light-blue">Save Location Details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

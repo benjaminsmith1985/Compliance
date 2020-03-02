@@ -1,0 +1,867 @@
+<div class="wrap">
+
+  <div class="cnt">
+    <form [formGroup]="insertCustomerForm" (ngSubmit)="startReport()">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li class="breadcrumb-item grey-txt-active">Create Transaction</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+
+        <div class="fromWrapper">
+
+          <div *ngIf="currentCustomer && insertCustomerForm.value.clientType == 'client'">
+            <div class="section">
+              <div style="overflow: hidden;" class="section-title">
+                <div style="float:left;">
+                  Customer Information
+                </div>
+                <div style="float: right;">
+                  <!-- <i class="fas fa-trash"></i> --> &nbsp;
+                </div>
+              </div>
+              <div class="section-item">
+                <span class="topic">ICS-No:</span><span routerLink="/business/user/{{currentCustomer.icsNo}}" class="txt-spacing hyperlink">{{currentCustomer.icsNo}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Full Name:</span><span class="txt-spacing">{{currentCustomer.customerName}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Risk Rating:</span><span class="txt-spacing">{{selectedRisk}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Risk Country:</span><span class="txt-spacing">No</span>
+              </div>
+
+              <!-- <div *ngIf="userDocuments && userDocuments.id" class="section-label">
+                <div>&nbsp;</div>
+                Select below an identification method
+              </div> -->
+              <!-- <div *ngIf="userDocuments && userDocuments.id">
+                <select class="custom-select" formControlName="attachedId">
+                  <option *ngFor="let item of userDocuments.id; let i = index" [ngValue]="item">{{item.documentName}}</option>
+                </select>
+                <div *ngIf="insertCustomerForm.value.attachedId.expired == '1'" style="position: absolute; color: red; margin-top: -18px; font-size: 12px;">
+                  This identification document has expired
+                </div>
+              </div> -->
+              <!-- <div *ngIf="!userDocuments || !userDocuments.id" class="section-label">
+                <div class="section-item">
+                  No Identification document available for this user.
+                </div>
+                <div>&nbsp;</div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Select Identification Document Type
+                  </div>
+                  <div class="section-input-area">
+                    <select class="custom-select" formControlName="userType">
+                      <option value="natural">Passport</option>
+                      <option value="legal">Drivings License</option>
+                      <option value="legal">Id Card</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Document No.
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Issue Date
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Country of Issue
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Expiration Date
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="section">
+            <div *ngIf="!hasParameter">
+              <div class="section-label">
+                Is this user an existing customer?
+              </div>
+              <div>
+                <select (change)="resetCustomer()" class="custom-select" formControlName="clientType">
+                  <option value="client">Yes</option>
+                  <option value="nonclient">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="section-label">
+              Suspicious customer behaviour?
+            </div>
+            <div>
+              <select class="custom-select" formControlName="suspicious">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <div class="section-label">
+              Is the transaction intended or has it been executed?
+            </div>
+            <div>
+              <select class="custom-select" formControlName="hastransaction">
+                <option value="1">Executed</option>
+                <option value="0">Intended</option>
+              </select>
+            </div>
+            <!-- <div class="section-label">
+              Report this transaction ?
+            </div>
+            <div>
+              <select class="custom-select" formControlName="hasreport">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div> -->
+          </div>
+
+          <div class="section" *ngIf="insertCustomerForm.value.clientType == 'client' && !hasParameter">
+            <div class="section-title">Search Existing Customer</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Please type a keyword
+              </div>
+              <div class="section-input-area">
+                <input autocomplete="off" #searchBox id="search-box" class="input" (input)="search(searchBox.value)"
+                  type="text" />
+                <div class="section-input-dropdown" *ngIf="searchresult && searchBox.value != ''">
+                  <div class="section-input-dropdown-item" (click)="setCustomer(item)" *ngFor="let item of searchresult; let i = index">
+                    <div *ngIf="item.granted == '1'">{{item.customerName}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section" *ngIf="insertCustomerForm.value.clientType == 'nonclient'">
+            <div>
+              <div class="section-title">Customer Information</div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Select customer type
+                </div>
+                <div class="section-input-area">
+                  <select class="custom-select" formControlName="userType">
+                    <option value="natural">Natural Person</option>
+                    <option value="legal">Legal Person</option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="insertCustomerForm.value.userType == 'natural' && insertCustomerForm.value.clientType == 'nonclient'">
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Full Name
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="fullname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Last Name
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Email
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="email" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Birth Date
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="birthdate" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Nationality
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="nationality" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Address
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="address" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Place
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="place" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Country
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="country" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Telephone
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="phone" type="text" />
+                  </div>
+                </div>
+                <div>&nbsp;</div>
+                <div class="section-title">Identification</div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Select Identification Document Type
+                  </div>
+                  <div class="section-input-area">
+                    <select class="custom-select" formControlName="userType">
+                      <option value="natural">Passport</option>
+                      <option value="legal">Drivings License</option>
+                      <option value="legal">Id Card</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Document No.
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Issue Date
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Country of Issue
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Expiration Date
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="lastname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Is this person politcally exposed?
+                  </div>
+                  <div class="section-input-area">
+                    <select class="custom-select" formControlName="ispep">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Save this person as customer?
+                  </div>
+                  <div class="section-input-area">
+                    <select class="custom-select" formControlName="save">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="insertCustomerForm.value.userType == 'legal' && insertCustomerForm.value.clientType == 'nonclient'">
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Company Name
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="companyname" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Trade Name
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="tradename" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Chamber No.
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="chamberno" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Address
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="address" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Email
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="email" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Telephone No.
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="phone" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Sector
+                  </div>
+                  <div class="section-input-area">
+                    <input class="input" formControlName="occgroup" type="text" />
+                  </div>
+                </div>
+                <div class="section-input-wrapper">
+                  <div class="section-input-text-area">
+                    Save this company as customer?
+                  </div>
+                  <div class="section-input-area">
+                    <select class="custom-select" formControlName="save">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="row-header">
+              <div class="row-cols col-doc-name">Attach Identification Documents To Transaction</div>
+            </div>
+            <div *ngIf="!userDocuments || !userDocuments.id" class="row">
+              <div style="padding: 15px;" class="row-wrapper">
+                No documents available
+              </div>
+            </div> 
+            <div *ngIf="userDocuments">
+              <div *ngFor="let item of userDocuments.id; let i = index" class="row">
+                <div style="padding: 0px;" class="row-wrapper">
+                  <table width="100%" cellspacing="0" cellpadding="15">
+                    <tr (click)="selectDocument(item, userDocuments.id)">
+                      <td [ngClass]="{'on': item.selected, 'off': !item.selected }" style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                        valign="middle" width="30">
+                        <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                          <i style="color:#fff;" class="fas fa-check"></i>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {{item.documentName}}
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div>
+            <div class="row-header">
+              <div class="row-cols col-doc-name">Attach Documents To Transaction</div>
+              <div class="add-btn"><i (click)="open(otherDocContent)"  class="fad fa-plus-circle"></i></div>
+            </div>
+            <div *ngIf="!userDocuments || !userDocuments.other" class="row">
+              <div style="padding: 15px;" class="row-wrapper">
+                No documents available 
+              </div>
+            </div> 
+
+            <div *ngIf="userDocuments && userDocuments.other">
+              <div *ngFor="let item of userDocuments.other; let i = index" class="row">
+                <div style="padding: 0px;" class="row-wrapper">
+                  <table width="100%" cellspacing="0" cellpadding="15">
+                    <tr (click)="attachDocument(item)">
+                      <td [ngClass]="{'on': item.selected, 'off': !item.selected }" style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                        valign="middle" width="30">
+                        <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                          <i style="color:#fff;" class="fas fa-check"></i>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {{item.documentName}}
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- <div class="section" *ngIf="userDocuments">
+            <div class="section-title">Customer Documents</div>
+            <div style="overflow: hidden" *ngFor="let item of userDocuments.id; let i = index">
+              <div *ngIf="item.permission == '1'">
+                <div style="float:left;">
+                  <i (click)="attachDocument(item)" *ngIf="!item.selected" class="material-icons">
+                    check_box_outline_blank
+                  </i>
+                  <i (click)="attachDocument(item)" *ngIf="item.selected" class="material-icons">
+                    check_box
+                  </i>
+                </div>
+                <div style="float: left;">{{item.documentName}}</div>
+                <div *ngIf="item.certified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
+                  Verfied]</div>
+                <div *ngIf="item.verified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
+                  Certified]</div>
+              </div>
+            </div>
+            <div style="overflow: hidden" *ngFor="let item of userDocuments.other; let i = index">
+              <div *ngIf="item.permission == '1'">
+                <div style="float:left;">
+                  <i (click)="attachDocument(item)" *ngIf="!item.selected" class="material-icons">
+                    check_box_outline_blank
+                  </i>
+                  <i (click)="attachDocument(item)" *ngIf="item.selected" class="material-icons">
+                    check_box
+                  </i>
+                </div>
+                <div style="float: left;">{{item.documentName}}</div>
+                <div *ngIf="item.certified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
+                  Verfied]</div>
+                <div *ngIf="item.verified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
+                  Certified]</div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="section">
+            <div class="section-title">Transaction Information</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Island
+              </div>
+              <div style="float: right; width: 900px;">
+                <select class="custom-select" formControlName="island">
+                  <option value="Curacao">Cura&ccedil;ao</option>
+                  <option value="Aruba">Aruba</option>
+                  <option value="Bonaire">Bonaire</option>
+                  <option value="St.Maarten">St.Maarten</option>
+                  <option value="Saba">Saba</option>
+                  <option value="St.Eustatius">St.Eustatius</option>
+                </select>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Select Transaction Type
+              </div>
+              <div style="float: right; width: 900px;">
+                <select class="custom-select" formControlName="transactionType">
+                  <option value="Cash">Cash</option>
+                  <option value="Giro">Wire Transafer</option>
+                  <option value="Giro">Giro Based</option>
+                  <option value="Giro">Swipe</option>
+                  <option value="Giro">Personal Cheque</option>
+                  <option value="Giro">Cassier Cheque</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Date
+              </div>
+              <div class="section-input-area">
+                <input (click)="d.toggle()" formControlName="transactionDate" class="input" ngbDatepicker #d="ngbDatepicker"
+                  type="text" />
+              </div>
+            </div>
+            <div *ngIf="insertCustomerForm.value.transactionType == 'Giro'" class="section-input-wrapper">
+              <div class="section-input-text-area">
+                From Account No.
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="fromaccount" type="text" />
+              </div>
+            </div>
+            <div *ngIf="insertCustomerForm.value.transactionType == 'Giro'" class="section-input-wrapper">
+              <div class="section-input-text-area">
+                To Account No.
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="toaccount" type="text" />
+                <i (click)="open(content)" class="fas fa-file-invoice" style=" position:
+                  absolute; font-size: 16px; cursor:pointer; margin-left: -12px; margin-top: 20px;"></i>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Amount
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="amount" type="number" />
+                <div *ngIf="threshold" style="position: absolute; color: red; margin-top: -18px; font-size: 12px;">
+                  <div *ngFor="let item of threshold; let i = index">
+                    <div *ngIf="item.transactionType == insertCustomerForm.value.transactionType && insertCustomerForm.value.amount >= item.amount">
+                      Transaction amount exceeds threshold
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Source of funds
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="srcFunds" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Service Renderd
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="service" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Description
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="description" />
+              </div>
+            </div>
+
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Create unusual transaction report
+              </div>
+              <div style="float: right; width: 900px;">
+                <select class="custom-select" formControlName="hasreport">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="insertCustomerForm.value.hasreport == '1'" class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Send report to FIU?
+              </div>
+              <div style="float: right; width: 900px;">
+                <select class="custom-select" formControlName="fiureport">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="insertCustomerForm.value.hasreport == '0'" class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Reason for not reporting
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="reason" />
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="indicators && insertCustomerForm.value.hasreport == '1'">
+            <div class="row-header">Objective Indicators</div>
+            <div *ngFor="let item of indicators.objective; let i = index" class="row">
+              <div style="padding: 0px;" class="row-wrapper">
+                <table width="100%" cellspacing="0" cellpadding="15">
+                  <tr>
+                    <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''" [ngClass]="{'on': item.selected, 'off': !item.selected }"
+                      style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                      valign="middle" width="30">
+                      <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                        <i style="color:#fff;" class="fas fa-check"></i>
+                      </div>
+                    </td>
+                    <td (click)="!item.subIndicator ? test(item, i) : ''">
+                      <div style="font-weight: 600">
+                        {{item.indicator}}
+                      </div>
+                      <div>
+                        {{item.definition}}
+                      </div>
+                      <div style="margin-top: 15px;" *ngIf="item.subIndicator">
+                        <div style="font-weight: 600;">Sub Indicators</div>
+                        <div *ngFor="let subInd of item.subIndicator; let a = index" style="padding: 5px 0;">
+                          <table cellspacing="15" cellpadding="0" width="100%">
+                            <tr>
+                              <td valign="top" width="30">
+                                <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="subInd.selected"
+                                  class="radiobutton">
+                                  <div class="checked">&nbsp;</div>
+                                </div>
+                                <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
+                                  class="radiobutton">
+                                  &nbsp;
+                                </div>
+                              </td>
+                              <td valign="top" width="20">
+                                {{subInd.indicatorNr}}
+                              </td>
+                              <td>
+                                {{subInd.definition}}
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="indicators && insertCustomerForm.value.hasreport == '1'">
+            <div class="row-header">Subjective Indicators</div>
+            <div *ngFor="let item of indicators.subjective; let i = index" class="row">
+              <div style="padding: 0px;" class="row-wrapper">
+                <table width="100%" cellspacing="0" cellpadding="15">
+                  <tr>
+                    <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''" [ngClass]="{'on': item.selected, 'off': !item.selected }"
+                      style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+                      valign="middle" width="30">
+                      <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                        <i style="color:#fff;" class="fas fa-check"></i>
+                      </div>
+                    </td>
+                    <td (click)="!item.subIndicator ? test(item, i) : ''">
+                      <div style="font-weight: 600">
+                        {{item.indicator}}
+                      </div>
+                      <div>
+                        {{item.definition}}
+                      </div>
+                      <div style="margin-top: 15px;" *ngIf="item.subIndicator">
+                        <div style="font-weight: 600;">Sub Indicators</div>
+                        <div *ngFor="let subInd of item.subIndicator; let a = index" style="padding: 5px 0;">
+                          <table cellspacing="15" cellpadding="0" width="100%">
+                            <tr>
+                              <td valign="top" width="30">
+                                <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="subInd.selected"
+                                  class="radiobutton">
+                                  <div class="checked">&nbsp;</div>
+                                </div>
+                                <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
+                                  class="radiobutton">
+                                  &nbsp;
+                                </div>
+                              </td>
+                              <td valign="top" width="20">
+                                {{subInd.indicatorNr}}
+                              </td>
+                              <td>
+                                {{subInd.definition}}
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Case Description</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Enter your text here
+              </div>
+              <div class="section-input-area">
+                <textarea class="materialize-textarea" formControlName="caseDescription" id="textareaExampleSmall" rows="1"></textarea>
+                <!-- <textarea class="form-control textarea-autosize" id="textareaExampleField" rows="1" placeholder="Try this textarea with textfield box"></textarea> -->
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="section">
+            <div class="section-title">Additional Information <span style="font-size: 12px;">(For Internal Use)</span></div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Enter your text here
+              </div>
+              <div class="section-input-area">
+                <textarea class="materialize-textarea" formControlName="additionalInfo" id="textareaExampleSmall" rows="1"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="threshold">
+            <div *ngFor="let item of threshold; let i = index">
+              <div *ngIf="item.transactionType == insertCustomerForm.value.transactionType && insertCustomerForm.value.amount >= item.amount"
+                class="alert alert-danger" role="alert">
+                <span class="alert-link">Threshold exceeded. </span>A {{item.transactionType}}-based transaction
+                amounting to NAF (ANG) 5,000.00 or more must be reported.
+              </div>
+            </div>
+          </div>
+          <button class="button lime-green"><span *ngIf="insertCustomerForm.value.fiureport == '1'">
+              Submit report to FIU</span> <span *ngIf="insertCustomerForm.value.fiureport != '1'">
+              Save to archive</span></button>
+
+        </div>
+      </div>
+    </form>
+    <div style="height: 150px;">
+      &nbsp;
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="accModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          SELECT BANK ACCOUNT
+        </div>
+      </div>
+      <div class="modal-body">
+        <div (click)="selectAccount(item)" class="items" *ngFor="let item of bankAccounts; let i = index">
+          {{item.bankName}} : {{item.accountNr}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <div (click)="modal.dismiss('Cross click')">
+      <i class="fal fa-times"></i>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="modal-title" id="modal-basic-title">SELECT BANK ACCOUNT</div>
+    <div (click)="selectAccount(item)" class="items" *ngFor="let item of bankAccounts; let i = index">
+      {{item.bankName}} : {{item.accountNr}}
+    </div>
+  </div>
+</ng-template>
+<!-- 
+<ng-template #docContent let-modal>
+  <form [formGroup]="insertIdForm" (ngSubmit)="startReport()">
+    <div class="my-modal-header">
+      <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
+    </div>
+    <div class="my-modal-body">
+      <div class="my-modal-title">ATTACH IDENTIFICATION DOCUMENT</div>
+      <div>
+        <select class="custom-select" formControlName="idDocType">
+          <option value="Passport">Passport</option>
+          <option value="Drivings License">Drivings License</option>
+          <option value="Id Card">Id Card</option>
+        </select>
+      </div>
+      <div><input class="input" type="text" formControlName="idDocNo"  placeholder="Document No" /></div>
+      <div><input type="text" placeholder="Date of Issue" (click)="e.toggle()" formControlName="dateOfIssue" class="input"
+          ngbDatepicker #e="ngbDatepicker" /></div>
+      <div><input type="text" formControlName="idPlaceOfIssue"  placeholder="Place of Issue" /></div>
+      <div><input type="text" formControlName="idCountryOfIssue"  placeholder="Country Issued" /></div>
+      <div><input type="text" formControlName="idExpirationDate" (click)="f.toggle()" ngbDatepicker #f="ngbDatepicker"  placeholder="Expiration Date" /></div>
+      <div (click)="attach()" class="my-modal-btn">Attach</div>
+    </div>
+  </form>
+</ng-template> -->
+
+<ng-template #otherDocContent let-modal>
+  <form [formGroup]="insertIdForm">
+    <div class="my-modal-header">
+      <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
+    </div>
+    <div class="my-modal-body">
+      <div class="my-modal-title">UPLOAD DOCUMENT TO TRANSACTION</div>
+      <div>
+        <input class="input" type="text" formControlName="docName" placeholder="Document Name" />
+      </div>
+      <div><input class="input" type="text" formControlName="docNo" placeholder="Document No" /></div>
+      <div (click)="attachDoc(currentCustomer.icsNo, 'transaction')" class="my-modal-btn">Upload</div>
+    </div>
+  </form>
+</ng-template>

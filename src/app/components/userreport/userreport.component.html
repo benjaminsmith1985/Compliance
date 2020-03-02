@@ -1,0 +1,448 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div *ngIf="transaction" class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/business/fiureports/1/10" class="breadcrumb-item grey-txt underline cursor">FIU Reports</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">{{transaction.uuid}}</li>
+              </ol>
+            </nav>
+          </div>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="fas fa-file-excel"></i>
+            </li>
+            <li class="nav-item">
+              <i (click)="openPdf(operation.uuid)" class="fas fa-file-pdf"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div *ngIf="transaction && operation" class="section">
+        <div style="text-align: right"><img src="../../../assets/logo.jpg" height="80" alt="Logo ICS"></div>
+        <div style="text-align: center; font-weight: 600; text-transform: uppercase;  font-size: 20px;">
+          FIU report card for {{operation.customername}}
+        </div>
+        <div style="padding-top: 40px;">
+          <table width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="200">
+                Reporters Code
+              </td>
+              <td>
+                : 123456
+              </td>
+            </tr>
+            <tr>
+              <td width="200">
+                Transaction No
+              </td>
+              <td>
+                : {{transaction.uuid}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;" colspan="2">
+                Transaction
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Island
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.island}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Transaction Type
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.transactionType}}
+              </td>
+            </tr>
+            <tr *ngFor="let item of transactionReports; let i = index">
+              <td>
+                Indicator
+              </td>
+              <td style="font-weight: 600;">
+                : {{item.indicator}} <span *ngIf="item.subindicatorId != '0' && item.subindicatorId != null">{{item.subindicatorId}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Phase
+              </td>
+              <td style="font-weight: 600;">
+                : {{operation.hastransaction == '1' ? 'Executed' : 'Intended'}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Date
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.formattedDate}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Place
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.place}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Time
+              </td>
+              <td style="font-weight: 600;">
+                : 15:00
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-weight: 600;">
+                From
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Account nr
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.fromAccount ? transaction.fromAccount : 'No information available'}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Ccy
+              </td>
+              <td style="font-weight: 600;">
+                : ANG
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Amount
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.amount}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-weight: 600;">
+                To
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Account nr
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.toAccount ? transaction.toAccount : 'No information available'}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Ccy
+              </td>
+              <td style="font-weight: 600;">
+                : ANG
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Amount
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.amount}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-weight: 600;">
+                Case Description
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                {{transaction.description ? transaction.description : 'No case description'}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-weight: 600;">
+                Natural Person
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Last Name
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.customerLastName}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Initials
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.initials}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                First Name
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.customerFirstName}}
+              </td>
+            </tr>
+            <tr *ngIf="transaction.marriedName">
+              <td>
+                Married Name
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.marriedName}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Account Nr
+              </td>
+              <td style="font-weight: 600;">
+                : -
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Street Name
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.customerStreetName}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Street Number
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.customerStreetNumber}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Gender
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.gender}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Birth Date
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.birthDate}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Nationality
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.nationality}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Birth Place
+              </td>
+              <td style="font-weight: 600;">
+                : {{transaction.birthCountry}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-weight: 600;">
+                Identification
+              </td>
+            </tr>
+            <tr *ngFor="let item of attachedDocs; let i = index">
+              <td colspan="2">
+                <table *ngIf="item.documentType == 'id'" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="200">
+                      Type
+                    </td>
+                    <td style="font-weight: 600;">
+                      : {{item.documentName}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Number
+                    </td>
+                    <td style="font-weight: 600;">
+                      : {{item.documentNr}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Place of Issue
+                    </td>
+                    <td style="font-weight: 600;">
+                      : {{item.placeIssue}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Country Issue
+                    </td>
+                    <td style="font-weight: 600;">
+                      : {{item.countryIssue}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Date Issue
+                    </td>
+                    <td style="font-weight: 600;">
+                      : {{item.dateIssue}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- <div *ngIf="operation" class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Reporting Information</h4>
+        <div>On {{transactionReports.formattedDate}}, <span *ngIf="operation.reported != '0'">a report has been filed
+            by
+            {{operation.reportedName}} to FIU Cura&ccedil;ao against {{operation.customername}}. </span> <span *ngIf="operation.hastransaction == '0'">There
+            was an intended transaction by this customer. </span><span *ngIf="operation.thresholdex == '1'">The
+            transaction amount exceeded the threshold. </span> Below you will find
+          more information about the report. </div>
+      </div> -->
+
+
+      <!-- <div *ngIf="operation" class="section">
+        <div class="section-title">Reported Customer</div>
+        <div class="section-item"><span class="topic">ICS-No:</span><span routerLink="/business/user/{{operation.userIcsNo}}"
+            class="hyperlink txt-spacing">{{operation.userIcsNo}}</span></div>
+        <div class="section-item">
+          <span class="topic">Customer Name:</span><span class="txt-spacing">{{operation.customername}}</span>
+        </div>
+        <div class="section-item">
+          <span class="topic">Suspicious Behaviour:</span><span class="txt-spacing">{{operation.suspicious == '1' ?
+            'Yes' : 'No'}}</span>
+        </div>
+
+        <div class="section-item" *ngFor="let item of attachedDocs; let i = index">
+          <div *ngIf="item.documentType == 'id'"><span class="topic">Identification:</span>
+            <span class="hyperlink" routerLink="/business/userid/{{operation.userIcsNo}}/{{item.documentId}}">{{item.documentName}}</span></div>
+        </div>
+
+      </div> -->
+      <!-- 
+      <div *ngIf="transactionReports" class="center">
+        <div class="row-header">
+          Reporting Details
+        </div>
+        <div class="row row-items">
+          <div class="row-wrapper">
+            <div class="row-single">
+              <span style="font-weight: 600;">Reporting Date:</span> {{transactionReports.formattedDate}}<br /><span
+                style="font-weight: 600;">Reported By:</span> {{transactionReports.reportedByName}}
+            </div>
+            <div class="row-single">
+              <span style="font-weight: 600;">Indicator:</span> {{transactionReports.indicator}}<br />
+              {{transactionReports.definition}}
+            </div>
+            <div class="row-single" *ngIf="transactionReports.subindicatorId && transactionReports.subindicatorId != '0'"><span
+                style="font-weight: 600;">Subindicator
+                No:</span>
+              {{transactionReports.subindicatorId}}<br />
+              {{transactionReports.subdefinition}}
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- 
+      <div *ngIf="attachedDocs">
+
+        <div class="row-block set-cursor" *ngFor="let item of attachedDocs; let i = index">
+          <div class="row-block-single">
+            {{item.documentName}}
+          </div>
+        </div>
+      </div> -->
+      <!-- <div *ngIf="!attachedDocs">
+          <div class="row-block set-cursor" *ngFor="let item of attachedDocs; let i = index">
+            <div class="row-block-single">
+              There are no items attached to this transaction.
+            </div>
+          </div>
+        </div> -->
+
+      <!-- <div *ngIf="transaction" class="section">
+        <div class="section-title">Transaction Details</div>
+        <div class="section-item">Transaction Id: <span routerLink="/usertransaction/{{transaction.uuid}}" class="hyperlink">{{transaction.uuid}}</span></div>
+       
+        <div class="section-item">Transaction Date: {{transaction.formattedDate}}</div>
+        <div class="section-item">Amount: {{transaction.amount}}</div>
+        <div class="section-item">Transaction Type: {{transaction.transactionType}}</div>
+       
+        <div class="section-item">Funds Source: {{transaction.fundsSrc}}</div>
+        <div class="section-item">Service: {{transaction.service}}</div>
+        <div class="section-item">Transaction Description: {{transaction.description}}</div>
+        <div *ngIf="transaction.reported == 'yes'">Reported: Yes</div>
+        <div *ngIf="transaction.reported == 'no'">
+          <button>Report</button>
+        </div>
+      </div> -->
+
+      <!-- <div *ngIf="operation" class="section">
+        <div class="section-title">Additional Information</div>
+        <div>{{operation.additional ? operation.additional : 'The user has not added any additional information.'}}</div>
+      </div> -->
+    </div>
+  </div>
+</div>

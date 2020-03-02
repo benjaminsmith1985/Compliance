@@ -1,0 +1,21 @@
+.col-invNo {
+  width: 150px;
+}
+.col-summary {
+  width: 400px;
+}
+.col-date {
+  width: 160px;
+}
+.col-amount {
+  width: 160px;
+}
+.col-total {
+  width: 100px;
+  float: right;
+}
+.col-balance {
+  width: 150px;
+  float: right !important;
+  text-align: right;
+}

@@ -1,0 +1,16 @@
+.col-invNo {
+  width: 200px;
+}
+.amount-due {
+  float: right;
+  text-align: right;
+}
+.on {
+  background-color: #20c997;
+}
+.off {
+  background-color: #fff;
+}
+.padding {
+  padding: 15px 0;
+}

@@ -1,0 +1,205 @@
+<div class="wrap">
+    <div class="cnt">
+        <div class="header">
+            <div class="title-text">Business Accounts</div>
+            <div routerLink="/customerbusiness/add" style="float:right; line-height: 50px; margin-left: 5px; font-size: 12px;">
+                Add Account
+            </div>
+            <div data-toggle="modal" data-target="#addAccountModal" style="float:right; line-height: 50px; padding-top: 8px; font-size: 12px;"><i
+                    class="material-icons">
+                    add_circle
+                </i>
+            </div>
+        </div>
+        <div class="center">
+            <div *ngFor="let item of merchantAccounts; let i = index"  class="row row-items">
+                <div class="row-wrapper">
+                    <div class="row-left">
+                        {{item.name}}
+                    </div>
+                    <div class="row-right">
+                        <div class="certified-col">
+                            <i class="material-icons">
+                                done
+                            </i><br />
+                            <span class="certified-txt">Certified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id="accordion">
+                <div *ngFor="let item of merchantAccounts; let i = index" class="card">
+                    <div data-toggle="collapse" [attr.data-target]="'#merchant' + i" aria-expanded="true" aria-controls="collapseOne"
+                        class="card-header" id="headingOne">
+                        <div class="row-wrapper">
+                            <div class="row-left">
+                                {{item.name}}
+                            </div>
+                            <div class="row-right">
+                                <div class="certified-col">
+                                    <i class="material-icons">
+                                        done
+                                    </i><br />
+                                    <span class="certified-txt">Certified</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="{{'merchant' + i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col col2">
+                                    <div class="bold">{{item.email}}</div>
+                                    <div class="details">
+                                        <div>
+                                            Official Name:<span class="txt-spacing">{{item.name}}</span>
+                                        </div>
+                                        <div>
+                                            Trade Name: <span class="txt-spacing">{{item.tradeName}}</span>
+                                        </div>
+                                        <div>
+                                            Chamber of Commerce no.: <span class="txt-spacing">{{item.chamberNo}}</span>
+                                        </div>
+                                        <div>
+                                            Business Address: <span class="txt-spacing">{{item.address}}</span>
+                                        </div>
+                                        <div>
+                                            Telephone Number: <span class="txt-spacing">{{item.telephone}}</span>
+                                        </div>
+                                        <div>
+                                            Occupational Group: <span class="txt-spacing">{{item.OccupationalGroup}}</span>
+                                        </div>
+                                        <div>
+                                            Status: <span class="txt-spacing">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col3">
+                                    <div>
+                                        CHANGE EMAIL
+                                    </div>
+                                    <div class="details">
+                                        EDIT DETAILS
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding: 15px 36px;">
+                                <div style="font-weight: 600; margin-bottom: 10px;" class="title-text">Business
+                                    Documents</div>
+                                <div class="list-group">
+                                    <button type="button" class="list-group-item list-group-item-action">
+                                        <a href="../../../assets/incor.pdf" target="_blank">Articles of Incorporation</a>
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action">
+                                        <a href="../../../assets/chamber.pdf" target="_blank">Chamber of Commerce</a>
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action">
+                                        <a href="../../../assets/share.pdf" target="_blank"> Shareholders register</a>
+                                    </button>
+                                    <button type="button" class="list-group-item list-group-item-action">
+                                        <a href="../../../assets/esta.pdf" target="_blank">Application establishment
+                                            permit</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div>&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    ADD BUSINESS ACCOUNT
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input name="email" placeholder="Chamber Of Commerce No." type="text" />
+                    <div>
+                        <input name="email" placeholder="Official Name" type="text" />
+                        <input name="email" placeholder="Trade Name" type="text" />
+                        <input name="email" placeholder="Business Address" type="text" />
+                        <input name="email" placeholder="Telephone No." type="text" />
+                        <select>
+                            <option value="volvo">Traders in building and construction materials</option>
+                            <option value="saab">Providers of factoring services</option>
+                            <option value="mercedes">Representatives of trusts as meant in Title 6 Book 3 Civil Code
+                                (BW)</option>
+                            <option value="audi">Local and International Banks</option>
+                            <option value="audi">Trust Companies and other Company Service Providers</option>
+                            <option value="audi">Investment Institutions</option>
+                            <option value="audi">Credit Unions and Savings Banks</option>
+                            <option value="audi">Money Remitters</option>
+                            <option value="audi">Casino's and Hazard Games such as Lottery and Internet Gambling</option>
+                        </select>
+                    </div>
+                    <button class="button light-blue">Add Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE EMAIL
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input name="email" placeholder="New Email Address" type="email" email="true" />
+                    <input name="password" required placeholder="Confirm New Email Address" />
+                    <button class="button light-blue">Send Confirmation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-h1">
+                <div class="model-close-container">
+                    <i data-dismiss="modal" class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-h">
+                <div class="modal-title">
+                    CHANGE DETAILS
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input name="email" placeholder="New Address" type="email" email="true" />
+                    <input name="password" required placeholder="New Place" />
+                    <input name="password" required placeholder="New Country" />
+                    <button class="button light-blue">Save Details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

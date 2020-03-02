@@ -1,0 +1,331 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="header">
+      <div class="title-text">Customer Information</div>
+    </div>
+    <div class="row row-items">
+      <div class="row-wrapper">
+        <div class="row-left">
+          {{user.customerName}}
+        </div>
+        <div class="row-right">
+          <div class="certified-col">
+            <i class="material-icons">
+              done
+            </i><br />
+            <span class="certified-txt">Certified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+     
+      <div>&nbsp;</div>
+      <div class="header">
+        <div class="title-text">Transaction Details</div>
+        
+      </div>
+      <div class="center">
+        <div class="fromWrapper">
+          <form [formGroup]="transactionForm" (ngSubmit)="startTransaction()">
+            <div>
+              <input class="input" formControlName="amount" placeholder="Transaction Amount" type="number" />
+            </div>
+            <!-- <div>
+              <select formControlName="currency">
+                <option value="">Currency</option>
+                <option value="Guilder">Guilders</option>
+                <option value="Dollar">Dollar</option>
+                <option value="Euro">Euro</option>
+              </select>
+            </div> -->
+            <div>
+              <select formControlName="transactionType">
+                <option value="">Select Transaction Type</option>
+                <option value="Cash">Cash</option>
+                <option value="Giro">Wire Transafer</option>
+                <option value="Giro">Giro Based</option>
+                <option value="Giro">Swipe</option>
+                <option value="Giro">Personal Cheque</option>
+                <option value="Giro">Cassier Cheque</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <input class="input" formControlName="srcFunds" placeholder="Source of Funds" type="text" />
+            </div>
+            <div>
+              <input class="input" formControlName="service" placeholder="Service Rendered" type="text" />
+            </div>
+            <div>
+              <select formControlName="suspicious">
+                <option value="">Suspicious?</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div *ngIf="user.isPep != 1">
+              <select formControlName="isPep">
+                <option value="">Politically Exposed?</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div>
+              <input class="input" formControlName="description" placeholder="Description (example: invoice nr, product name, service etc)"
+                type="text" />
+            </div>
+            <div>
+              <select formControlName="report">
+                <option value="">Report Transaction?</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div *ngIf="transactionForm.value.report == 'no'">
+              <textarea class="textare" placeholder="Reason for not reporting?"></textarea>
+            </div>
+            <div>&nbsp;</div>
+            <div *ngIf="transactionForm.value.report == 'yes'">
+              <div class="header">
+                <div class="title-text">Objective Indicators</div>
+              </div>
+              <div *ngIf="indicators" class="center">
+                <div *ngFor="let item of indicators.objective; let i = index" class="row">
+                  <div style="font-size: 14px; padding: 10px; overflow: hidden;" class="row-wrapper">
+                    <div style="overflow: hidden;">
+                      <div style="float:left; width: 50px;" id="{{item.indicator}}">
+                        <span (click)="test(item, i)" *ngIf="item.selected">
+                          <i class="material-icons">
+                            check_box
+                          </i>
+                        </span>
+                        <span (click)="test(item, i)" *ngIf="!item.selected">
+                          <i class="material-icons">
+                            check_box_outline_blank
+                          </i>
+                        </span>
+                      </div>
+                      <div style="float:left; width: 1000px;">
+                        <div style="font-weight: 600">
+                          {{item.indicator}}
+                        </div>
+                        <div>
+                          {{item.definition}}
+                        </div>
+                        <div *ngIf="item.subIndicator">
+                          <div style="overflow: hidden; padding: 10px 0;" *ngFor="let subInd of item.subIndicator; let a = index">
+                            <div style="float:left; width: 40px;">
+                              <i (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="subInd.selected"
+                                class="material-icons">
+                                radio_button_checked
+                              </i>
+                              <i (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
+                                class="material-icons">
+                                radio_button_unchecked
+                              </i>
+                            </div>
+                            <div style="float:left; width: 800px;">
+                              <span style="font-weight: 800;">{{subInd.indicatorNr}}.</span>&nbsp;{{subInd.definition}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>&nbsp;</div>
+            <div *ngIf="transactionForm.value.report == 'yes'">
+              <div class="header">
+                <div class="title-text">Subjective Indicators</div>
+              </div>
+              <div *ngIf="indicators" class="center">
+                <div (click)="test(item, i)" *ngFor="let item of indicators.subjective; let i = index" class="row">
+                  <div style="font-size: 14px; padding: 10px; overflow: hidden;" class="row-wrapper">
+                    <div style="float: left;">
+                      <div style="float:left; width: 50px;" id="{{item.indicator}}">
+                        <span *ngIf="item.selected">
+                          <i class="material-icons">
+                            check_box
+                          </i>
+                        </span>
+                        <span *ngIf="!item.selected">
+                          <i class="material-icons">
+                            check_box_outline_blank
+                          </i>
+                        </span>
+                      </div>
+                      <div style="font-weight: 600">
+                        {{item.indicator}}
+                      </div>
+                      <div>
+                        {{item.definition}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              &nbsp;
+            </div>
+            <!-- <div class="header">
+              <div class="title-text">Subjective Indicators</div>
+            </div>
+            <div class="center">
+              <div *ngFor="let item of indicators.subjective; let i = index" class="row">
+                <div style="font-size: 14px; padding: 10px;" class="row-wrapper">
+                  <div style="font-weight: 600">
+                    {{item.indicator}}
+                  </div>
+                  <div>
+                    {{item.definition}}
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div *ngIf="user.isPep == 1 || threshold && transactionForm.value.amount >= threshold.amount || transactionForm.value.suspicious == 'yes'"
+              class="header">
+              <div class="title-text">Alert(s)</div>
+            </div>
+            <div *ngIf="user.isPep == 1">
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 5px;">Politically exposed
+                </div>
+                <div style="margin-bottom: 10px;">
+                  According to our system this person is registered as a politically exposed person</div>
+              </div>
+              <select formControlName="reportSuspicious">
+                <option value="">Do you want to report?</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div *ngIf="threshold && transactionForm.value.amount >= threshold.amount">
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 5px;">The Transaction amount exeeds the threshold. </div>
+                <div style="margin-bottom: 10px;">Indicator {{threshold.indicator}} : {{threshold.definition}}</div>
+              </div>
+              <select formControlName="reportThreshold">
+                <option value="">Do you want to report?</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div *ngIf="transactionForm.value.suspicious == 'yes'">
+              <div style="font-size: 13px;">
+                <div style="font-weight: 600; margin-bottom: 5px;">You indicated that the transaction is suspicious.
+                </div>
+                <div *ngFor="let item of indicators.subjective; let i = index" style="margin-bottom: 10px;">Indicator
+                  {{item.indicator}} : {{item.definition}}</div>
+              </div>
+              <select formControlName="reportSuspicious">
+                <option value="">Do you want to report?</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div> -->
+            <div style="text-align: center; padding: 20px 0 0 0;">
+              <button class="button light-blue">Create Transaction</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <div class="header">
+            <div class="title-text">Search Result</div>
+            <div  style="float:right; line-height: 50px; margin-left: 5px; font-size: 12px;">
+              New Search
+            </div>
+            <div data-toggle="modal" data-target="#addAccountModal" style="float:right; line-height: 50px; padding-top: 8px; font-size: 12px;"><i
+                class="material-icons">
+                search
+              </i>
+            </div>
+          </div>
+          <!-- <div *ngFor="let item of searchResult; let i = index" class="row row-items">
+            <div class="row-wrapper">
+              <div class="row-left">
+                {{item.name}}
+              </div>
+              <div class="row-right">
+                <div class="certified-col">
+                  <i class="material-icons">
+                    person_add
+                  </i><br />
+                  <span class="certified-txt">Add Customer</span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userType == 'legal'">
+      <div class="row">
+        <div class="col col2">
+          <div class="details">
+            <div>
+              Name:<span class="txt-spacing">{{user.name}}</span>
+            </div>
+            <div>
+              Email:<span class="txt-spacing">{{user.email}}</span>
+            </div>
+            <div>
+              Trade Name:<span class="txt-spacing">{{user.tradeName}}</span>
+            </div>
+            <div>
+              Chamber No: <span class="txt-spacing">{{user.chamberNo}}</span>
+            </div>
+            <div>
+              Address: <span class="txt-spacing">{{user.address}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col col3">
+          <div data-toggle="modal" data-target="#changeEmailModal">
+            REPORT COMPANY
+          </div>
+          <div data-toggle="modal" data-target="#changePasswordModal">
+
+          </div>
+          <div class="details">
+            <div data-toggle="modal" data-target="#changeDetailsModal">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="identificationDocuments">
+        <div>&nbsp;</div>
+        <div class="header">
+          <div class="title-text">Company Documents</div>
+        </div>
+        <div *ngFor="let item of identificationDocuments; let i = index" class="row row-items">
+          <div class="row-wrapper">
+            <div class="row-left">
+              {{item.documentType}}
+            </div>
+            <div class="row-right">
+              <div class="certified-col">
+                <i class="material-icons">
+                  done
+                </i><br />
+                <span class="certified-txt">Certified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div>&nbsp;</div>
+
+    <div style="height: 150px;">
+      &nbsp;
+    </div>
+  </div>
+</div>

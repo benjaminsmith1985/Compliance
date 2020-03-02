@@ -1,0 +1,77 @@
+<div *ngIf="doc && user" class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My Customers</li>
+                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">{{user.customerName}}</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">{{doc.documentName}}</li>
+              </ol>
+            </nav>
+          </div>
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+              <i class="fas fa-file-pdf"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div [ngClass]="{'alert-danger': doc.expired == '1'}" class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Notice</h4>
+        <div>
+          <span *ngIf="doc.expired == '1'">This identification document<span class="alert-link"> expired on
+              {{doc.formattedExpirationDate}}.</span></span>
+          <span *ngIf="doc.expired == '0'">This identification document is up to date.</span>
+          <span *ngIf="doc.docVerified == '0'"> The document has not been verified.</span>
+          <span *ngIf="doc.docVerified == '1'"> The document has been verified on {{doc.formattedDateVerified}} by
+            {{doc.verifiedName}}.</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Customer Indentification</div>
+        <div style="overflow: hidden;">
+          <div style="float: left;">
+            <div class="section-item">
+              <span class="topic">First Name:</span><span class="txt-spacing">{{user.firstname}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Last Name:</span><span class="txt-spacing">{{user.lastname}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Upload date:</span><span class="txt-spacing">{{doc.uploadDate}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Identification Type:</span><span class="txt-spacing">{{doc.documentName}}</span>
+            </div>
+            <div class="section-item">  
+              <span class="topic">Date of Issue:</span><span class="txt-spacing">{{doc.formattedDateIssue}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Place of Issue:</span><span class="txt-spacing">{{doc.placeIssue}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Country Issued:</span><span class="txt-spacing">{{doc.countryIssue}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Expiration Date:</span><span class="txt-spacing">{{doc.formattedExpirationDate}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Document No:</span><span class="txt-spacing">{{doc.documentNr}}</span>
+            </div>
+          </div>
+          <div style="float: right;">
+            <span style="display: inline-block; padding: 15px; border: 2px dotted #adadad; border-radius: 10px;"><img style="border-radius: 10px; height: 200px;" src="{{doc.path}}" alt="{{doc.documentName}}" /></span>
+          </div>
+        </div>
+
+      </div>
+      <button (click)="verifyDocument()" *ngIf="doc.docVerified == '0'" class="button lime-green"><span>Verify Document</span></button>
+      <button *ngIf="doc.used == '0'" class="button lime-green"><span>Delete Document</span></button>
+    </div>
+  </div>
+</div>

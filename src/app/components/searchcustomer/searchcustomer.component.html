@@ -1,0 +1,169 @@
+<div class="wrap">
+    <div class="cnt">
+        <!-- <div *ngIf="!searchResult" class="header">
+            <div class="title-text">Search User</div>
+        </div> -->
+
+        <form [formGroup]="searchForm" (ngSubmit)="searchUser()">
+            <div class="center">
+                <div *ngIf="!searchResult" class="navbar-inline">
+                    <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+                        <div class="mr-auto">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                                    <!-- <li>
+                                        <div style="width:30px; font-size: 20px;">
+                                                <i class="fas fa-angle-left"></i>
+                                        </div>
+                                    </li> -->
+                                    <li class="breadcrumb-item grey-txt-active">Search User</li>
+                                    <!-- <li class="breadcrumb-item active">Date Picker</li> -->
+                                </ol>
+                            </nav>
+                        </div>
+                    </nav>
+                </div>
+                <div *ngIf="searchResult" class="navbar-inline">
+                    <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+                        <div class="mr-auto">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                                    <li (click)="newSearch()" class="breadcrumb-item grey-txt cursor underline">Search
+                                        User</li>
+                                    <li class="breadcrumb-item active grey-txt-active" aria-current="page">Search
+                                        Results (<span>{{searchResult.length}}</span>)</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- <nav *ngIf="searchResult" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li (click)="newSearch()" class="breadcrumb-item breadcrumb-off">Search User</li>
+                       
+                    </ol>
+                </nav> -->
+                <div *ngIf="!searchResult" class="section">
+                    <div class="section-input-wrapper">
+                        <div class="section-input-text-area">
+                            Select user type
+                        </div>
+                        <div class="section-input-area">
+                            <select class="custom-select" formControlName="userType">
+                                <option value="natural">Natural Person</option>
+                                <option value="legal">Legal Entity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section-input-wrapper">
+                        <div class="section-input-text-area">
+                            User ICS-No.
+                        </div>
+                        <div class="section-input-area">
+                            <input class="input" formControlName="icsNo" type="text" />
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="searchForm.value.userType == 'natural'">
+                        <div class="section-input-wrapper">
+                            <div class="section-input-text-area">
+                                Firstname
+                            </div>
+                            <div class="section-input-area">
+                                <input class="input" formControlName="firstName" type="text" />
+                            </div>
+                        </div>
+                        <div class="section-input-wrapper">
+                            <div class="section-input-text-area">
+                                Lastname
+                            </div>
+                            <div class="section-input-area">
+                                <input class="input" formControlName="lastName" type="text" />
+                            </div>
+                        </div>
+                        <div class="section-input-wrapper">
+                            <div class="section-input-text-area">
+                                Identification Type
+                            </div>
+                            <div class="section-input-area">
+                                <select class="custom-select" formControlName="idType">
+                                    <option value="">Select Type</option>
+                                    <option value="legal">Paspoort</option>
+                                    <option value="legal">Drivings License</option>
+                                    <option value="legal">ID Card</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div *ngIf="searchForm.value.idType != ''" class="section-input-wrapper">
+                            <div class="section-input-text-area">
+                                Document No
+                            </div>
+                            <div class="section-input-area">
+                                <input class="input" formControlName="docNo" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="searchForm.value.userType == 'legal'">
+                        <div class="section-input-wrapper">
+                            <div class="section-input-text-area">
+                                Chamber Of Commerce No.
+                            </div>
+                            <div class="section-input-area">
+                                <input class="input" formControlName="chamberNo" type="text" />
+                            </div>
+                        </div>
+                        <div class="section-input-wrapper">
+                            <div class="section-input-text-area">
+                                Company Name
+                            </div>
+                            <div class="section-input-area">
+                                <input class="input" formControlName="companyName" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="!searchResult">
+                    <button class="button lime-green">Search User</button>
+                </div>
+
+                <div *ngIf="searchResult">
+                    <div class="row-header">
+                        <div class="row-cols col-icsno">ICS-No</div>
+                        <div class="row-cols col-customer">Customer</div>
+                    </div>
+                    <div *ngFor="let item of searchResult; let i = index" class="row row-items">
+                        <div class="row-wrapper">
+                            <div class="row-left col-icsno">
+                                {{item.icsNo}}
+                            </div>
+                            <div class="row-left col-customer">
+                                {{item.name}}
+                            </div>
+                            <div style="float: right; width: 100px; line-height: 54px;">
+                                <div style="position: absolute; margin-top: 8px; line-height: 30px; font-size: 14px;"
+                                    class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <div style="font-size: 12px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a *ngIf="item.granted != 0 && item.granted != null" class="dropdown-item"
+                                            routerLink="/business/user/{{item.icsNo}}">View Profile</a>
+                                        <a *ngIf="item.merchantUserId == null" class="dropdown-item" (click)="addCustomer(item.icsNo)">Add
+                                            As Customer</a>
+                                        <a routerLink="/business/newtransaction/{{item.icsNo}}" *ngIf="item.granted != 0 && item.granted != null"
+                                            class="dropdown-item">Create Transaction</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

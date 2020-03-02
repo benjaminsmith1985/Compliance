@@ -1,0 +1,69 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/search" class="breadcrumb-item grey-txt cursor underline">Search</li>
+                <li class="breadcrumb-item grey-txt-active">Result<span *ngIf="amountResults > 1">s</span>
+                  ({{amountResults}})</li>
+              </ol>
+            </nav>
+          </div>
+        </nav>
+      </div>
+      <div *ngFor="let item of searchResult; let i = index" class="search-row">
+        <div style="float:left;">
+          <div style="font-weight: 600;">{{item.focusType}} - {{item.focusType == 'Transaction' ? item.fwdId :
+            item.customerName}}</div>
+          <div class="searched-content">{{item.content}}</div>
+        </div>
+        <div *ngIf="item.isCustomer != 'Pending'" style="float:right; width: 70px;">
+          <span (click)="openDialog(content, item)" class="action-btn">
+            ACTION
+          </span>
+        </div>
+        <div *ngIf="item.isCustomer == 'Pending'" class="grey-txt" style="float:right; padding-top: 16px; font-size: 12px; text-align: right; width: 150px;">
+          Pending Authorization
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div>
+        <div *ngIf="amountPages > 1" class="pagination-wrapper">
+          <span *ngFor='let in of counter(amountPages);let i = index; let last = last'>
+            <span class="span" routerLink="/search/{{i+1}}/{{amountPerPage}}/{{urlData}}" [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
+          </span>
+          <span *ngIf="amountPagingBtns < amountPages" class="span">
+            ...
+          </span>
+          <span class="span" routerLink="/search/{{amountPages}}/{{amountPerPage}}/{{urlData}}" [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
+        </div>
+      </div>
+    </div>
+    <div style="height: 50px;">
+      &nbsp;
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="my-modal-header">
+    <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
+  </div>
+  <div *ngIf="currentUser" class="modal-body">
+    <div (click)="addCustomer(currentUser.icsNo)" class="my-modal-btn" *ngIf="currentUser.isCustomer == 'No'">
+      Add User to Customer List
+    </div>
+    <div class="my-modal-btn" (click)="viewProfile()" *ngIf="currentUser.isCustomer == 'Yes'">
+      View Customer Profile
+    </div>
+    <div class="my-modal-btn" (click)="createTransaction()" *ngIf="currentUser.isCustomer == 'Yes'">
+      Create Transaction
+    </div>
+    <div class="my-modal-btn" (click)="viewTransaction()" *ngIf="currentUser.focusType == 'Transaction'">
+      View Transaction
+    </div>
+  </div>
+</ng-template>

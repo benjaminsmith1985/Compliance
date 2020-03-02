@@ -1,0 +1,108 @@
+.cnt .center {
+  margin: 0 auto;
+  width: 1300px;
+}
+.cnt .header {
+  margin: 0 auto;
+  width: 1300px;
+  overflow: hidden;
+}
+.cnt .header .title-text {
+  float: left;
+  line-height: 50px;
+  letter-spacing: 1px;
+}
+.cnt .row {
+  cursor: pointer;
+  margin: 0 auto;
+  width: 1300px;
+  background-color: #fff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+  border-top: 0;
+}
+.cnt .row .row-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+.cnt .row .row-wrapper .row-left {
+  float: left;
+  line-height: 54px;
+}
+.cnt .row .row-wrapper .row-btn {
+  line-height: 54px;
+}
+.cnt .row .row-wrapper .row-btn button {
+  background-color: #339af0;
+  border: 0;
+}
+.cnt .row .row-wrapper .row-right {
+  float: right;
+}
+.cnt .row .row-wrapper .row-right .certified-col {
+  text-align: center;
+}
+.cnt .row .row-wrapper .row-right .certified-col .material-icons {
+  color: green;
+}
+.cnt .row .row-wrapper .row-right .certified-col .certified-txt {
+  color: gray;
+  font-size: 12px;
+}
+.cnt .row .bold {
+  font-weight: 600;
+}
+.cnt .row .col1 .card .card-body .card-title,
+.cnt .row .col1 .card .card-body .card-text {
+  font-size: 14px !important;
+}
+.cnt .row .col2 {
+  font-size: 14px;
+  line-height: 40px;
+}
+.cnt .row .col2 .details {
+  margin-top: 40px;
+}
+.cnt .row .col2 .details .txt-spacing {
+  display: inline-block;
+  margin-left: 10px;
+}
+.cnt .row .col3 {
+  font-size: 12px;
+  text-align: right;
+  color: #323443;
+  font-weight: 600;
+  line-height: 40px;
+}
+.cnt .row .col3 .details {
+  margin-top: 40px;
+}
+.cnt .row-items:hover {
+  background-color: #339af0;
+  border-color: #fff;
+  color: #fff;
+}
+.cnt .row-items:hover .row-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+.cnt .row-items:hover .row-wrapper .row-left {
+  float: left;
+  line-height: 54px;
+}
+.cnt .row-items:hover .row-wrapper .row-btn button {
+  background-color: #fff;
+  color: #339af0;
+  border: 0;
+}
+.cnt .row-items:hover .row-wrapper .row-right .certified-col {
+  text-align: center;
+}
+.cnt .row-items:hover .row-wrapper .row-right .certified-col .material-icons {
+  color: #fff;
+}
+.cnt .row-items:hover .row-wrapper .row-right .certified-col .certified-txt {
+  color: #fff;
+  font-size: 12px;
+}

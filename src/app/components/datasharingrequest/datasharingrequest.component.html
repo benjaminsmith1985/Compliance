@@ -1,0 +1,40 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="header">
+      <div class="title-text">Request</div>
+    </div>
+    <div *ngIf="dataRequest" class="row">
+      <div *ngFor="let item of dataRequest" class="row-wrapper">
+        <div class="row-left">
+          {{item.name}}
+        </div>
+        <div class="row-right row-btn">
+            <button (click)="confirm(item)" type="button" class="btn btn-success btn-sm">Grand Permission</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-h1">
+        <div class="model-close-container">
+          <i data-dismiss="modal" class="fal fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-h">
+        <div class="modal-title">
+          Are you sure you want to grant this permission?
+        </div>
+      </div>
+      <div class="modal-body">
+        <button (click)="grandPermission()" class="button lime-green">Yes</button>
+        <button data-dismiss="modal" class="button weird-purple">No</button>
+      </div>
+    </div>
+  </div>
+</div>

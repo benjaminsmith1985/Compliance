@@ -1,0 +1,27 @@
+.search-row {
+  padding: 15px;
+  font-size: 15px;
+  background-color: #fff;
+  border: 1px solid #efefef;
+  border-top: 0;
+  overflow: hidden;
+}
+.search-row .searched-content {
+  font-size: 14x;
+  padding: 3px 0;
+}
+.search-row .action-btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 12px;
+  background-color: #20c997;
+  color: #fff;
+}
+.search-row .action-btn:hover {
+  background-color: #36d5a6;
+}
+.fa-check-circle {
+  color: #20c997;
+}

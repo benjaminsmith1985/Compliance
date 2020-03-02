@@ -1,0 +1,42 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UploadService {
+
+  SERVER_URL: string = "http://localhost/complianceServer";
+  constructor(private httpClient: HttpClient) { }
+
+  public upload(data) {
+    let uploadURL = `${this.SERVER_URL}/file_upload.php`;
+    var percentage = 0;
+
+    return this.httpClient.post<any>(uploadURL, data, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(map((event) => {
+       
+
+      switch (event.type) {
+        
+        case HttpEventType.UploadProgress:
+          const progress = Math.round(100 * event.loaded / event.total);
+          percentage = progress;
+       
+          return { status: 'progress', message: percentage, data: '' };
+
+        case HttpEventType.Response:
+      
+          return event.body;
+         // return { status: 'Body', message: percentage, data: event.body };
+        default:
+          return `Unhandled event: ${event.type}`;
+          //return { status: 'Unhandled event', message: percentage, data: event.type };
+      }
+    })
+    );
+  }
+}
