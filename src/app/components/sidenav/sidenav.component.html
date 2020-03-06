@@ -1,7 +1,6 @@
-<div class="wrapper">
-
+<div *ngIf="authenticationService && authenticationService.currentUserValue" class="wrapper">
   <div>
-    <nav  id="sidebar">
+    <nav id="sidebar">
       <div class="sidebar-header lime-green">
         <div class="sidebar-txt">BUSINESS PORTAL</div>
         <div class="sidebar-username" *ngIf="currentUser">{{currentUser.merchantname}}</div>

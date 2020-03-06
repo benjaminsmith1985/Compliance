@@ -1,5 +1,5 @@
-<div class="center">
-  <div class="login-type-container">
+<div class="center-index">
+  <!-- <div class="login-type-container">
     <div class="type-container left">
       <div class="icons-area">
         <i class="fal fa-user"></i>
@@ -33,6 +33,18 @@
           REGISTER
         </div>
       </div>
+    </div>
+  </div> -->
+  <div class="center-frame">
+    <div class="title">BUSINESS PORTAL LOGIN</div>
+    <div class="index-form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit('business')">
+        <input formControlName="email" placeholder="Email" type="text" />
+        <input formControlName="icsNo" placeholder="Merchant ICS-No." type="text" />
+        <input formControlName="password" type="password" name="password" required placeholder="Password" />
+        <button class="button light-blue">Sign In</button>
+        <div (click)="register()" class="button grey">Register</div>
+      </form>
     </div>
   </div>
 </div>

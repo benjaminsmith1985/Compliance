@@ -162,7 +162,7 @@
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
         <!-- <div class="row-cols col-date">Permission</div> -->
-        <div class="add-btn"><i (click)="open(docContent)" class="fad fa-plus-circle"></i></div>
+        <div class="add-btn"><i routerLink="/documents/add/{{user.icsNo}}" (click)="open(docContent)" class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!identificationDocuments">
         <div style="padding: 15px;" class="row row-items">

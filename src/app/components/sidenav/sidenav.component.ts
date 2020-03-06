@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +15,7 @@ export class SidenavComponent implements OnInit {
   customerType: string = 'select';
   searchCustomerForm: FormGroup;
   searchForm: FormGroup;
-  currentUser : any;
+  currentUser : any = null;
 
   constructor(
     private userService: UserService,
@@ -37,8 +38,12 @@ export class SidenavComponent implements OnInit {
       icsNo: [''], 
       userType: ['']
     });
+
+
     
     this.currentUser = this.authenticationService.currentUserValue;
+
+    console.log(this.currentUser);
 
   }
 

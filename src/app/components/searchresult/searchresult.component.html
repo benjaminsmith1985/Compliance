@@ -22,7 +22,7 @@
         </div>
         <div *ngIf="item.isCustomer != 'Pending'" style="float:right; width: 70px;">
           <span (click)="openDialog(content, item)" class="action-btn">
-            ACTION
+            <!-- ACTION --><i style="font-size: 18px;" class="far fa-ellipsis-h"></i>
           </span>
         </div>
         <div *ngIf="item.isCustomer == 'Pending'" class="grey-txt" style="float:right; padding-top: 16px; font-size: 12px; text-align: right; width: 150px;">

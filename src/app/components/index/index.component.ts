@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { NgForm } from '@angular/forms';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-index',
@@ -11,19 +12,32 @@ import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/opera
   styleUrls: ['./index.component.less']
 })
 export class IndexComponent implements OnInit {
+  loginForm: FormGroup;
   customerPage: any;
   merchantPage: any;
+  submitted = false;
   registerCustomerForm: FormGroup;
   registerMerchantForm: FormGroup;
+  loading = false;
+  returnUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router) { }
+    private authenticationService: AuthenticationService,
+    private router: Router
+    ) { }
+   
 
   ngOnInit() {
     this.customerPage = 1;
     this.merchantPage = 1;
+
+    this.loginForm = this.formBuilder.group({
+      icsNo: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['']
+    });
 
     this.registerCustomerForm = this.formBuilder.group({
       firstname: [''],
@@ -56,14 +70,52 @@ export class IndexComponent implements OnInit {
     });
   }
 
-  onSubmit(form_data: NgForm) {
-    if (form_data.valid) {
-      this.login(form_data.value);
+  onSubmit(role) {
+
+    this.submitted = true;
+   
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
     }
+
+   
+    this.loading = true;    
+
+    this.loginForm.value.role = role;    
+
+    this.authenticationService.login(this.loginForm.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          switch (role) {
+            case 'business':
+              this.router.navigate(['/search']);
+              break;
+            case 'customer':
+              this.router.navigate(['/customer']);
+              window['$']('#loginModal')['modal']('hide');
+              break;
+          }
+
+          this.loginForm.reset();
+         
+
+        },
+        error => {
+          // this.alertService.error(error);
+          this.loading = false;
+        });
   }
 
+  // onSubmit(form_data: NgForm) {
+  //   if (form_data.valid) {
+  //     this.login(form_data.value);
+  //   }
+  // }
+
   login(form_data) {
-    console.log('binnen');
+ 
   }
 
   page(page, pageType): void {
@@ -83,6 +135,10 @@ export class IndexComponent implements OnInit {
     }
 
     this.registerCustomer();
+  }
+
+  register():void{
+    alert('awoo');
   }
 
   registerCustomerDialog(): void {

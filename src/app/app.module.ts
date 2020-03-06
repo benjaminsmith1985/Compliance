@@ -59,6 +59,7 @@ import { UseridsComponent } from './components/userids/userids.component';
 import { UserdocumentsComponent } from './components/userdocuments/userdocuments.component';
 import { SearchresultComponent } from './components/searchresult/searchresult.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { AdddocumentsComponent } from './components/adddocuments/adddocuments.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     BusinessuserComponent,
     BusinesstransactionComponent,
     Datepicker1Component,
-    TransactionsComponent, BusinessemployeesComponent, UsertransactionsComponent, UsertransactionComponent, ReportsComponent, UserreportsComponent, AddcustomerComponent, NewreportComponent, SearchInputComponent, NewtransactionComponent, UserreportComponent, UseridComponent, Datepicker1Component, MerchantaccountComponent, PaymentComponent, CurrentinvoiceComponent, FiureportsComponent, UseridsComponent, UserdocumentsComponent, SearchresultComponent
+    TransactionsComponent, BusinessemployeesComponent, UsertransactionsComponent, UsertransactionComponent, ReportsComponent, UserreportsComponent, AddcustomerComponent, NewreportComponent, SearchInputComponent, NewtransactionComponent, UserreportComponent, UseridComponent, Datepicker1Component, MerchantaccountComponent, PaymentComponent, CurrentinvoiceComponent, FiureportsComponent, UseridsComponent, UserdocumentsComponent, SearchresultComponent, AdddocumentsComponent
   ],
   imports: [
     BrowserModule,
