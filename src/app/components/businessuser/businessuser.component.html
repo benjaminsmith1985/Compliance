@@ -161,8 +161,7 @@
         <div class="row-cols col-date">Expiration Date</div>
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
-        <!-- <div class="row-cols col-date">Permission</div> -->
-        <div class="add-btn"><i routerLink="/documents/add/{{user.icsNo}}" (click)="open(docContent)" class="fad fa-plus-circle"></i></div>
+        <div class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!identificationDocuments">
         <div style="padding: 15px;" class="row row-items">
@@ -192,14 +191,6 @@
               <td>
                 <span>{{item.verified == '1' ? 'Yes' : 'No'}}</span>
               </td>
-              <!-- <td width="150">
-                <span *ngIf="item.permission == '1'">Yes</span>
-                <span *ngIf="item.permission == '0'">Pending</span>
-                <span *ngIf="item.permission == null">No</span>
-              </td>
-              <td style="text-align: right; padding: 0 20px;">
-                <span *ngIf="item.expired == '1'" [ngClass]="{'red-txt': true}"><i class="fas fa-exclamation-circle"></i></span>
-              </td> -->
             </tr>
           </table>
         </div>
@@ -217,7 +208,7 @@
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
         <!-- <div class="row-cols col-date">Permission</div> -->
-        <div class="add-btn"><i (click)="open(otherDocContent)" class="fad fa-plus-circle"></i></div>
+        <div class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!otherDocuments">
         <div style="padding: 15px;" class="row row-items">

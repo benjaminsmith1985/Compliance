@@ -82,7 +82,7 @@ const routes: Routes = [
   { path: 'billing/invoice/:invoiceNo', component: CurrentinvoiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'userreports/:userIcs', component:  UserreportsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
-  { path: 'documents/add/:userIcs', component:  AdddocumentsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } }
+  { path: 'documents/add/:docType/:userIcs', component:  AdddocumentsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } }
 ]; 
  
 @NgModule({
