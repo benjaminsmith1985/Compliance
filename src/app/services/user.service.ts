@@ -94,6 +94,10 @@ export class UserService {
     return this.http.post(`${this.link}/get_user_transactions`, { data });
   }
 
+  getUserWeeklyTransactions(data: any): any {
+    return this.http.post(`${this.link}/get_user_weekly_transactions`, { data });
+  }
+
   getUserReports(data: any): any {
     return this.http.post(`${this.link}/get_user_reports`, { data });
   }
