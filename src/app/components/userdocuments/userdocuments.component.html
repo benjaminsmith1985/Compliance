@@ -9,7 +9,7 @@
                 <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My
                   Customers</li>
                 <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">{{user.customerName}}</li>
-                <li class="breadcrumb-item grey-txt-active" aria-current="page">Other Documents</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">Other Documents <span *ngIf="userDocuments && userDocuments.id">({{userDocuments.other.length}})</span></li>
               </ol>
             </nav>
           </div>
@@ -18,43 +18,26 @@
 
       <div *ngIf="userDocuments && userDocuments.other">
         <div class="row-header">
-          Other Documents
-        </div>
+          <div class="row-cols col-doc-name">Document Name</div>
+          <div class="row-cols col-date">Document No</div>
+          <div class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+        </div> 
         <div *ngFor="let item of userDocuments.other; let i = index" class="row row-items">
-          <div class="row-wrapper">
-            <div [ngClass]="{'grey-txt': item.permission != '1'}" class="row-left">
-              {{item.documentName}}
-            </div>
-            <div *ngIf="item.permission == '0'" class="row-right">
-              <div class="right-col">
-                <span class="right-txt">Pending Authorization</span>
-              </div>
-            </div>
-            <div *ngIf="item.permission == '1' && item.verified == '1'" class="button-right button-right-active">
-              <div class="certified-col">
-                <i class="material-icons">
-                  done
-                </i><br />
-                <span class="certified-txt">Verified</span>
-              </div>
-            </div>
-            <div *ngIf="item.permission == '1' && item.verified != '1'" (click)="fyDocs(item, 'verify')" class="button-right">
-              <div class="certified-col">
-                <i class="material-icons">
-                  done
-                </i><br />
-                <span class="certified-txt">Verify</span>
-              </div>
-            </div>
-            <div (click)="requestpermission(item.documentId, item.icsNo)" *ngIf="item.new == '1'" class="button-right">
-              <div class="certified-col">
-                <i class="material-icons">
-                  lock
-                </i><br />
-                <span class="certified-txt">Request</span>
-              </div>
-            </div>
-          </div>
+          <table width="100%">
+            <tr>
+              <td (click)="openDoc(item, action)" width="264" style="height: 75px; padding: 0 15px;">
+                {{item.documentName}}
+              </td>
+              <td (click)="openDoc(item, action)" width="200">
+                <span>
+                  <span>{{item.documentNr}}</span>
+                </span>
+              </td>
+              <td style="text-align: right; padding: 0 20px;">
+                <!-- <span *ngIf="item.expired == '1'" [ngClass]="{'red-txt': true}"><i class="fas fa-exclamation-circle"></i></span> -->&nbsp;
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
 
