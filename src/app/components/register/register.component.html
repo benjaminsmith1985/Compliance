@@ -1,54 +1,159 @@
-
-<div class="modal fade" id="registerBusinessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-h1">
-        <div class="model-close-container">
-          <i data-dismiss="modal" class="fal fa-times"></i>
-        </div>
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/login" class="breadcrumb-item grey-txt cursor underline">Home</li>
+                <li class="breadcrumb-item grey-txt-active">ICS Business Register</li>
+              </ol>
+            </nav>
+          </div>
+        </nav>
       </div>
-      <div class="modal-h">
-        <div class="modal-title">
-          BUSINESS REGISTER
-        </div>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="registerMerchantForm">
-          <span *ngIf="merchantPage == '1'">
-            <span class="modal-subtitle">STEP 1 OF 3</span>
-            <input name="firstname" formControlName="firstname" placeholder="Statutory Name" />
-            <input name="lastname" formControlName="lastname" placeholder="Business Name" />
-            <input name="initials" formControlName="initials" placeholder="Legal Form" />
-            <select class="custom-select" formControlName="gender">
-              <option value="">Sector</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <div (click)="page(2, 'merchant')" class="button light-blue">NEXT STEP</div>
-          </span>
-          <span *ngIf="merchantPage == '2'">
-            <span class="modal-subtitle">STEP OF 3</span>
-            <input name="telephone" formControlName="telephoneNo" placeholder="Street Name" type="email" email="true" />
-            <input name="address" formControlName="address" required placeholder="Street Number" />
-            <input name="place" formControlName="place" required placeholder="Place" />
-            <input name="country" formControlName="country" required placeholder="Country" />
-            <div (click)="page(3, 'merchant')" class="button light-blue">NEXT STEP</div>
-            <div (click)="page(1, 'merchant')" class="button light-brown">PREVIOUS STEP</div>
+      <div class="fromWrapper">
+        <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+          <div class="section">
+            <div class="section-title">Company Information</div>
+            <div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Business Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="companyname" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Trade Name
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="tradename" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Legal Form
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="legalForm" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Chamber Of Commerce No.
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="chamberno" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Email
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="email" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Telephone
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="phone" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Sector
+                </div>
+                <div class="section-input-area">
+                  <select class="custom-select" formControlName="occgroup">
+                    <option *ngFor="let item of occupationalGroups; let i = index" value="natural">{{item.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          </span>
-          <span *ngIf="merchantPage == '3'">
-            <span class="modal-subtitle">FINAL STEP</span>
-            <input name="firstname" formControlName="firstname" placeholder="First Name" />
-            <input name="lastname" formControlName="lastname" placeholder="Last Name" />
-            <input name="email" formControlName="email" placeholder="Email" type="email" email="true" />
-            <input name="password" formControlName="password" required placeholder="Password" />
-            <input name="retypepassword" formControlName="retypepassword" required placeholder="Retype Password" />
-            <div (click)="registerCustomer()" class="button light-blue">REGISTER</div>
-            <div (click)="page(2, 'merchant')" class="button light-brown">PREVIOUS STEP</div>
-          </span>
+
+          <div class="section">
+            <div class="section-title">Address Information</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Street Name
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="streetName" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Street Number
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="streetNumber" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Place
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="place" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Country
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="country" type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">Login Information</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Email
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="streetName" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Password
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="streetNumber" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Retype Password
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="place" type="text" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="button lime-green">Register Business</button>
+          </div>
         </form>
       </div>
+    </div>
+
+
+
+    <div style="height: 150px;">
+      &nbsp;
     </div>
   </div>
 </div>

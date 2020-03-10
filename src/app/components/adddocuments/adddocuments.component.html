@@ -1,5 +1,5 @@
 <div *ngIf="user" class="wrap">
-  <form [formGroup]="insertDocForm"  (ngSubmit)="uploadDocument()">
+  <form [formGroup]="insertDocForm" (ngSubmit)="uploadDocument()">
     <div class="cnt">
       <div class="center">
 
@@ -94,6 +94,17 @@
             </div>
             <div class="section-input-area">
               <input class="input" formControlName="docName" type="text" />
+              <i (click)="open(content)" class="fas fa-file-invoice" style=" position:
+              absolute; font-size: 16px; cursor:pointer; margin-left: -12px; margin-top: 20px;"></i>
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Date of Issue
+            </div>
+            <div class="section-input-area">
+              <input (click)="d.toggle()" formControlName="dateOfIssue" class="input" ngbDatepicker #d="ngbDatepicker"
+                type="text" />
             </div>
           </div>
           <!-- <div class="section-input-wrapper">
@@ -113,15 +124,6 @@
             </div>
           </div> -->
           <div *ngIf="selectedDocument == 'id'">
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Date of Issue
-              </div>
-              <div class="section-input-area">
-                <input (click)="d.toggle()" formControlName="dateOfIssue" class="input" ngbDatepicker #d="ngbDatepicker"
-                  type="text" />
-              </div>
-            </div>
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
                 Expiration Date
@@ -147,23 +149,23 @@
                 <input class="input" formControlName="idCountryOfIssue" type="text" />
               </div>
             </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Document
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Document
+            </div>
+            <div class="section-input-area">
+              <label for="file-upload" style="border:0;" class="custom-file-upload lime-green">
+                <i class="fa fa-cloud-upload"></i>&nbsp;Select Document
+              </label>
+              <div style="width:400px;">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
+                  [aspectRatio]="4 / 3" [resizeToWidth]="0" format="png" (imageCropped)="imageCropped($event)"
+                  (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                </image-cropper>
               </div>
-              <div class="section-input-area">
-                <label for="file-upload" style="border:0;" class="custom-file-upload lime-green">
-                  <i class="fa fa-cloud-upload"></i>&nbsp;Select Document
-                </label>
-                <div style="width:400px;">
-                  <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
-                    [aspectRatio]="4 / 3" [resizeToWidth]="0" format="png" (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
-                  </image-cropper>
-                </div>
-                <input accept="image/x-png,image/gif,image/jpeg" id="file-upload" size="600" type="file"
-                  (change)="fileChangeEvent($event)" />
-              </div>
+              <input accept="image/x-png,image/gif,image/jpeg" id="file-upload" size="600" type="file"
+                (change)="fileChangeEvent($event)" />
             </div>
           </div>
         </div>
@@ -175,3 +177,17 @@
     </div>
   </form>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <div (click)="modal.dismiss('Cross click')">
+        <i class="fal fa-times"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-title" id="modal-basic-title">SELECT DOCUMENT NAME</div>
+      <div (click)="selectAccount(item)" class="items" *ngFor="let item of documentNames; let i = index">
+          {{item.name}} 
+      </div>
+    </div>
+  </ng-template>

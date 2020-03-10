@@ -134,6 +134,10 @@ export class UserService {
     return this.http.post(`${this.link}/get_indicator_by_occupational_group_id`, {});
   }
 
+  getOccupationalGroups(): any {
+    return this.http.post(`${this.link}/get_occupationalgroups`, {});
+  }
+
   getThreshold(): any {
     return this.http.post(`${this.link}/get_merchant_threshold.php`, {});
   }

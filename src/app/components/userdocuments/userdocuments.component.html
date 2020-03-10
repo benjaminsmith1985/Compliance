@@ -8,8 +8,10 @@
               <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
                 <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My
                   Customers</li>
-                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">{{user.customerName}}</li>
-                <li class="breadcrumb-item grey-txt-active" aria-current="page">Other Documents <span *ngIf="userDocuments && userDocuments.id">({{userDocuments.other.length}})</span></li>
+                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">
+                  {{user.customerName}}</li>
+                <li class="breadcrumb-item grey-txt-active" aria-current="page">Other Documents <span
+                    *ngIf="userDocuments && userDocuments.id">({{userDocuments.other.length}})</span></li>
               </ol>
             </nav>
           </div>
@@ -20,12 +22,16 @@
         <div class="row-header">
           <div class="row-cols col-doc-name">Document Name</div>
           <div class="row-cols col-date">Document No</div>
-          <div class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
-        </div> 
+          <div class="row-cols col-date">Date Issue</div>
+          <div class="row-cols col-date">Upload By</div>
+          <div class="row-cols col-indicator">Verified</div>
+          <!-- <div class="row-cols col-date">Permission</div> -->
+          <div class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+        </div>
         <div *ngFor="let item of userDocuments.other; let i = index" class="row row-items">
           <table width="100%">
             <tr>
-              <td (click)="openDoc(item, action)" width="264" style="height: 75px; padding: 0 15px;">
+              <td (click)="openDoc(item, action)" width="264" style="height: 51px; padding: 0 15px;">
                 {{item.documentName}}
               </td>
               <td (click)="openDoc(item, action)" width="200">
@@ -33,6 +39,22 @@
                   <span>{{item.documentNr}}</span>
                 </span>
               </td>
+              <td (click)="openDoc(item, action)" width="200">
+                <span>
+                  <span>{{item.dateIssue}}</span>
+                </span>
+              </td>
+              <td width="200" (click)="openDoc(item, action)">
+                <span>{{item.uploadAccount}}</span>
+              </td>
+              <td width="150">
+                <span>{{item.verified == '1' ? 'Yes' : 'No'}}</span>
+              </td>
+              <!-- <td width="150">
+                  <span *ngIf="item.permission == '1'">Yes</span>
+                  <span *ngIf="item.permission == '0'">Pending</span>
+                  <span *ngIf="item.permission == null">No</span>
+                </td> -->
               <td style="text-align: right; padding: 0 20px;">
                 <!-- <span *ngIf="item.expired == '1'" [ngClass]="{'red-txt': true}"><i class="fas fa-exclamation-circle"></i></span> -->&nbsp;
               </td>

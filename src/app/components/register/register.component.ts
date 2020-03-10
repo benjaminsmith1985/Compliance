@@ -13,8 +13,8 @@ import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/opera
 export class RegisterComponent implements OnInit {
   customerPage: any;
   merchantPage: any;
-  registerCustomerForm: FormGroup;
-  registerMerchantForm: FormGroup;
+  registerForm: FormGroup;
+  occupationalGroups: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,38 +22,25 @@ export class RegisterComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.customerPage = 1;
-    this.merchantPage = 1;
-
-    this.registerCustomerForm = this.formBuilder.group({
-      firstname: [''],
-      lastname: [''],
+ 
+    this.registerForm = this.formBuilder.group({
+      companyname: [''],
+      tradename: [''],
+      legalForm: [''],
+      chamberno: [],
       email: [''],
-      password: [],
-      retypepassword: [''],
-      telephoneNo: [''],
-      initials: [''],
-      country: [''],
+      phone: [''],
+      occgroup: [''],
+      password: [''],
+      streetName: [''],
+      streetNumber: [''],
       place: [''],
-      address: [''],
-      nationality: [''],
-      gender: ['']
+      country: ['']
     });
 
-    this.registerMerchantForm = this.formBuilder.group({
-      firstname: [''],
-      lastname: [''],
-      email: [''],
-      password: [],
-      retypepassword: [''],
-      telephoneNo: [''],
-      initials: [''],
-      country: [''],
-      place: [''],
-      address: [''],
-      nationality: [''],
-      gender: ['']
-    });
+    this.getOccupationalGroups();
+
+    
   }
 
   onSubmit(form_data: NgForm) {
@@ -78,7 +65,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submitCustomerForm(): void {
-    if (this.registerCustomerForm.invalid) {
+    if (this.registerForm.invalid) {
       return;
     }
 
@@ -86,18 +73,26 @@ export class RegisterComponent implements OnInit {
   }
 
   registerCustomer(): void {
-    this.userService.registerUser(this.registerCustomerForm.value)
+    this.userService.registerUser(this.registerForm.value)
       .pipe(first())
       .subscribe(
         data => {
           window['$']('#registerCustomerModal')['modal']('hide');
-          this.registerCustomerForm.reset();
+          this.registerForm.reset();
           this.customerPage = 1;
         },
         error => {
           // this.alertService.error(error);
           // this.loading = false;
         });
+  }
+
+  getOccupationalGroups(): void {
+    this.userService.getOccupationalGroups()
+      .subscribe(data => {    
+          this.occupationalGroups = data.data;  
+          console.log(this.occupationalGroups); 
+      });
   }
 
 }

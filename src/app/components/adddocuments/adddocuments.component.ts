@@ -20,10 +20,21 @@ export class AdddocumentsComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   user: any;
+  closeResult: string;
 
   documentType = [
     { type: 'Identification Document', id: 'id', selected: false, color: 'lime-green' },
     { type: 'Other Document', id: 'other', selected: false, color: 'lime-green' }
+  ];
+
+  documentNames = [
+    { name: 'Excerpt of Chamber of Commerce' },
+    { name: 'Address Verification' },
+    { name: 'Shareholders Register' },
+    { name: 'Application Establishment Permit' },
+    { name: 'Articles of Incorporation' },
+    { name: 'Residence Permit' },
+    { name: 'Work Permit' }
   ];
 
   identificationType = [
@@ -64,6 +75,24 @@ export class AdddocumentsComponent implements OnInit {
     });
   }
 
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   getUserByIcsNo(icsNo) {
     this.userService.getUserByIcsNo(icsNo)
       .subscribe(data => {
@@ -79,6 +108,11 @@ export class AdddocumentsComponent implements OnInit {
     this.selectedIdentification = item.type;
 
     item.selected = true;
+  }
+
+  selectAccount(item): void {
+    this.insertDocForm.controls['docName'].setValue(item.name);
+    this.modalService.dismissAll();
   }
 
   setDocumentType(item): void {
@@ -121,7 +155,7 @@ export class AdddocumentsComponent implements OnInit {
           case 'id':
             this.router.navigate(['/business/userids/' + userIcsNo]);
             break;
-            case 'other':
+          case 'other':
             this.router.navigate(['/business/userdocuments/' + userIcsNo]);
             break;
         }

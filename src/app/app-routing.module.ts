@@ -40,6 +40,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { CurrentinvoiceComponent } from './components/currentinvoice/currentinvoice.component';
 import { SearchresultComponent } from './components/searchresult/searchresult.component';
 import { AdddocumentsComponent } from './components/adddocuments/adddocuments.component';
+import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -82,6 +83,7 @@ const routes: Routes = [
   { path: 'billing/invoice/:invoiceNo', component: CurrentinvoiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'userreports/:userIcs', component:  UserreportsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'register', component:  RegisterComponent },
   { path: 'documents/add/:docType/:userIcs', component:  AdddocumentsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } }
 ]; 
  

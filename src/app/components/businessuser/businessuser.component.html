@@ -129,7 +129,8 @@
         <div style="padding: 0px;" class="row-wrapper">
           <table width="100%" cellspacing="0" cellpadding="15">
             <tr (click)="setRisk(item)">
-              <td [ngClass]="item.selected || selectedRisk == item.riskrate ? item.color : ''" style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
+              <td [ngClass]="item.selected || selectedRisk == item.riskrate ? item.color : ''"
+                style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
                 valign="middle" width="30">
                 <div style="float:left; width: 30px;">
                   <i style="color:#fff;" class="fas fa-check"></i>
@@ -172,7 +173,7 @@
         <div *ngFor="let item of identificationDocuments; let i = index" class="row row-items">
           <table width="100%">
             <tr>
-              <td (click)="openDoc(item, action)" width="264" style="height: 75px; padding: 0 15px;">
+              <td (click)="openDoc(item, action)" width="264" style="height: 51px; padding: 0 15px;">
                 {{item.documentName}}
               </td>
               <td (click)="openDoc(item, action)" width="200">
@@ -205,6 +206,7 @@
       <div class="row-header">
         <div class="row-cols col-doc-name">Other Documents</div>
         <div class="row-cols col-date">Document No</div>
+        <div class="row-cols col-date">Date of Issue</div>
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
         <!-- <div class="row-cols col-date">Permission</div> -->
@@ -219,12 +221,17 @@
         <div *ngFor="let item of otherDocuments; let i = index" class="row row-items">
           <table width="100%">
             <tr>
-              <td (click)="openDoc(item, action)" width="264" style="height: 75px; padding: 0 15px;">
+              <td (click)="openDoc(item, action)" width="264" style="height: 51px; padding: 0 15px;">
                 {{item.documentName}}
               </td>
               <td (click)="openDoc(item, action)" width="200">
                 <span>
                   <span *ngIf="item.permission == '1'">{{item.documentNr}}</span>
+                </span>
+              </td>
+              <td (click)="openDoc(item, action)" width="200">
+                <span>
+                  {{item.dateIssue}}
                 </span>
               </td>
               <td width="200" (click)="openDoc(item, action)">
@@ -361,16 +368,17 @@
         </select>
       </div>
       <div><input class="input" type="text" formControlName="docNo" placeholder="Document No" /></div>
-      <div><input type="text" placeholder="Date of Issue" (click)="e.toggle()" formControlName="dateOfIssue" class="input"
-          ngbDatepicker #e="ngbDatepicker" /></div>
+      <div><input type="text" placeholder="Date of Issue" (click)="e.toggle()" formControlName="dateOfIssue"
+          class="input" ngbDatepicker #e="ngbDatepicker" /></div>
       <div><input type="text" formControlName="idPlaceOfIssue" placeholder="Place of Issue" /></div>
       <div><input type="text" formControlName="idCountryOfIssue" placeholder="Country Issued" /></div>
       <div><input type="text" formControlName="idExpirationDate" (click)="f.toggle()" ngbDatepicker #f="ngbDatepicker"
           placeholder="Expiration Date" /></div>
       <label for="file-upload" class="custom-file-upload">
-          <i class="fa fa-cloud-upload"></i>&nbsp;Upload Document
+        <i class="fa fa-cloud-upload"></i>&nbsp;Upload Document
       </label>
-      <input accept="image/x-png,image/gif,image/jpeg" id="file-upload"  size="600" type="file" (change)="fileChangeEvent($event)" />
+      <input accept="image/x-png,image/gif,image/jpeg" id="file-upload" size="600" type="file"
+        (change)="fileChangeEvent($event)" />
 
       <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="4 / 3"
         [resizeToWidth]="0" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
