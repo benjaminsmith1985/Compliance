@@ -7,9 +7,11 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrls: ['./navbar.component.less']
 })
 export class NavbarComponent implements OnInit {
-  currentUser : any;
+  currentUser: any;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;

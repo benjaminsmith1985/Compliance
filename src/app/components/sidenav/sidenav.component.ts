@@ -43,7 +43,6 @@ export class SidenavComponent implements OnInit {
     
     this.currentUser = this.authenticationService.currentUserValue;
 
-    console.log(this.currentUser);
 
   }
 
