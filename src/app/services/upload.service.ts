@@ -8,6 +8,9 @@ import { map } from 'rxjs/operators';
 export class UploadService {
 
   SERVER_URL: string = "http://localhost/complianceServer";
+
+  // SERVER_URL: String = 'http://108.179.196.226/~ics';
+
   constructor(private httpClient: HttpClient) { }
 
   public upload(data) {

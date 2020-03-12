@@ -76,6 +76,7 @@
           <div class="section-item">Phase: {{operation.hastransaction == '0' ? 'Intended' : 'Executed'}}</div>
           <div class="section-item">Place: {{transaction.island}}</div>
           <div class="section-item">Amount: {{transaction.amount}}</div>
+          <div class="section-item">Currency: {{transaction.ccy}}</div>
           <div class="section-item">Transaction Type: {{transaction.transactionType}}</div>
           <div *ngIf="transaction.transactionType == 'Giro'" class="section-item">From Account:
             {{transaction.fromAccount}}</div>

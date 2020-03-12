@@ -9,6 +9,8 @@ export class UserService {
 
   private link: String = "http://localhost/complianceServer";
 
+  // private link: String = 'http://108.179.196.226/~ics';
+
   constructor(private http: HttpClient) { }
 
   getAll() {
@@ -34,7 +36,6 @@ export class UserService {
   }
 
   test(): any {
-    console.log('aloden');
     return this.http.post(`http://108.179.196.226/~ics/mobileCustomerByIcs.php/`, {});
   }
 

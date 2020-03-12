@@ -11,6 +11,7 @@ import * as decode from 'jwt-decode';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private apiUrl: String = "http://localhost/complianceServer/login.php";
+  // private apiUrl: String = 'http://108.179.196.226/~ics/login.php';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 

@@ -87,6 +87,10 @@ export class RegisterComponent implements OnInit {
         });
   }
 
+  submitForm(): void {
+    
+  }
+
   getOccupationalGroups(): void {
     this.userService.getOccupationalGroups()
       .subscribe(data => {    

@@ -10,7 +10,7 @@ export class NavbarComponent implements OnInit {
   currentUser: any;
 
   constructor(
-    private authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {

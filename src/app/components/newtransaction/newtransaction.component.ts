@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MerchantService } from '../../services/merchant.service';
+import { CurrencyService } from '../../services/currency.service';
 import { CustomerService } from '../../services/customer.service';
 import { Observable, Subject } from 'rxjs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -32,10 +33,12 @@ export class NewtransactionComponent implements OnInit {
     selectedRisk: any;
     selectedId: any = false;
     hasParameter: any = false;
+    currencies: any;
 
     constructor(
         private route: ActivatedRoute,
         private userService: UserService,
+        private currencyService: CurrencyService,
         private formBuilder: FormBuilder,
         private router: Router,
         private modalService: NgbModal
@@ -65,6 +68,8 @@ export class NewtransactionComponent implements OnInit {
             }
         });
 
+        this.getCurrency();
+
         this.attachedDocuments = [];
         this.formIndicator = [];
         this.getBankAccounts();
@@ -88,6 +93,7 @@ export class NewtransactionComponent implements OnInit {
             place: [''],
             country: [''],
             phone: [''],
+            transaction: ['buyin'],
             icsNo: [''],
             ispep: ['1'],
             companyname: [''],
@@ -115,6 +121,7 @@ export class NewtransactionComponent implements OnInit {
             srcFunds: [''],
             service: [''],
             reason: [''],
+            ccy: [''],
             thresholdex: [false],
             additionalInfo: [''],
             attachedId: [''],
@@ -159,7 +166,7 @@ export class NewtransactionComponent implements OnInit {
             });
     }
 
-    
+
     getCustomerDocuments(id): void {
         this.userService.getMerchantCustomerDocuments(id)
             .subscribe(data => {
@@ -174,6 +181,7 @@ export class NewtransactionComponent implements OnInit {
             });
     }
 
+   
     selectBankAccount(): void {
         window['$']('#accModal')['modal']('show');
     }
@@ -326,6 +334,16 @@ export class NewtransactionComponent implements OnInit {
             });
     }
 
+    getCurrency(): void {
+        this.currencyService.getCurrencies()
+            .subscribe(data => {
+                //console.log(data);
+           
+                this.currencies = data; 
+            
+            });
+    }
+
 
     submitForm(): void {
         if (this.insertCustomerForm.invalid) {
@@ -387,7 +405,7 @@ export class NewtransactionComponent implements OnInit {
         if (item.selected) {
             item.selected = false;
         } else {
-            item.selected = true; 
+            item.selected = true;
         }
 
         var response = this.documentExists(this.attachedDocuments, item);
@@ -401,29 +419,29 @@ export class NewtransactionComponent implements OnInit {
 
     uploadDocument(data): void {
         this.userService.merchantUploadUserDocument(data)
-          .subscribe(response => {
-          
-            this.modalService.dismissAll();
-          });
-      }
+            .subscribe(response => {
+
+                this.modalService.dismissAll();
+            });
+    }
 
     attachDoc(icsNo, docType) {
         var data: any = false;
         switch (docType) {
-          case 'id':
-            var data = this.insertIdForm.value;
-            data.docType = 'id';
-            break;
-          case 'transaction':
-            var data = this.insertIdForm.value;
-            data.docType = 'transaction';
-            break;
+            case 'id':
+                var data = this.insertIdForm.value;
+                data.docType = 'id';
+                break;
+            case 'transaction':
+                var data = this.insertIdForm.value;
+                data.docType = 'transaction';
+                break;
         }
         if (data) {
-          data.userIcsNo = icsNo;
-          this.uploadDocument(data);
+            data.userIcsNo = icsNo;
+            this.uploadDocument(data);
         }
-      }
+    }
 
     attach() {
         var thisv = this;

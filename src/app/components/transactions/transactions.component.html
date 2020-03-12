@@ -30,6 +30,7 @@
         <div class="row-cols col-date">Date Created</div>
         <div class="row-cols col-date">Transaction Date</div>
         <div class="row-cols col-indicator">Type</div>
+        <div class="row-cols col-type">Ccy</div>
         <div class="row-cols col-type">Amount</div>
         <div class="row-cols col-type">Has Report</div>
         <div class="row-cols">Customer</div>
@@ -47,6 +48,9 @@
           </div>
           <div class="row-cols col-indicator">
             {{item.transactionType}}
+          </div>
+          <div class="row-cols col-type">
+            {{item.ccy ? item.ccy : '?'}}
           </div>
           <div class="row-cols col-type">
             {{item.amount}}

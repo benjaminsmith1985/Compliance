@@ -8,6 +8,8 @@ export class DocumentService {
 
   private link: String = "http://localhost/complianceServer";
 
+  // private link: String = 'http://108.179.196.226/~ics';
+
   constructor(private http: HttpClient) { }
  
   getCustomerDocuments():any {

@@ -16,10 +16,11 @@ export class SidenavComponent implements OnInit {
   searchCustomerForm: FormGroup;
   searchForm: FormGroup;
   currentUser : any = null;
-
+  
+ 
   constructor(
     private userService: UserService,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private router: Router,
     private formBuilder: FormBuilder
   ) { 
