@@ -423,6 +423,13 @@
                           {{item.documentName}}
                         </div>
                       </td>
+                      <td [ngClass]="{'expired': item.expired == '1', 'off': item.expired == '0' }"
+                        style="border-style: solid; text-align: center; padding: 0; border-width: 0 0 0 1px; border-color: #efefef;"
+                        valign="middle" width="30">
+                        <div style="float:left; width: 30px;" id="{{item.indicator}}">
+                          <i style="color:#fff;" class="far fa-times"></i>
+                        </div>
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -436,7 +443,6 @@
           <div>
             <div class="row-header">
               <div class="row-cols col-doc-name">Attach Documents To Transaction</div>
-              <div class="add-btn"><i (click)="open(otherDocContent)" class="fad fa-plus-circle"></i></div>
             </div>
             <div *ngIf="!userDocuments || !userDocuments.other" class="row">
               <div style="padding: 15px;" class="row-wrapper">
@@ -547,8 +553,8 @@
                   <option value="Giro">Wire Transafer</option>
                   <option value="Giro">Giro Based</option>
                   <option value="Giro">Swipe</option>
-                  <option value="Giro">Personal Cheque</option>
-                  <option value="Giro">Cassier Cheque</option>
+                  <option value="Cheque">Personal Cheque</option>
+                  <option value="Cheque">Cassier Cheque</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
@@ -562,7 +568,9 @@
                   #d="ngbDatepicker" type="text" />
               </div>
             </div>
-            <div *ngIf="insertCustomerForm.value.transactionType == 'Giro'" class="section-input-wrapper">
+            <div
+              *ngIf="insertCustomerForm.value.transactionType == 'Giro' || insertCustomerForm.value.transactionType == 'Cheque'"
+              class="section-input-wrapper">
               <div class="section-input-text-area">
                 From Account No.
               </div>
@@ -662,6 +670,14 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Exchange Rate
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="description" />
                 </div>
               </div>
             </div>
