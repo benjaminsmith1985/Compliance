@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { NgForm } from '@angular/forms';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-index',
@@ -25,7 +26,8 @@ export class IndexComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    public globals: Globals
     ) { }
    
 
@@ -90,6 +92,7 @@ export class IndexComponent implements OnInit {
         data => {
           switch (role) {
             case 'business':
+              this.globals.expired = data.expired;
               this.router.navigate(['/search']);
               break;
             case 'customer':

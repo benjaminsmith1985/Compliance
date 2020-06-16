@@ -1,9 +1,9 @@
 export class Packages {
   constructor(
-    public id: number,
+    public packageId: number,
     public summary: string,
     public term: string,
-    public balance: number,
+    public amount: number,
     public selected: boolean,
     public type: string
   ) { }

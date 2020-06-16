@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Globals } from './globals';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -60,6 +61,8 @@ import { UserdocumentsComponent } from './components/userdocuments/userdocuments
 import { SearchresultComponent } from './components/searchresult/searchresult.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AdddocumentsComponent } from './components/adddocuments/adddocuments.component';
+import { PaymentnotificationComponent } from './components/paymentnotification/paymentnotification.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +91,7 @@ import { AdddocumentsComponent } from './components/adddocuments/adddocuments.co
     BusinessuserComponent,
     BusinesstransactionComponent,
     Datepicker1Component,
-    TransactionsComponent, BusinessemployeesComponent, UsertransactionsComponent, UsertransactionComponent, ReportsComponent, UserreportsComponent, AddcustomerComponent, NewreportComponent, SearchInputComponent, NewtransactionComponent, UserreportComponent, UseridComponent, Datepicker1Component, MerchantaccountComponent, PaymentComponent, CurrentinvoiceComponent, FiureportsComponent, UseridsComponent, UserdocumentsComponent, SearchresultComponent, AdddocumentsComponent
+    TransactionsComponent, BusinessemployeesComponent, UsertransactionsComponent, UsertransactionComponent, ReportsComponent, UserreportsComponent, AddcustomerComponent, NewreportComponent, SearchInputComponent, NewtransactionComponent, UserreportComponent, UseridComponent, Datepicker1Component, MerchantaccountComponent, PaymentComponent, CurrentinvoiceComponent, FiureportsComponent, UseridsComponent, UserdocumentsComponent, SearchresultComponent, AdddocumentsComponent, PaymentnotificationComponent, FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,8 @@ import { AdddocumentsComponent } from './components/adddocuments/adddocuments.co
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     FormBuilder,
-    MatDatepickerModule
+    MatDatepickerModule,
+    Globals
   ],
   bootstrap: [AppComponent]
 })

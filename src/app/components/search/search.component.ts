@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { PaymentService } from '../../services/payment.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Globals } from '../../globals';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -15,9 +17,11 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private paymentService: PaymentService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public globals: Globals
   ) { }
 
   ngOnInit() {
@@ -47,12 +51,19 @@ export class SearchComponent implements OnInit {
       transactionDate: [''],
       risk: ['']
     });
+    this.getPaymentExpiration();
   }
 
   newSearch(): void {
     this.searchResult = "";
   }
 
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
+  }
 
 
   addCustomer(icsNo): void {

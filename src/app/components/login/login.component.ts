@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Globals } from '../../globals';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -20,11 +21,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute, 
-    private router: Router, 
+    private route: ActivatedRoute,
+    private router: Router,
+    public globals: Globals,
     private authenticationService: AuthenticationService
   ) {
-    
+
     // redirect to dashboard if already logged in 
     // if (this.authenticationService.currentUserValue) {
     //   switch (this.authenticationService.currentUserValue.role) {
@@ -36,8 +38,8 @@ export class LoginComponent implements OnInit {
     //       break;
     //   }
     // }  
-  }   
- 
+  }
+
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       icsNo: ['', Validators.required],
@@ -46,26 +48,31 @@ export class LoginComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/search']);
+    }
+    
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  get f() {     
-    return this.loginForm.controls; 
+  get f() {
+    return this.loginForm.controls;
   }
 
   onSubmit(role) {
+    console.log('submit');
 
     this.submitted = true;
-   
+
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
 
-   
-    this.loading = true;    
 
-    this.loginForm.value.role = role;    
+    this.loading = true;
+
+    this.loginForm.value.role = role;
 
     this.authenticationService.login(this.loginForm.value)
       .pipe(first())
@@ -73,17 +80,17 @@ export class LoginComponent implements OnInit {
         data => {
           switch (role) {
             case 'business':
+              console.log('data');
               this.router.navigate(['/search']);
-              window['$']('#loginBusinessModal')['modal']('hide');
-              break;
+              break; 
             case 'customer':
+              console.log('data');
               this.router.navigate(['/customer']);
-              window['$']('#loginModal')['modal']('hide');
               break;
           }
 
           this.loginForm.reset();
-         
+
 
         },
         error => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { PackageService } from '../../services/package.service';
 import { Packages } from '../../models/packages';
 
 @Component({
@@ -9,23 +10,28 @@ import { Packages } from '../../models/packages';
 })
 export class PaymentComponent implements OnInit {
   currentInvoices: any;
-  packages = [
-    new Packages(1, "Small Package", "1 month", 50.00, false, 'packages'),
-    new Packages(2, "Medium Packge", "6 months", 250.00, false, 'packages'),
-    new Packages(3, "Large Package", "1 year", 450.00, false, 'packages')
-  ]
+  // packages = [
+  //   new Packages(1, "Small Package", "1 month", 50.00, false, 'packages'),
+  //   new Packages(2, "Medium Packge", "6 months", 250.00, false, 'packages'),
+  //   new Packages(3, "Large Package", "1 year", 450.00, false, 'packages')
+  // ]
 
   totalDueInvoice: any = 0;
   totalDuePackage: any = 0;
   totalDue: any = 0;
   payments: any = [];
+  packages: any;
 
 
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private packageService: PackageService
+    ) { }
 
   ngOnInit() {
     this.getOpenBalance();
+    this.getPackages();
   }
 
   setPackage(item): void {
@@ -43,7 +49,7 @@ export class PaymentComponent implements OnInit {
       this.clearRadioButtons(this.packages);
       this.payments.push(item);
       item.selected = true;
-      balance = item.balance;
+      balance = item.amount;
     }
 
     this.totalDue = (balance + this.totalDueInvoice).toFixed(2);
@@ -94,6 +100,13 @@ export class PaymentComponent implements OnInit {
         value.selected = false;
       });
     }
+  }
+
+  getPackages(): void {
+    this.packageService.getPackages()
+      .subscribe(data => {
+        this.packages = data.data
+      });
   }
 
   getOpenBalance(): void {
