@@ -19,6 +19,13 @@
         </nav>
       </div>
 
+      <div *ngIf="paidNotification" class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Payment Successful</h4>
+        <div>
+          You just completed your payment.
+        </div>
+      </div>
+
 
       <div class="section">
         <div class="section-title">Invoice</div>
@@ -54,14 +61,14 @@
             </tr>
             <tr>
               <td valign="top">
-                {{invoice.dueDate}}
+                {{invoice.datePaid}}
               </td>
               <td valign="top">
                 <div>{{invoice.summary}}</div>
-                <div>License and a year of updates/services (valid from Aug 22, 2018 until Aug 22, 2019)</div>
+                <div>License and {{invoice.term}} of updates/services (valid till {{invoice.dueDate}})</div>
               </td>
               <td valign="top">
-                1 Year
+                {{invoice.term}}
               </td>
               <td valign="top" style="text-align: right;">
                 {{invoice.total}}
@@ -97,7 +104,8 @@
                 <div [ngClass]="{'green-text' : invoice.balance == 0}" class="head">Paid:</div>
               </td>
               <td style="text-align: right;">
-                <div [ngClass]="{'green-text' : invoice.balance == 0}"  class="head">{{invoice.total - invoice.balance}}</div>
+                <div [ngClass]="{'green-text' : invoice.balance == 0}" class="head">{{invoice.total - invoice.balance}}
+                </div>
               </td>
             </tr>
             <tr>
@@ -118,7 +126,8 @@
         </div>
       </div>
       <div>
-        <button *ngIf="invoice.balance != 0" routerLink="/billing/payment" class="button lime-green">Pay Invoice</button>
+        <button *ngIf="invoice.balance != 0" routerLink="/billing/payment" class="button lime-green">Pay
+          Invoice</button>
       </div>
     </div>
   </div>

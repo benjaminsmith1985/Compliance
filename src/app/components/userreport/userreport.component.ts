@@ -15,6 +15,7 @@ export class UserreportComponent implements OnInit {
   transactionReports: any;
   attachedDocs: any;
   operation: any;
+  user: any;
 
   constructor(
     private userService: UserService,
@@ -28,8 +29,16 @@ export class UserreportComponent implements OnInit {
         this.getUserTransactionReports(routeParams.transactionId);
         this.getMerchantAttachedDocs(routeParams.transactionId);
         this.getOperationByUuid(routeParams.transactionId);
+        this.getAccountInfo();
       }
     });
+  }
+
+  getAccountInfo() {
+    this.userService.getAccountInfo()
+      .subscribe(data => {
+        this.user = data.data;
+      });
   }
 
   getMerchantAttachedDocs(uuid): void {

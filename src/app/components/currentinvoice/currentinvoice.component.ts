@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CurrentinvoiceComponent implements OnInit {
   invoice: any;
   merchant: any;
+  paidNotification: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +23,10 @@ export class CurrentinvoiceComponent implements OnInit {
         this.getAccountInfo();
         this.getInvoice(routeParams.invoiceNo);
       }
+      if(routeParams.return == 'paid'){
+        this.paidNotification = true;
+      }
+
     });
   }
 

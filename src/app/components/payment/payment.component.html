@@ -13,6 +13,20 @@
         </nav>
       </div>
 
+      <div *ngIf="paidNotification === 'Failed'" class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Payment Failed</h4>
+        <div>
+          Try again, or use a different payment method.
+        </div>
+      </div>
+
+      <div *ngIf="paidNotification === 'canceled'" class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Payment Canceled</h4>
+        <div>
+          You canceled the payment.
+        </div>
+      </div>
+
 
       <div *ngIf="currentInvoices" class="row-header">
         <div class="row-cols col-invNo">Current Invoices</div>
@@ -77,7 +91,7 @@
       <div class="section">
         <div class="section-title">Payment Totals</div>
         <table width="100%" cellspacing="0" cellpadding="0">
-          <tr *ngFor="let item of payments; let i = index">
+          <tr *ngFor="let item of checkout; let i = index">
             <td class="padding" width="150">
               <div *ngIf="item.invoiceNo" style="width: 150px;">
                 Invoice No. {{item.invoiceNo}}
@@ -118,7 +132,7 @@
         </table>
 
       </div>
-      <button class="button lime-green">Make Payment</button>
+      <button (click)="goTo()" class="button lime-green">Make Payment</button>
       <div style="height: 150px">
         &nbsp;
       </div>

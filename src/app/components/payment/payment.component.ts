@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { PackageService } from '../../services/package.service';
 import { Packages } from '../../models/packages';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -16,50 +17,63 @@ export class PaymentComponent implements OnInit {
   //   new Packages(3, "Large Package", "1 year", 450.00, false, 'packages')
   // ]
 
-  totalDueInvoice: any = 0;
+  totalDueInvoice: number = 0;
   totalDuePackage: any = 0;
   totalDue: any = 0;
-  payments: any = [];
+  checkout: any = [];
   packages: any;
-
+  user: any;
+  currentItem: any;
+  paidNotification : any = null;
 
 
   constructor(
+    private route: ActivatedRoute,
     private userService: UserService,
     private packageService: PackageService
-    ) { }
+  ) { }
 
   ngOnInit() {
+    this.getAccountInfo();
     this.getOpenBalance();
     this.getPackages();
+    this.route.params.subscribe(routeParams => {      
+      if(routeParams.return){
+        this.paidNotification = routeParams.return;
+      }
+    });
   }
 
   setPackage(item): void {
     var balance = 0;
+    this.currentItem = item;
 
-    this.payments.forEach(function (value, index, object) {
+    this.checkout.forEach(function (value, index, object) {
       if (value.type == "packages") {
         object.splice(index, 1);
       }
     });
 
-    if (item.selected) { 
+    if (item.selected) {
       item.selected = false;
     } else {
       this.clearRadioButtons(this.packages);
-      this.payments.push(item);
+      this.checkout.push(item);
       item.selected = true;
-      balance = item.amount;
+      balance = parseFloat(item.amount);
+
     }
 
     this.totalDue = (balance + this.totalDueInvoice).toFixed(2);
 
   }
 
-
+  goTo() {
+    window.location.href = "http://localhost/complianceServer/mollieTest.php?m=" + this.user.merchantId + "&p=" + this.currentItem.packageId;
+  }
 
   calculateInvoiceBalance(data): void {
-    var balance = this.totalDueInvoice;
+    var balance: number = this.totalDueInvoice;
     if (data) {
       data.forEach(function (value) {
         balance = value.balance;
@@ -67,8 +81,8 @@ export class PaymentComponent implements OnInit {
 
 
     }
-    this.totalDueInvoice = parseFloat(balance);
-    this.totalDue = parseFloat(balance);
+    this.totalDueInvoice = balance;
+    this.totalDue = balance;
   }
 
   // calculateTotalDue(): void {
@@ -94,6 +108,13 @@ export class PaymentComponent implements OnInit {
     return false;
   }
 
+  getAccountInfo() {
+    this.userService.getAccountInfo()
+      .subscribe(data => {
+        this.user = data.data;
+      });
+  }
+
   clearRadioButtons(data) {
     if (data) {
       data.forEach(function (value) {
@@ -112,9 +133,11 @@ export class PaymentComponent implements OnInit {
   getOpenBalance(): void {
     this.userService.getMerchantOpenBalance()
       .subscribe(data => {
-        this.currentInvoices = data.data;
-        this.payments.push(data.data[0]);
-        this.calculateInvoiceBalance(data.data);
+        if (data.data) {
+          this.currentInvoices = data.data;
+          this.checkout.push(data.data[0]);
+          this.calculateInvoiceBalance(data.data);
+        }
       });
   }
 

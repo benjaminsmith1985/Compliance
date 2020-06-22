@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/search']);
+      //this.router.navigate(['/search']);
     }
     
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-
     this.loading = true;
 
     this.loginForm.value.role = role;
@@ -81,7 +80,7 @@ export class LoginComponent implements OnInit {
           switch (role) {
             case 'business':
               console.log('data');
-              this.router.navigate(['/search']);
+              this.router.navigate(['/search']); 
               break; 
             case 'customer':
               console.log('data');
