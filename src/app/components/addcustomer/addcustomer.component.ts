@@ -34,6 +34,7 @@ export class AddcustomerComponent implements OnInit {
       gender: [''],
       streetName: [''],
       streetNumber: [''],
+      reportersCode: [''],
       place: [''],
       country: [''],
       birthCountry: [''],

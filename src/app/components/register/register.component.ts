@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
       tradename: [''],
       legalForm: [''],
       chamberno: [],
+      reporterscode: [],
       email: [''],
       phone: [''],
       occgroup: [''],
