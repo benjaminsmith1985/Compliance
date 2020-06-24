@@ -13,6 +13,7 @@ import { first } from 'rxjs/operators';
 })
 export class AddcustomerComponent implements OnInit {
   insertCustomerForm: FormGroup;
+  occupationalGroups: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +23,7 @@ export class AddcustomerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getOccupationalGroups();
     this.insertCustomerForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
@@ -47,6 +49,8 @@ export class AddcustomerComponent implements OnInit {
       occgroup: ['']
     });
 
+    
+
   }
 
   submitForm(): void {
@@ -55,6 +59,13 @@ export class AddcustomerComponent implements OnInit {
     // }
 
     this.insertCustomer();
+  }
+
+  getOccupationalGroups(): void {
+    this.userService.getOccupationalGroups()
+      .subscribe(data => {    
+          this.occupationalGroups = data.data;  
+      });
   }
 
 

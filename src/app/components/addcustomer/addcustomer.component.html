@@ -187,7 +187,10 @@
                   Sector
                 </div>
                 <div class="section-input-area">
-                  <input class="input" formControlName="occgroup" type="text" />
+                  <select class="custom-select" formControlName="occgroup">
+                    <option *ngFor="let item of occupationalGroups; let i = index" [ngValue]="item.occupationalgroupId">{{item.name}}
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>

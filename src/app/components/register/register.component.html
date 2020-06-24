@@ -14,7 +14,7 @@
         </nav>
       </div>
       <div class="fromWrapper">
-        <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+        <form [formGroup]="registerForm" (ngSubmit)="submitCustomerForm()">
           <div class="section">
             <div class="section-title">Company Information</div>
             <div>
@@ -23,7 +23,7 @@
                   FIU Resporters Code
                 </div>
                 <div class="section-input-area">
-                  <input class="input" formControlName="reporterscode" type="text" />
+                  <input class="input" formControlName="reportersCode" type="text" />
                 </div>
               </div>
               <div class="section-input-wrapper">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="section-input-area">
                   <select class="custom-select" formControlName="occgroup">
-                    <option *ngFor="let item of occupationalGroups; let i = index" value="natural">{{item.name}}
+                    <option [ngValue]="item.occupationalgroupId" *ngFor="let item of occupationalGroups; let i = index">{{item.name}}
                     </option>
                   </select>
                 </div>
@@ -131,7 +131,7 @@
                 Email
               </div>
               <div class="section-input-area">
-                <input class="input" formControlName="streetName" type="text" />
+                <input class="input" formControlName="userEmail" type="text" />
               </div>
             </div>
             <div class="section-input-wrapper">
@@ -155,7 +155,7 @@
                 Password
               </div>
               <div class="section-input-area">
-                <input class="input" formControlName="streetNumber" type="text" />
+                <input class="input" formControlName="password" type="text" />
               </div>
             </div>
             <div class="section-input-wrapper">
@@ -163,7 +163,7 @@
                 Retype Password
               </div>
               <div class="section-input-area">
-                <input class="input" formControlName="place" type="text" />
+                <input class="input" formControlName="retypedPassword" type="text" />
               </div>
             </div>
           </div>

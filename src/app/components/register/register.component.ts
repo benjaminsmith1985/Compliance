@@ -22,24 +22,28 @@ export class RegisterComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
- 
+    this.getOccupationalGroups();
     this.registerForm = this.formBuilder.group({
       companyname: [''],
       tradename: [''],
       legalForm: [''],
       chamberno: [],
-      reporterscode: [],
+      reportersCode: [],
       email: [''],
+      lastName: [''],
+      firstName: [''],
       phone: [''],
       occgroup: [''],
       password: [''],
+      retypedPassword: [''],
       streetName: [''],
       streetNumber: [''],
+      userEmail: [''],
       place: [''],
       country: ['']
     });
 
-    this.getOccupationalGroups();
+   
 
     
   }
@@ -74,13 +78,11 @@ export class RegisterComponent implements OnInit {
   }
 
   registerCustomer(): void {
-    this.userService.registerUser(this.registerForm.value)
+    this.userService.registerMerchant(this.registerForm.value)
       .pipe(first())
       .subscribe(
-        data => {
-          window['$']('#registerCustomerModal')['modal']('hide');
-          this.registerForm.reset();
-          this.customerPage = 1;
+        data => {       
+          // this.registerForm.reset();
         },
         error => {
           // this.alertService.error(error);

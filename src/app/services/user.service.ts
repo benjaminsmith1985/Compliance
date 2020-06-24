@@ -195,6 +195,10 @@ export class UserService {
     return this.http.post(`${this.link}/register_user`, { data });
   }
 
+  registerMerchant(data): any {
+    return this.http.post(`${this.link}/register_merchant.php`, { data });
+  }
+
   startCustomTransaction(data): any {
     return this.http.post(`${this.link}/set_custom_transaction`, { data });
   }
