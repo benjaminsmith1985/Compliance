@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Globals } from '../globals';
 
 import { Merchant } from '../models/merchant';
 
@@ -10,27 +11,29 @@ export class MerchantService {
 
   // private link: String = 'http://108.179.196.226/~ics';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient, 
+    private globals: Globals) { }
 
 
   getMerchantAccounts(): any {
-    return this.http.get(`${this.link}/get_merchant_accounts`);
+    return this.http.get(`${this.globals.serverlink}get_merchant_accounts`);
   }
 
   getMerchantUsers(data): any {
-    return this.http.post(`${this.link}/get_merchant_users`, {data});
+    return this.http.post(`${this.globals.serverlink}get_merchant_users`, {data});
   }
 
   getMerchantEmployees(): any {
-    return this.http.get(`${this.link}/get_merchant_employees`);
+    return this.http.get(`${this.globals.serverlink}get_merchant_employees`);
   }
 
   getMerchantById(data): any {
-    return this.http.post(`${this.link}/get_merchant_by_id`, { data });
+    return this.http.post(`${this.globals.serverlink}get_merchant_by_id`, { data });
   }
 
   updateMerchantUser(data: any) {
-    return this.http.post(`${this.link}/update_merchantuser_bymerchant`, { data });
+    return this.http.post(`${this.globals.serverlink}update_merchantuser_bymerchant`, { data });
   }
 
 

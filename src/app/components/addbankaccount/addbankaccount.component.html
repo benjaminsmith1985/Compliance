@@ -1,0 +1,50 @@
+<div class="wrap">
+  <form [formGroup]="bankAccountForm" (ngSubmit)="submitBankAccount()">
+    <div class="cnt">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/merchantaccount" class="breadcrumb-item grey-txt cursor underline">Merchant Account</li>
+                  <li routerLink="/merchantaccount/bankaccounts" class="breadcrumb-item grey-txt cursor underline"
+                    aria-current="page">Bank Accounts</li>
+                  <li class="breadcrumb-item grey-txt-active" aria-current="page">
+                    Add Bank Account</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+      </div>    
+
+      <div class="center">
+        <div class="section">
+          <div class="section-title">Bank Account Information</div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Bank Account No.
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="bankaccountnr" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Bank Name.
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="bank" type="text" />
+            </div>
+          </div>
+        </div>
+        <button class="button lime-green">Add Bank Account</button>
+      </div>
+      <div style="height: 150px;">
+        &nbsp;
+      </div>
+    </div>
+  </form>
+</div>
+

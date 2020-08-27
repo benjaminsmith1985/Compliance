@@ -238,8 +238,8 @@ export class BusinessuserComponent implements OnInit {
       });
   }
 
-  uploadDocument(data): void {
-    this.userService.merchantUploadUserDocument(data)
+  uploadDocument(data, file): void {
+    this.userService.merchantUploadUserDocument(data, file)
       .subscribe(response => {
         this.getCustomerDocumentsByType(data.userIcsNo, data.documentType);
         this.modalService.dismissAll();
@@ -260,8 +260,9 @@ export class BusinessuserComponent implements OnInit {
         break;
     }
     if (data) {
+      var file = 'file';
       data.userIcsNo = icsNo;
-      this.uploadDocument(data);
+      this.uploadDocument(data, file);
     }
   }
 

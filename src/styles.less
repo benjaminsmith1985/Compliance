@@ -268,6 +268,10 @@ input:focus {
     background-color: #7d0c0c;
 }
 
+.dark-orange{
+    background-color: #ec8d23;
+}
+
 .weird-purple{
     background-color: #333645;
 }
@@ -620,6 +624,7 @@ input:focus {
 
 .wrap{
     padding-left: 270px;  
+    padding-top: 150px;
 }
 
 .row:last-child{
@@ -1082,17 +1087,48 @@ ngb-datepicker {
   .row-footer{
     margin-top: 0;
     margin-bottom: 50px;
-    text-align: center !important;
-    line-height: 35px;
-    cursor: pointer;
+    text-align: right !important;
+    line-height: 35px;   
     width: 1300px;
-    background-color: #fff;
-    padding: 0;   
-    border: 1px solid #efefef;
+    font-size: 14px;
+  
+    padding: 12px 0 ;   
+    // border: 1px solid #efefef;
     border-top: 0; 
+
+    span{
+        cursor: pointer;
+    }
+
+    span:hover{
+        text-decoration: none;
+    }
+
+   
+     
   }
 
-  .row-footer:hover{
-      background-color: #20c997;
-      color:#fff;
-  }
+    .bottom-button{
+        background-color: #20c997; 
+   
+        color: #fff; 
+      
+        padding: 8px 10px;
+
+        a{
+            font-size: 14px;;
+            color: #fff; 
+        }
+    }
+
+    .bottom-button:hover{
+        background-color: #36d5a6;
+    }
+
+//   .row-footer:hover{
+//       text-decoration: none;
+//     span{
+//         text-decoration: underline;
+//     }
+     
+//   }

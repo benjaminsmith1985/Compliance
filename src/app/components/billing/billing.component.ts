@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { PaymentService } from '../../services/payment.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-billing',
@@ -9,10 +11,22 @@ import { UserService } from '../../services/user.service';
 export class BillingComponent implements OnInit {
   invoices: any;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private paymentService: PaymentService,
+    public globals: Globals
+    ) { }
 
   ngOnInit() {
+    this.getPaymentExpiration();
     this.getInvoiceHistory();
+  }
+
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
   }
 
   getInvoiceHistory() {

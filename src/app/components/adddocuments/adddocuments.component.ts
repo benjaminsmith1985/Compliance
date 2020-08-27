@@ -21,6 +21,7 @@ export class AdddocumentsComponent implements OnInit {
   croppedImage: any = '';
   user: any;
   closeResult: string;
+  private file: File | null = null;
 
   documentType = [
     { type: 'Identification Document', id: 'id', selected: false, color: 'lime-green' },
@@ -61,7 +62,7 @@ export class AdddocumentsComponent implements OnInit {
         this.getUserByIcsNo(routeParams.userIcs);
 
       }
-    });
+    }); 
 
     this.insertDocForm = this.formBuilder.group({
       idPlaceOfIssue: [''],
@@ -70,8 +71,10 @@ export class AdddocumentsComponent implements OnInit {
       dateOfIssue: [''],
       docName: [''],
       base64: [''],
+      docExt: [''],
       docNo: [],
-      docType: []
+      docType: [],
+      doc: []
     });
   }
 
@@ -120,13 +123,27 @@ export class AdddocumentsComponent implements OnInit {
   }
 
   fileChangeEvent(event: any): void {
+    var vr = this;
+
+    this.file = event.target.files[0];
+     console.log(this.file);
+    vr.insertDocForm.controls['docExt'].setValue(this.file.name.slice((this.file.name.lastIndexOf(".") - 1 >>> 0) + 2));
+
+    var reader = new FileReader();
+    reader.readAsDataURL(this.file);
+    reader.onload = function () {
+      vr.insertDocForm.controls['base64'].setValue(reader.result);
+    };
+
     this.imageChangedEvent = event;
   }
+
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
     var data = this.insertDocForm.value;
     data.base64 = event.base64;
   }
+
   imageLoaded() {
     // show cropper
   }
@@ -135,6 +152,23 @@ export class AdddocumentsComponent implements OnInit {
   }
   loadImageFailed() {
     // show message
+  }
+
+  getBase64(file) {
+    var vr = this;
+
+
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+
+      vr.insertDocForm.controls['base64'].setValue('test');
+      // console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
   }
 
   uploadDocument(): void {
@@ -148,8 +182,11 @@ export class AdddocumentsComponent implements OnInit {
       data.docName = this.selectedIdentification;
     }
 
+    this.getBase64(this.file);
 
-    this.userService.merchantUploadUserDocument(data)
+
+
+    this.userService.merchantUploadUserDocument(data, this.file)
       .subscribe(response => {
         switch (data.docType) {
           case 'id':

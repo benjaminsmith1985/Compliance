@@ -1,33 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Globals } from '../globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private link: String = "http://localhost/complianceServer";
-  // private link: String = 'http://108.179.196.226/~ics';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private globals: Globals) { }
  
   getCurrentCustomer():any { 
-    return this.http.get(`${this.link}/get_current_customer.php`);
+    return this.http.get(`${this.globals.serverlink}get_current_customer.php`);
   } 
 
   getCustomerDocuments():any { 
-    return this.http.get(`${this.link}/get_customer_documents.php`);
+    return this.http.get(`${this.globals.serverlink}get_customer_documents.php`);
   } 
 
   getCustomerDataSharing():any { 
-    return this.http.get(`${this.link}/get_data_sharing.php`);
+    return this.http.get(`${this.globals.serverlink}get_data_sharing.php`);
   } 
 
   getCustomerDataRequest():any{
-    return this.http.get(`${this.link}/get_data_request.php`);
+    return this.http.get(`${this.globals.serverlink}get_data_request.php`);
   }
 
   updateDatasharing(data: any):any {
-    return this.http.post(`${this.link}/update_merchantuser`, {data});
+    return this.http.post(`${this.globals.serverlink}update_merchantuser`, {data});
   }
 
 

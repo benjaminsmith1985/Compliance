@@ -42,7 +42,7 @@
           <span class="topic">Street Name:</span>{{user.address}}<span class="txt-spacing"></span>
         </div>
         <div class="section-item">
-          <span class="topic">Street Number:</span><span class="txt-spacing">25</span>
+          <span class="topic">Street Number:</span><span class="txt-spacing">{{user.streetNumber}}</span>
         </div>
         <div class="section-item">
           <span class="topic">Country:</span><span class="txt-spacing">Cura&ccedil;ao</span>
@@ -61,7 +61,9 @@
             <span class="topic">Business Activity:</span><span class="txt-spacing"></span>
           </div>
         </div>
-
+      </div>
+      <div class="row-footer">
+        <span routerLink="/merchantaccount/edit" class="bottom-button">Edit Account&nbsp;&nbsp;<i class="fas fa-pen"></i></span>
       </div>
 
       <div>
@@ -89,7 +91,7 @@
         <div class="row-header">
           <div class="row-cols col-doc-name">Bank Account Nr</div>
           <div class="row-cols col-date">Bank Name</div>
-          <div class="add-btn"><i (click)="addBankAccount()" class="fad fa-plus-circle"></i></div>
+          <div class="add-btn"><i routerLink="/merchantaccount/bankaccounts/add" class="fad fa-plus-circle"></i></div>
         </div>
         <div *ngFor="let item of bankAccounts; let i = index" class="row row-items">
           <div class="row-wrapper">
@@ -102,16 +104,14 @@
           </div>
         </div>
         <div class="row-footer">
-          <i class="far fa-ellipsis-h"></i>
+          <span routerLink="/merchantaccount/bankaccounts"  class="bottom-button">All My Bank Accounts&nbsp;&nbsp;<i class="far fa-external-link"></i></span>
         </div>
       </div>
-
-
 
       <div>
         <div class="row-header">
           <div class="row-cols col-doc-name">Seats <span *ngIf="seats">({{seats.length}})</span></div>
-          <div class="add-btn"><i (click)="addSeats()" class="fad fa-plus-circle"></i></div>
+          <div class="add-btn"><i routerLink="/merchantaccount/seats/add" class="fad fa-plus-circle"></i></div>
         </div>
         <div *ngFor="let item of seats; let i = index" class="row row-items">
           <div class="row-wrapper">
@@ -124,7 +124,7 @@
           </div>
         </div>
         <div class="row-footer">
-          <i class="far fa-ellipsis-h"></i>
+          <span routerLink="/merchantaccount/seats" class="bottom-button">All Seats&nbsp;&nbsp;<i class="far fa-external-link"></i></span>
         </div>
       </div>
 
@@ -137,7 +137,7 @@
 </div>
 
 
-<div class="modal fade" id="upAccModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<!-- <div class="modal fade" id="upAccModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -151,7 +151,7 @@
           BANK ACCOUNT DETAILS
         </div>
       </div>
-      <div class="modal-body">
+      <div class="modal-body"> 
         <form [formGroup]="bankAccountForm" (ngSubmit)="submitBankAccount()">
           <input formControlName="bankaccountnr" name="address" placeholder="Bank Account Nr" type="text" />
           <input formControlName="bank" name="place" required placeholder="Bank Name" />
@@ -160,9 +160,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="modal fade" id="addSeatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<!-- <div class="modal fade" id="addSeatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -186,4 +186,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

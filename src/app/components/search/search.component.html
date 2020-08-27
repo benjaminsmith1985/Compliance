@@ -265,7 +265,12 @@
 
           <!-- End Transactions -->
         </div>
-        <button class="button lime-green">Search</button>
+        <button *ngIf="!globals.expired" class="button lime-green">Search</button>
+        <button routerLink="/billing/payment" *ngIf="globals.expired" class="button dark-orange">
+          <span>
+            Please activate your account to proceed
+          </span>
+        </button>
       </div>
     </form>
     <div style="height: 50px;">

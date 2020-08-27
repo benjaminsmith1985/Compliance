@@ -5,6 +5,8 @@ import { UserService } from '../../services/user.service';
 import { MerchantService } from '../../services/merchant.service';
 import { CustomerService } from '../../services/customer.service';
 import { first } from 'rxjs/operators';
+import { PaymentService } from '../../services/payment.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-addcustomer',
@@ -20,9 +22,12 @@ export class AddcustomerComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private paymentService: PaymentService,
+    public globals: Globals
   ) { }
 
   ngOnInit() {
+    this.getPaymentExpiration();
     this.getOccupationalGroups();
     this.insertCustomerForm = this.formBuilder.group({
       firstName: [''],
@@ -68,6 +73,12 @@ export class AddcustomerComponent implements OnInit {
       });
   }
 
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
+  }
 
   insertCustomer(): void {
     this.userService.addUser(this.insertCustomerForm.value)

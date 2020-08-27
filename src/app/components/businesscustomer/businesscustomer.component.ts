@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { MerchantService } from '../../services/merchant.service';
 import { NgbModal, NgbDateStruct, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { PaymentService } from '../../services/payment.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-businesscustomer',
@@ -26,12 +28,16 @@ export class BusinesscustomerComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
+    private paymentService: PaymentService,
+    public globals: Globals
   ) { }
 
   ngOnInit() {
     this.searchPageForm = this.formBuilder.group({
       pageNr: ['']
     });
+
+    this.getPaymentExpiration();
 
     this.route.params.subscribe(routeParams => {
       if (routeParams.page && routeParams.amount) {
@@ -71,6 +77,13 @@ export class BusinesscustomerComponent implements OnInit {
 
   }
 
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
+  }
+
   goToPage() {
     if (this.searchPageForm.invalid) {
       return;
@@ -96,11 +109,14 @@ export class BusinesscustomerComponent implements OnInit {
   }
 
   getMerchantUsers(data) {
+    this.globals.isLoading = true;
     this.merchantService.getMerchantUsers(data)
       .subscribe(data => {
+       
         this.merchantUsers = data.data;
         this.amountPages = data.pages;
         this.amountCustomers = data.amountCustomers;
+        this.globals.isLoading = false;
       });
   }
 

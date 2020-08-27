@@ -475,45 +475,6 @@
 
           </div>
 
-
-          <!-- <div class="section" *ngIf="userDocuments">
-            <div class="section-title">Customer Documents</div>
-            <div style="overflow: hidden" *ngFor="let item of userDocuments.id; let i = index">
-              <div *ngIf="item.permission == '1'">
-                <div style="float:left;">
-                  <i (click)="attachDocument(item)" *ngIf="!item.selected" class="material-icons">
-                    check_box_outline_blank
-                  </i>
-                  <i (click)="attachDocument(item)" *ngIf="item.selected" class="material-icons">
-                    check_box
-                  </i>
-                </div>
-                <div style="float: left;">{{item.documentName}}</div>
-                <div *ngIf="item.certified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
-                  Verfied]</div>
-                <div *ngIf="item.verified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
-                  Certified]</div>
-              </div>
-            </div>
-            <div style="overflow: hidden" *ngFor="let item of userDocuments.other; let i = index">
-              <div *ngIf="item.permission == '1'">
-                <div style="float:left;">
-                  <i (click)="attachDocument(item)" *ngIf="!item.selected" class="material-icons">
-                    check_box_outline_blank
-                  </i>
-                  <i (click)="attachDocument(item)" *ngIf="item.selected" class="material-icons">
-                    check_box
-                  </i>
-                </div>
-                <div style="float: left;">{{item.documentName}}</div>
-                <div *ngIf="item.certified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
-                  Verfied]</div>
-                <div *ngIf="item.verified == '0'" style="float: left; padding: 0 5px; margin-left: 15px;  color:red; ">[Not
-                  Certified]</div>
-              </div>
-            </div>
-          </div> -->
-
           <div *ngIf="indicators && indicators.sector == '1'; else normalTransaction" class="section">
             <div class="section-title">Transaction Information</div>
             <div class="section-input-wrapper">
@@ -1028,9 +989,16 @@
               </div>
             </div>
           </div>
-          <button class="button lime-green"><span *ngIf="insertCustomerForm.value.fiureport == '1'">
+          <button *ngIf="!globals.expired" class="button lime-green"><span
+              *ngIf="insertCustomerForm.value.fiureport == '1'">
               Submit report to FIU</span> <span *ngIf="insertCustomerForm.value.fiureport != '1'">
               Save to archive</span></button>
+
+          <button routerLink="/billing/payment" *ngIf="globals.expired" class="button dark-orange">
+            <span>
+              Please activate your account to proceed
+            </span>
+          </button>
 
         </div>
       </div>
@@ -1077,33 +1045,9 @@
     </div>
   </div>
 </ng-template>
-<!-- 
-<ng-template #docContent let-modal>
-  <form [formGroup]="insertIdForm" (ngSubmit)="startReport()">
-    <div class="my-modal-header">
-      <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
-    </div>
-    <div class="my-modal-body">
-      <div class="my-modal-title">ATTACH IDENTIFICATION DOCUMENT</div>
-      <div>
-        <select class="custom-select" formControlName="idDocType">
-          <option value="Passport">Passport</option>
-          <option value="Drivings License">Drivings License</option>
-          <option value="Id Card">Id Card</option>
-        </select>
-      </div>
-      <div><input class="input" type="text" formControlName="idDocNo"  placeholder="Document No" /></div>
-      <div><input type="text" placeholder="Date of Issue" (click)="e.toggle()" formControlName="dateOfIssue" class="input"
-          ngbDatepicker #e="ngbDatepicker" /></div>
-      <div><input type="text" formControlName="idPlaceOfIssue"  placeholder="Place of Issue" /></div>
-      <div><input type="text" formControlName="idCountryOfIssue"  placeholder="Country Issued" /></div>
-      <div><input type="text" formControlName="idExpirationDate" (click)="f.toggle()" ngbDatepicker #f="ngbDatepicker"  placeholder="Expiration Date" /></div>
-      <div (click)="attach()" class="my-modal-btn">Attach</div>
-    </div>
-  </form>
-</ng-template> -->
 
-<ng-template #otherDocContent let-modal>
+
+<!-- <ng-template #otherDocContent let-modal>
   <form [formGroup]="insertIdForm">
     <div class="my-modal-header">
       <i (click)="modal.dismiss('Cross click')" class="fal fa-times my-modal-close-btn"></i>
@@ -1117,4 +1061,4 @@
       <div (click)="attachDoc(currentCustomer.icsNo, 'transaction')" class="my-modal-btn">Upload</div>
     </div>
   </form>
-</ng-template>
+</ng-template> -->

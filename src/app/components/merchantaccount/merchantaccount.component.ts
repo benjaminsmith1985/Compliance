@@ -5,6 +5,8 @@ import { UserService } from '../../services/user.service';
 import { MerchantService } from '../../services/merchant.service';
 import { CustomerService } from '../../services/customer.service';
 import { DocumentService } from '../../services/document.service';
+import { PaymentService } from '../../services/payment.service';
+import { Globals } from '../../globals';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -23,10 +25,13 @@ export class MerchantaccountComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private paymentService: PaymentService,
+    public globals: Globals
   ) { }
 
   ngOnInit() {
+    this.getPaymentExpiration();
     this.getAccountInfo();
     this.getBankAccounts();
     this.getMerchantThreshold();
@@ -58,6 +63,14 @@ export class MerchantaccountComponent implements OnInit {
     window['$']('#addSeatModal')['modal']('show');
   }
 
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
+  }
+
+
   getBankAccounts() {
     this.userService.getBankAccounts()
       .subscribe(data => {
@@ -71,7 +84,7 @@ export class MerchantaccountComponent implements OnInit {
         this.seats = data.data;
       });
   }
-
+ 
 
   submitBankAccount(): void {
     if (this.bankAccountForm.invalid) {

@@ -41,6 +41,11 @@ import { CurrentinvoiceComponent } from './components/currentinvoice/currentinvo
 import { SearchresultComponent } from './components/searchresult/searchresult.component';
 import { AdddocumentsComponent } from './components/adddocuments/adddocuments.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MerchantbankaccountsComponent } from './components/merchantbankaccounts/merchantbankaccounts.component';
+import { AddbankaccountComponent } from './components/addbankaccount/addbankaccount.component';
+import { AddseatsComponent } from './components/addseats/addseats.component';
+import { MerchantseatsComponent } from './components/merchantseats/merchantseats.component';
+import { MerchanteditaccountComponent } from './components/merchanteditaccount/merchanteditaccount.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -59,6 +64,11 @@ const routes: Routes = [
   { path: 'business/customers/:page/:amount', component: BusinesscustomerComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/employees', component: BusinessemployeesComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount', component: MerchantaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/bankaccounts', component: MerchantbankaccountsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/bankaccounts/add', component: AddbankaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/seats', component: MerchantseatsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/seats/add', component: AddseatsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/edit', component: MerchanteditaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/accounts', component: BusinessaccountsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/user/:id', component:  BusinessuserComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/addcustomer', component:  AddcustomerComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },

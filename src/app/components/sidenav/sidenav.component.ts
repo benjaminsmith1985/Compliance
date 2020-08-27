@@ -15,35 +15,32 @@ export class SidenavComponent implements OnInit {
   customerType: string = 'select';
   searchCustomerForm: FormGroup;
   searchForm: FormGroup;
-  currentUser : any = null;
-  
- 
+  currentUser: any = null;
+
+
   constructor(
     private userService: UserService,
     public authenticationService: AuthenticationService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit() {
     this.searchCustomerForm = this.formBuilder.group({
       address: ['', Validators.required],
       place: ['', Validators.required],
-      country: ['', Validators.required]      
+      country: ['', Validators.required]
     });
 
     this.searchForm = this.formBuilder.group({
       chamberNo: [''],
-      icsNo: [''], 
+      icsNo: [''],
       userType: ['']
     });
 
-
-    
     this.currentUser = this.authenticationService.currentUserValue;
-
 
   }
 
@@ -60,7 +57,7 @@ export class SidenavComponent implements OnInit {
       return;
     }
 
-   // this.loading = true;
+    // this.loading = true;
 
 
 
@@ -82,7 +79,7 @@ export class SidenavComponent implements OnInit {
 
     this.userService.searchUser(this.searchForm.value)
       .subscribe(data => {
-     
+
       });
   }
 

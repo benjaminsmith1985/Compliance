@@ -63,6 +63,13 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { AdddocumentsComponent } from './components/adddocuments/adddocuments.component';
 import { PaymentnotificationComponent } from './components/paymentnotification/paymentnotification.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MerchantbankaccountsComponent } from './components/merchantbankaccounts/merchantbankaccounts.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { FileuploadComponent } from './components/fileupload/fileupload.component';
+import { AddbankaccountComponent } from './components/addbankaccount/addbankaccount.component';
+import { AddseatsComponent } from './components/addseats/addseats.component';
+import { MerchantseatsComponent } from './components/merchantseats/merchantseats.component';
+import { MerchanteditaccountComponent } from './components/merchanteditaccount/merchanteditaccount.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +98,7 @@ import { FooterComponent } from './components/footer/footer.component';
     BusinessuserComponent,
     BusinesstransactionComponent,
     Datepicker1Component,
-    TransactionsComponent, BusinessemployeesComponent, UsertransactionsComponent, UsertransactionComponent, ReportsComponent, UserreportsComponent, AddcustomerComponent, NewreportComponent, SearchInputComponent, NewtransactionComponent, UserreportComponent, UseridComponent, Datepicker1Component, MerchantaccountComponent, PaymentComponent, CurrentinvoiceComponent, FiureportsComponent, UseridsComponent, UserdocumentsComponent, SearchresultComponent, AdddocumentsComponent, PaymentnotificationComponent, FooterComponent
+    TransactionsComponent, BusinessemployeesComponent, UsertransactionsComponent, UsertransactionComponent, ReportsComponent, UserreportsComponent, AddcustomerComponent, NewreportComponent, SearchInputComponent, NewtransactionComponent, UserreportComponent, UseridComponent, Datepicker1Component, MerchantaccountComponent, PaymentComponent, CurrentinvoiceComponent, FiureportsComponent, UseridsComponent, UserdocumentsComponent, SearchresultComponent, AdddocumentsComponent, PaymentnotificationComponent, FooterComponent, MerchantbankaccountsComponent, LoaderComponent, FileuploadComponent, AddbankaccountComponent, AddseatsComponent, MerchantseatsComponent, MerchanteditaccountComponent
   ],
   imports: [
     BrowserModule,

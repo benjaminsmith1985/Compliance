@@ -31,7 +31,13 @@
         <div *ngFor="let item of userDocuments.other; let i = index" class="row row-items">
           <table width="100%">
             <tr>
-              <td (click)="openDoc(item, action)" width="264" style="height: 51px; padding: 0 15px;">
+              <td width="50" style="height: 51px; padding: 0 15px;">
+                <i *ngIf="item.documentExtension === 'docx'" class="fad fa-file-word docIcon"></i>
+                <i *ngIf="item.documentExtension === 'pdf'"  class="fad fa-file-pdf docIcon"></i>
+                <i *ngIf="item.documentExtension === 'xlsx'" class="fad fa-file-excel docIcon"></i>
+                <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'" class="fad fa-file-image docIcon"></i>
+              </td>
+              <td (click)="openDoc(item, action)" width="214" >
                 {{item.documentName}}
               </td>
               <td (click)="openDoc(item, action)" width="200">

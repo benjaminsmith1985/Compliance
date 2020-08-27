@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/operators';
+import { Globals } from '../../globals';
+
 
 
 @Component({
@@ -29,6 +31,7 @@ export class SearchresultComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
+    public globals: Globals,
     private modalService: NgbModal
   ) { }
 
@@ -101,6 +104,7 @@ export class SearchresultComponent implements OnInit {
   }
 
   searchUser(data) {
+    this.globals.isLoading = true;
     this.userService.searchUser(data)
       .pipe(first())
       .subscribe(
@@ -108,6 +112,7 @@ export class SearchresultComponent implements OnInit {
           this.searchResult = data.data;
           this.amountPages = data.pages;
           this.amountResults = data.amountResults;
+          this.globals.isLoading = false;
         },
         error => {
           // this.alertService.error(error);

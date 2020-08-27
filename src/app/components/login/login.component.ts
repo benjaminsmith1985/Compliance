@@ -79,11 +79,11 @@ export class LoginComponent implements OnInit {
         data => {
           switch (role) {
             case 'business':
-              console.log('data');
+      
               this.router.navigate(['/search']); 
               break; 
             case 'customer':
-              console.log('data');
+           
               this.router.navigate(['/customer']);
               break;
           }

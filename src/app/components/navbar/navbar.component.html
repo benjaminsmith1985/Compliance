@@ -2,8 +2,11 @@
   <div style="padding-left: 300px">
     <img src="../../../assets/logo.jpg" height="80" alt="Card image cap">
   </div>
-  <div *ngIf="authenticationService && authenticationService.currentUserValue" class="right">
-      <div style="float:left; line-height: 30px; padding: 0 10px 0 0;"><i class="fad fa-user-circle"></i></div>
-      <div *ngIf="currentUser" style="float:left; line-height: 30px;">{{currentUser.nameuser}}</div>
+  <div class="right">
+      <!-- <div style="float:left; line-height: 30px; padding: 0 10px 0 0;"><i class="fad fa-user-circle"></i></div>
+      <div *ngIf="currentUser" style="float:left; line-height: 30px;">{{currentUser.nameuser}}</div> -->
+      <div  *ngIf="globals.expired && authenticationService && authenticationService.currentUserValue" routerLink="/billing/payment" style="background-color: #e9e6e6; padding: 8px 12px; font-weight: 600; font-size: 14px; color:#212529;">
+        <i class="fas fa-exclamation-triangle"></i>&nbsp; Activate Account
+      </div>
   </div>
 </nav>

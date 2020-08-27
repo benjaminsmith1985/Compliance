@@ -1,0 +1,58 @@
+<div class="wrap">
+  <form [formGroup]="addSeatsForm" (ngSubmit)="submitSeats()">
+    <div class="cnt">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/merchantaccount" class="breadcrumb-item grey-txt cursor underline">Merchant Account</li>
+                  <li routerLink="/merchantaccount/seats" class="breadcrumb-item grey-txt cursor underline"
+                    aria-current="page">Seats</li>
+                  <li class="breadcrumb-item grey-txt-active" aria-current="page">
+                    Add Seat</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+      </div>    
+
+      <div class="center">
+        <div class="section">
+          <div class="section-title">Seat Information</div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              First Name
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="firstname" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Last Name
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="lastname" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Email
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="email" type="text" />
+            </div>
+          </div>
+        </div>
+        <button class="button lime-green">Add Seats</button>
+      </div>
+      <div style="height: 150px;">
+        &nbsp;
+      </div>
+    </div>
+  </form>
+</div>
+

@@ -1,182 +1,190 @@
 <div class="wrap">
   <div class="cnt">
-    <div class="center">
-      <div class="navbar-inline">
-        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
-          <div class="mr-auto">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
-                <li routerLink="/login" class="breadcrumb-item grey-txt cursor underline">Home</li>
-                <li class="breadcrumb-item grey-txt-active">ICS Business Register</li>
-              </ol>
-            </nav>
-          </div>
-        </nav>
-      </div>
-      <div class="fromWrapper">
-        <form [formGroup]="registerForm" (ngSubmit)="submitCustomerForm()">
-          <div class="section">
-            <div class="section-title">Company Information</div>
-            <div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  FIU Resporters Code
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="reportersCode" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Business Name
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="companyname" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Trade Name
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="tradename" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Legal Form
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="legalForm" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Chamber Of Commerce No.
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="chamberno" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Email
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="email" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Telephone
-                </div>
-                <div class="section-input-area">
-                  <input class="input" formControlName="phone" type="text" />
-                </div>
-              </div>
-              <div class="section-input-wrapper">
-                <div class="section-input-text-area">
-                  Sector
-                </div>
-                <div class="section-input-area">
-                  <select class="custom-select" formControlName="occgroup">
-                    <option [ngValue]="item.occupationalgroupId" *ngFor="let item of occupationalGroups; let i = index">{{item.name}}
-                    </option>
-                  </select>
-                </div>
-              </div>
+    <form [formGroup]="registerForm" (ngSubmit)="submitCustomerForm()">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/login" class="breadcrumb-item grey-txt cursor underline">Home</li>
+                  <li class="breadcrumb-item grey-txt-active">ICS Business Register</li>
+                </ol>
+              </nav>
             </div>
-          </div>
+          </nav>
+        </div>
 
-
-          <div class="section">
-            <div class="section-title">Address Information</div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Street Name
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="streetName" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Street Number
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="streetNumber" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Place
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="place" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Country
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="country" type="text" />
-              </div>
-            </div>
-          </div>
-          <div class="section">
-            <div class="section-title">Login Information</div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Email
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="userEmail" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                First Name
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="firstName" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Last Name
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="lastName" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Password
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="password" type="text" />
-              </div>
-            </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Retype Password
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="retypedPassword" type="text" />
-              </div>
-            </div>
-          </div>
+        <div class="section">
+          <div class="section-title">Company Information</div>
           <div>
-            <button class="button lime-green">Register Business</button>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                FIU Resporters Code
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="reportersCode" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Business Name *
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="companyname" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Trade Name
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="tradename" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Legal Form *
+              </div>
+              <div class="section-input-area">
+                <select formControlName="legalForm" class="custom-select">
+                  <option value="Sole proprietor">Sole proprietor</option>
+                  <option value="General partership">General partnership</option>
+                  <option value="Professional partership">Professional partnership</option>
+                  <option value="Mimited partership">Limited partnership</option>
+                  <option value="Private limited company">Private limited company</option>
+                  <option value="Public limited company">Public limited company</option>
+                  <option value="Cooperative">Cooperative</option>
+                  <option value="Association">Association</option>
+                  <option value="Foundation">Foundation</option>
+                </select>
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Chamber Of Commerce No. *
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="chamberno" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Email *
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="email" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Telephone *
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="phone" type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Sector *
+              </div>
+              <div class="section-input-area">
+                <select class="custom-select" formControlName="occgroup">
+                  <option [ngValue]="item.occupationalgroupId" *ngFor="let item of occupationalGroups; let i = index">
+                    {{item.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
+
+
+        <div class="section">
+          <div class="section-title">Address Information</div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Street Name *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="streetName" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Street Number *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="streetNumber" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Place *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="place" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Country *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="country" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">Login Information</div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Email *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="userEmail" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              First Name *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="firstName" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Last Name *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="lastName" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Password *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="password" type="password" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Retype Password *
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="retypedPassword" type="password" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="button lime-green">Register Business</button>
+        </div>
+
       </div>
-    </div>
-
-
-
-    <div style="height: 150px;">
+    </form>
+    <div style="height: 50px;">
       &nbsp;
     </div>
   </div>

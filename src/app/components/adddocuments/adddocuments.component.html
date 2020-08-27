@@ -139,6 +139,7 @@
               </div>
               <div class="section-input-area">
                 <input class="input" formControlName="idPlaceOfIssue" type="text" />
+               
               </div>
             </div>
             <div class="section-input-wrapper">
@@ -152,11 +153,12 @@
           </div>
           <div class="section-input-wrapper">
             <div class="section-input-text-area">
-              Document
+              Select Document
             </div>
             <div class="section-input-area">
+              <!-- <app-fileupload formControlName="doc"></app-fileupload> -->
               <label for="file-upload" style="border:0;" class="custom-file-upload lime-green">
-                <i class="fa fa-cloud-upload"></i>&nbsp;Select Document
+                Click here to add document
               </label>
               <div style="width:400px;">
                 <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
@@ -164,7 +166,7 @@
                   (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
                 </image-cropper>
               </div>
-              <input accept="image/x-png,image/gif,image/jpeg" id="file-upload" size="600" type="file"
+              <input id="file-upload"  type="file"
                 (change)="fileChangeEvent($event)" />
             </div>
           </div>
@@ -179,15 +181,15 @@
 </div>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-      <div (click)="modal.dismiss('Cross click')">
-        <i class="fal fa-times"></i>
-      </div>
+  <div class="modal-header">
+    <div (click)="modal.dismiss('Cross click')">
+      <i class="fal fa-times"></i>
     </div>
-    <div class="modal-body">
-      <div class="modal-title" id="modal-basic-title">SELECT DOCUMENT NAME</div>
-      <div (click)="selectAccount(item)" class="items" *ngFor="let item of documentNames; let i = index">
-          {{item.name}} 
-      </div>
+  </div>
+  <div class="modal-body">
+    <div class="modal-title" id="modal-basic-title">SELECT DOCUMENT NAME</div>
+    <div (click)="selectAccount(item)" class="items" *ngFor="let item of documentNames; let i = index">
+      {{item.name}}
     </div>
-  </ng-template>
+  </div>
+</ng-template>

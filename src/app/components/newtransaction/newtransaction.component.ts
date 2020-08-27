@@ -9,6 +9,8 @@ import { CustomerService } from '../../services/customer.service';
 import { Observable, Subject } from 'rxjs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { PaymentService } from '../../services/payment.service';
+import { Globals } from '../../globals';
 
 @Component({
     selector: 'app-newtransaction',
@@ -41,7 +43,9 @@ export class NewtransactionComponent implements OnInit {
         private currencyService: CurrencyService,
         private formBuilder: FormBuilder,
         private router: Router,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private paymentService: PaymentService,
+        public globals: Globals
     ) { }
 
     @ViewChild("searchBox") searchBox: ElementRef;
@@ -60,6 +64,7 @@ export class NewtransactionComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getPaymentExpiration();
         window.scroll(0, 0);
         this.route.params.subscribe(routeParams => {
             if (routeParams.icsNo) {
@@ -148,6 +153,13 @@ export class NewtransactionComponent implements OnInit {
         });
     }
 
+    getPaymentExpiration(): void {
+        this.paymentService.getPaymentExpiration()
+            .subscribe(data => {
+                this.globals.expired = data.expired;
+            });
+    }
+
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';
@@ -181,7 +193,7 @@ export class NewtransactionComponent implements OnInit {
             });
     }
 
-   
+
     selectBankAccount(): void {
         window['$']('#accModal')['modal']('show');
     }
@@ -324,6 +336,13 @@ export class NewtransactionComponent implements OnInit {
             this.identificationDocuments = item;
         }
 
+        var response = this.documentExists(this.attachedDocuments, item);
+        console.log('docExists', response);
+
+        if (!response) {
+            this.attachedDocuments.push(item);
+        }
+
     }
 
 
@@ -338,9 +357,9 @@ export class NewtransactionComponent implements OnInit {
         this.currencyService.getCurrencies()
             .subscribe(data => {
                 //console.log(data);
-           
-                this.currencies = data; 
-            
+
+                this.currencies = data;
+
             });
     }
 
@@ -409,7 +428,7 @@ export class NewtransactionComponent implements OnInit {
         }
 
         var response = this.documentExists(this.attachedDocuments, item);
-        console.log(response);
+        console.log('docExists', response);
 
         if (!response) {
             this.attachedDocuments.push(item);
@@ -417,8 +436,8 @@ export class NewtransactionComponent implements OnInit {
 
     }
 
-    uploadDocument(data): void {
-        this.userService.merchantUploadUserDocument(data)
+    uploadDocument(data, file): void {
+        this.userService.merchantUploadUserDocument(data, file)
             .subscribe(response => {
 
                 this.modalService.dismissAll();
@@ -438,8 +457,9 @@ export class NewtransactionComponent implements OnInit {
                 break;
         }
         if (data) {
+            var file = 'test';
             data.userIcsNo = icsNo;
-            this.uploadDocument(data);
+            this.uploadDocument(data, file);
         }
     }
 

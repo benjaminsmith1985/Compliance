@@ -21,8 +21,10 @@ export class IndexComponent implements OnInit {
   registerMerchantForm: FormGroup;
   loading = false;
   returnUrl: string;
+  currentUser : any = null;
 
   constructor(
+
     private formBuilder: FormBuilder,
     private userService: UserService,
     private authenticationService: AuthenticationService,
@@ -34,6 +36,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.customerPage = 1;
     this.merchantPage = 1;
+
 
     this.loginForm = this.formBuilder.group({
       icsNo: ['', Validators.required],
@@ -70,9 +73,15 @@ export class IndexComponent implements OnInit {
       nationality: [''],
       gender: ['']
     });
+
+    this.currentUser = this.authenticationService.currentUserValue;
+    if(this.currentUser){
+      this.router.navigate(['/search']);
+    }
   }
 
   onSubmit(role) {
+    this.globals.isLoading = true;
 
     this.submitted = true;
    
@@ -94,6 +103,7 @@ export class IndexComponent implements OnInit {
             case 'business':
               this.globals.expired = data.expired;
               this.router.navigate(['/search']);
+              this.globals.isLoading = false;
               break;
             case 'customer':
               this.router.navigate(['/customer']);

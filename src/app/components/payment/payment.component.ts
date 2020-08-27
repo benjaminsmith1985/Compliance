@@ -3,6 +3,8 @@ import { UserService } from '../../services/user.service';
 import { PackageService } from '../../services/package.service';
 import { Packages } from '../../models/packages';
 import { ActivatedRoute } from '@angular/router';
+import { PaymentService } from '../../services/payment.service';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-payment',
@@ -30,10 +32,13 @@ export class PaymentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private packageService: PackageService
+    private packageService: PackageService,
+    private paymentService: PaymentService,
+    public globals: Globals
   ) { }
 
   ngOnInit() {
+    this.getPaymentExpiration();
     this.getAccountInfo();
     this.getOpenBalance();
     this.getPackages();
@@ -41,6 +46,13 @@ export class PaymentComponent implements OnInit {
       if(routeParams.return){
         this.paidNotification = routeParams.return;
       }
+    });
+  }
+
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
     });
   }
 
@@ -66,10 +78,11 @@ export class PaymentComponent implements OnInit {
 
     this.totalDue = (balance + this.totalDueInvoice).toFixed(2);
 
-  }
+  } 
 
-  goTo() {
-    window.location.href = "http://localhost/complianceServer/mollieTest.php?m=" + this.user.merchantId + "&p=" + this.currentItem.packageId;
+  goTo() { 
+    window.location.href = "https://www.ics-caribbean.com/complianceServer/mollieTest.php?m=" + this.user.merchantId + "&p=" + this.currentItem.packageId;
+    //window.location.href = "https://www.basilachill.com";
   }
 
   calculateInvoiceBalance(data): void {

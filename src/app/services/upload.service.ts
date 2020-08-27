@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Globals } from '../globals';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ export class UploadService {
 
   // SERVER_URL: String = 'http://108.179.196.226/~ics';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private globals: Globals) { }
 
   public upload(data) {
-    let uploadURL = `${this.SERVER_URL}/file_upload.php`;
+    let uploadURL = `${this.globals.serverlink}file_upload.php`;
     var percentage = 0;
 
     return this.httpClient.post<any>(uploadURL, data, {
