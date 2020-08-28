@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { NgbModal, NgbDateStruct, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Globals } from '../../globals';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-userdocuments',
@@ -23,7 +25,9 @@ export class UserdocumentsComponent implements OnInit {
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public globals: Globals,
+    private paymentService: PaymentService
   ) {
 
   }
@@ -69,6 +73,8 @@ export class UserdocumentsComponent implements OnInit {
         this.getCustomerDocuments(routeParams.userIcs);
       }
     });
+
+    this.getPaymentExpiration();
   }
 
   getCustomerDocuments(id): void {
@@ -76,6 +82,13 @@ export class UserdocumentsComponent implements OnInit {
       .subscribe(data => {
         this.userDocuments = data.data;
       });
+  }
+
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
   }
 
   getUserByIcsNo(icsNo) {

@@ -8,4 +8,4 @@ export class Globals {
     serverlink: string = "http://localhost/complianceServer/"; 
     isLoading: boolean = false;
     //serverlink:string = "complianceServer/";
-}  
+}   

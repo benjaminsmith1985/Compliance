@@ -15,8 +15,8 @@
       </div>
 
       <div class="fromWrapper">
-        <form [formGroup]="editAccountForm" (ngSubmit)="submitForm()">
-          <div class="section">
+        <form [formGroup]="editAccountForm" (ngSubmit)="update()">
+          <div class="section section-bottom-margin">
 
             <div class="section-title">Account Information</div>
             <div>
@@ -30,7 +30,7 @@
               </div>
               <div class="section-input-wrapper">
                 <div class="section-input-text-area">
-                  Business Name
+                  Statutory Name
                 </div>
                 <div class="section-input-area">
                   <input class="input" formControlName="companyname" type="text" />
@@ -49,17 +49,11 @@
                   Legal Form
                 </div>
                 <div class="section-input-area">
-                  <select formControlName="legalForm" class="custom-select">
-                    <option value="Sole proprietor">Sole proprietor</option>
-                    <option value="General partership">General partnership</option>
-                    <option value="Professional partership">Professional partnership</option>
-                    <option value="Mimited partership">Limited partnership</option>
-                    <option value="Private limited company">Private limited company</option>
-                    <option value="Public limited company">Public limited company</option>
-                    <option value="Cooperative">Cooperative</option>
-                    <option value="Association">Association</option>
-                    <option value="Foundation">Foundation</option>
-                  </select>
+                  <select class="custom-select" formControlName="legalForm">
+                    <option *ngFor="let item of legalforms; let i = index" [ngValue]="item.legalFormId">
+                      {{item.legalName}}
+                    </option>
+                  </select>                 
                 </div>
               </div>
               <div class="section-input-wrapper">

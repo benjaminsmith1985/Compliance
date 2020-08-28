@@ -72,14 +72,16 @@ export class MerchantaccountComponent implements OnInit {
 
 
   getBankAccounts() {
-    this.userService.getBankAccounts()
+    var amount = 5;
+    this.userService.getBankAccounts(amount)
       .subscribe(data => {
         this.bankAccounts = data.data;
       });
   }
 
   getSeats() {
-    this.userService.getSeats()
+    var amount = 5;
+    this.userService.getSeats(amount)
       .subscribe(data => {
         this.seats = data.data;
       });

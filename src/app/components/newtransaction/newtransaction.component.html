@@ -18,7 +18,7 @@
         <div class="fromWrapper">
 
           <div *ngIf="currentCustomer && insertCustomerForm.value.clientType == 'client'">
-            <div class="section">
+            <div class="section section-bottom-margin">
               <div style="overflow: hidden;" class="section-title">
                 <div style="float:left;">
                   Customer Information
@@ -106,7 +106,7 @@
             </div>
           </div>
 
-          <div class="section">
+          <div class="section section-bottom-margin">
             <div *ngIf="!hasParameter">
               <div class="section-label">
                 Is this user an existing customer?
@@ -148,7 +148,7 @@
             </div> -->
           </div>
 
-          <div class="section" *ngIf="insertCustomerForm.value.clientType == 'client' && !hasParameter">
+          <div class="section section-bottom-margin" *ngIf="insertCustomerForm.value.clientType == 'client' && !hasParameter">
             <div class="section-title">Search Existing Customer</div>
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
@@ -167,7 +167,7 @@
             </div>
           </div>
 
-          <div class="section" *ngIf="insertCustomerForm.value.clientType == 'nonclient'">
+          <div class="section section-bottom-margin" *ngIf="insertCustomerForm.value.clientType == 'nonclient'">
             <div>
               <div class="section-title">Customer Information</div>
               <div class="section-input-wrapper">
@@ -475,7 +475,7 @@
 
           </div>
 
-          <div *ngIf="indicators && indicators.sector == '1'; else normalTransaction" class="section">
+          <div *ngIf="indicators && indicators.sector == '1'; else normalTransaction" class="section section-bottom-margin">
             <div class="section-title">Transaction Information</div>
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
@@ -684,7 +684,7 @@
           </div>
 
           <ng-template #normalTransaction>
-            <div class="section">
+            <div class="section section-bottom-margin">
               <div class="section-title">Transaction Information</div>
               <div class="section-input-wrapper">
                 <div class="section-input-text-area">
@@ -949,7 +949,7 @@
             </div>
           </div>
 
-          <div class="section">
+          <div class="section section-bottom-margin">
             <div class="section-title">Case Description</div>
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
@@ -965,7 +965,7 @@
           </div>
 
 
-          <div class="section">
+          <div class="section section-bottom-margin">
             <div class="section-title">Additional Information <span style="font-size: 12px;">(For Internal Use)</span>
             </div>
             <div class="section-input-wrapper">

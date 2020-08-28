@@ -5,13 +5,13 @@ import { Globals } from '../globals';
 @Injectable({
   providedIn: 'root'
 })
-export class PackageService {
+export class LegaformService {
 
   constructor(
     private http: HttpClient,
     private globals: Globals) { }
  
-  getPackages():any {
-    return this.http.get(`${this.globals.serverlink}get_packages.php`);  
+  getLegalforms():any {
+    return this.http.get(`${this.globals.serverlink}get_legalforms.php`);  
   } 
 }

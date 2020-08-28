@@ -24,7 +24,7 @@
       </nav> -->
     </div>
     <div class="center" *ngIf="user && user.userType == 'natural'">
-      <div class="section">
+      <div class="section section-bottom-margin">
         <div class="section-title">Customer Information</div>
         <div class="section-item">
           <span class="topic">ICS-No:</span><span class="txt-spacing">{{user.icsNo}}</span>
@@ -89,7 +89,7 @@
           <span class="topic">Statutory Name:</span><span class="txt-spacing">{{user.customerName}}</span>
         </div>
         <div class="section-item">
-          <span class="topic">Business Name:</span><span class="txt-spacing">{{user.tradeName}}</span>
+          <span class="topic">Trade Name:</span><span class="txt-spacing">{{user.tradeName}}</span>
         </div>
         <div class="section-item">
           <span class="topic">Legal Form:</span><span class="txt-spacing">Sole Proprietorship</span>
@@ -162,7 +162,7 @@
         <div class="row-cols col-date">Expiration Date</div>
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
-        <div class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+        <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!identificationDocuments">
         <div style="padding: 15px;" class="row row-items">
@@ -175,9 +175,10 @@
             <tr>
               <td width="50" style="height: 51px; padding: 0 15px;">
                 <i *ngIf="item.documentExtension === 'docx'" class="fad fa-file-word docIcon"></i>
-                <i *ngIf="item.documentExtension === 'pdf'"  class="fad fa-file-pdf docIcon"></i>
+                <i *ngIf="item.documentExtension === 'pdf'" class="fad fa-file-pdf docIcon"></i>
                 <i *ngIf="item.documentExtension === 'xlsx'" class="fad fa-file-excel docIcon"></i>
-                <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'" class="fad fa-file-image docIcon"></i>
+                <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'"
+                  class="fad fa-file-image docIcon"></i>
               </td>
               <td (click)="openDoc(item, action)" width="214">
                 {{item.documentName}}
@@ -201,8 +202,9 @@
             </tr>
           </table>
         </div>
-        <div routerLink="/business/userids/{{user.icsNo}}" class="row-footer">
-          <span class="bottom-button">All Identification Documents&nbsp;&nbsp; <i class="fas fa-external-link"></i></span>
+        <div class="row-footer">
+          <span routerLink="/business/userids/{{user.icsNo}}" class="bottom-button">All
+            Identification Documents&nbsp;&nbsp; <i class="fas fa-external-link"></i></span>
         </div>
       </div>
     </div>
@@ -215,8 +217,7 @@
         <div class="row-cols col-date">Date of Issue</div>
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
-        <!-- <div class="row-cols col-date">Permission</div> -->
-        <div class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+        <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!otherDocuments">
         <div style="padding: 15px;" class="row row-items">
@@ -226,12 +227,13 @@
       <div *ngIf="otherDocuments">
         <div *ngFor="let item of otherDocuments; let i = index" class="row row-items">
           <table width="100%">
-            <tr> 
+            <tr>
               <td width="50" style="height: 51px; padding: 0 15px;">
                 <i *ngIf="item.documentExtension === 'docx'" class="fad fa-file-word docIcon"></i>
-                <i *ngIf="item.documentExtension === 'pdf'"  class="fad fa-file-pdf docIcon"></i>
+                <i *ngIf="item.documentExtension === 'pdf'" class="fad fa-file-pdf docIcon"></i>
                 <i *ngIf="item.documentExtension === 'xlsx'" class="fad fa-file-excel docIcon"></i>
-                <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'" class="fad fa-file-image docIcon"></i>
+                <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'"
+                  class="fad fa-file-image docIcon"></i>
               </td>
               <td (click)="openDoc(item, action)" width="214">
                 {{item.documentName}}
@@ -252,30 +254,13 @@
               <td>
                 <span>{{item.verified == '1' ? 'Yes' : 'No'}}</span>
               </td>
-              <!-- <td>
-                <span *ngIf="item.permission == '1'">Yes</span>
-                <span *ngIf="item.permission == '0'">Pending</span>
-                <span *ngIf="item.permission == null">No</span>
-              </td> -->
+
             </tr>
           </table>
-          <!-- <a download="{{item.documentName}}.jpg" href="data:image/png;base64,{{item.path}}" *ngIf="item.permission == '1'">
-                    <div class="button-right button-right-active">
-                      <div class="certified-col">
-                        <i class="material-icons">
-                          cloud_download
-                        </i><br />
-                        <span class="certified-txt">Download</span>
-                      </div>
-                    </div>
-                  </a> -->
-
         </div>
-        <!-- <div routerLink="/business/userdocuments/{{user.icsNo}}" class="row-footer">
-          <i class="far fa-ellipsis-h"></i>
-        </div> -->
-        <div routerLink="/business/userdocuments/{{user.icsNo}}" class="row-footer">
-          <span class="bottom-button">All Documents&nbsp;&nbsp;<i class="fas fa-external-link"></i></span>
+
+        <div class="row-footer">
+          <span routerLink="/business/userdocuments/{{user.icsNo}}" class="bottom-button">All Documents&nbsp;&nbsp;<i class="fas fa-external-link"></i></span>
         </div>
       </div>
     </div>

@@ -50,8 +50,8 @@ export class UserService {
     return this.http.post(`${this.globals.serverlink}get_customer_by_id.php`, { data });
   }
 
-  getSeats(): any {
-    return this.http.post(`${this.globals.serverlink}get_merchant_seats`, {});
+  getSeats(amount): any {
+    return this.http.post(`${this.globals.serverlink}get_merchant_seats`, { amount });
   }
 
   requestpermission(documentId, userIcsNo): any {
@@ -91,7 +91,7 @@ export class UserService {
   }
 
   getMerchantFiuReports(data): any {
-    return this.http.post(`${this.globals.serverlink}get_merchant_fiu_reports`, {data});
+    return this.http.post(`${this.globals.serverlink}get_merchant_fiu_reports`, { data });
   }
 
   getUserTransactions(data: any): any {
@@ -106,8 +106,8 @@ export class UserService {
     return this.http.post(`${this.globals.serverlink}get_user_reports`, { data });
   }
 
-  getBankAccounts(): any {
-    return this.http.post(`${this.globals.serverlink}get_merchant_bankaccounts`, {});
+  getBankAccounts(amount): any {
+    return this.http.post(`${this.globals.serverlink}get_merchant_bankaccounts`, { amount });
   }
 
   getInvoice(invoiceNo: any): any {
@@ -152,7 +152,7 @@ export class UserService {
 
   getInvoiceHistory(): any {
     return this.http.post(`${this.globals.serverlink}get_invoice_history`, {});
-  } 
+  }
 
   searchUser(data: any): any {
     return this.http.post(`${this.globals.serverlink}search_user.php`, { data });

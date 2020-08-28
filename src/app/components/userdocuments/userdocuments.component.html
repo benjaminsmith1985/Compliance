@@ -26,7 +26,7 @@
           <div class="row-cols col-date">Upload By</div>
           <div class="row-cols col-indicator">Verified</div>
           <!-- <div class="row-cols col-date">Permission</div> -->
-          <div class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+          <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
         </div>
         <div *ngFor="let item of userDocuments.other; let i = index" class="row row-items">
           <table width="100%">

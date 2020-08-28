@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div *ngIf="operation" class="section">
+        <div *ngIf="operation" class="section section-bottom-margin">
           <div class="section-title">Customer Information</div>
           <div class="section-item"><span class="topic">ICS-No:</span><span routerLink="/business/user/{{operation.userIcsNo}}"
               class="hyperlink txt-spacing">{{operation.userIcsNo}}</span></div>
@@ -67,7 +67,7 @@
           </div>
         </div>
 
-        <div class="section">
+        <div class="section section-bottom-margin">
           <div class="section-title">Transaction Details</div>
           <!-- <div class="section-item">Customer Name: {{transaction.customername}}</div> -->
           <!-- <div class="section-item">Suspicious Behaviour: {{transaction.suspicious == '1' ? 'Yes' : 'No'}}</div> -->
@@ -106,12 +106,12 @@
           </div>
         </div> -->
 
-        <div *ngIf="operation" class="section">
+        <div *ngIf="operation" class="section section-bottom-margin">
           <div class="section-title">Case Description</div>
           <div>{{operation.casedescription ? operation.casedescription : 'No case description.'}}</div>
         </div>
 
-        <div *ngIf="operation" class="section">
+        <div *ngIf="operation" class="section section-bottom-margin">
           <div class="section-title">Additional Information</div>
           <div>{{operation.additional ? operation.additional : 'No additional information.'}}</div>
         </div>
@@ -141,7 +141,7 @@
           </div>
         </div>
 
-        <div *ngIf="operation.fiuReported != '1'" class="section">
+        <div *ngIf="operation.fiuReported != '1'" class="section section-bottom-margin">
           <div *ngIf="indicators && operation.fiuReported != '1'">
             <div class="section-label">
               <!-- {{transactionReports.length > 0 ? 'Do you want to attach more report(s) to this transaction?' : 'Do you still want to save a report to the transaction?'}}  -->

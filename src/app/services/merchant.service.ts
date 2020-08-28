@@ -36,5 +36,9 @@ export class MerchantService {
     return this.http.post(`${this.globals.serverlink}update_merchantuser_bymerchant`, { data });
   }
 
+  updateMerchantAccount(data: any) {
+    return this.http.post(`${this.globals.serverlink}update_merchantaccount`, { data });
+  }
+
 
 }

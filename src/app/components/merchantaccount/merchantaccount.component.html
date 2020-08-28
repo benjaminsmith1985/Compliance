@@ -36,7 +36,7 @@
           <span class="topic">Business Name:</span><span class="txt-spacing">{{user.tradeName}}</span>
         </div>
         <div class="section-item">
-          <span class="topic">Legal Form:</span><span class="txt-spacing">Sole Proprietorship</span>
+          <span class="topic">Legal Form:</span><span class="txt-spacing">{{user.legalName}}</span>
         </div>
         <div class="section-item">
           <span class="topic">Street Name:</span>{{user.address}}<span class="txt-spacing"></span>
@@ -45,7 +45,10 @@
           <span class="topic">Street Number:</span><span class="txt-spacing">{{user.streetNumber}}</span>
         </div>
         <div class="section-item">
-          <span class="topic">Country:</span><span class="txt-spacing">Cura&ccedil;ao</span>
+          <span class="topic">Place:</span><span class="txt-spacing">{{user.place}}</span>
+        </div>
+        <div class="section-item">
+          <span class="topic">Country:</span><span class="txt-spacing">{{user.country}}</span>
         </div>
         <div class="section-item">
           <span class="topic">Email:</span><span class="txt-spacing">{{user.email}}</span>
@@ -58,7 +61,7 @@
             <span class="topic">Sector:</span><span class="txt-spacing">{{user.sector}}</span>
           </div>
           <div class="section-item">
-            <span class="topic">Business Activity:</span><span class="txt-spacing"></span>
+            <span class="topic">Business Activity:</span><span class="txt-spacing">{{user.businessActivity}}</span>
           </div>
         </div>
       </div>

@@ -8,6 +8,8 @@ import { CustomerService } from '../../services/customer.service';
 import { DocumentService } from '../../services/document.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { switchMapTo } from 'rxjs/operators';
+import { Globals } from '../../globals';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-businessuser',
@@ -46,7 +48,9 @@ export class BusinessuserComponent implements OnInit {
     private customerService: CustomerService,
     private documentService: DocumentService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public globals: Globals,
+    private paymentService: PaymentService
   ) { }
 
   ngOnInit() {
@@ -67,6 +71,8 @@ export class BusinessuserComponent implements OnInit {
       base64: ['']
     });
 
+    this.getPaymentExpiration();
+
     this.route.params.subscribe(routeParams => {
       if (routeParams.id) {
         this.getUserByIcsNo(routeParams.id);
@@ -76,6 +82,13 @@ export class BusinessuserComponent implements OnInit {
         this.getUserReports(routeParams.id);
         this.getUserRisk(routeParams.id);
       }
+    });
+  }
+
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
     });
   }
 

@@ -4,6 +4,8 @@ import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbDateStruct, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { first, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Globals } from '../../globals';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-userids',
@@ -21,7 +23,9 @@ export class UseridsComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public globals: Globals,
+    private paymentService: PaymentService
   ) {
 
   }
@@ -33,6 +37,8 @@ export class UseridsComponent implements OnInit {
         this.getCustomerDocuments(routeParams.userIcs);
       }
     });
+
+    this.getPaymentExpiration();
   }
 
   openDoc(item, content) {
@@ -73,6 +79,13 @@ export class UseridsComponent implements OnInit {
       .subscribe(data => {
         this.userDocuments = data.data;
       });
+  }
+
+  getPaymentExpiration(): void {
+    this.paymentService.getPaymentExpiration()
+    .subscribe(data => {
+      this.globals.expired = data.expired;
+    });
   }
 
   getUserByIcsNo(icsNo) {
