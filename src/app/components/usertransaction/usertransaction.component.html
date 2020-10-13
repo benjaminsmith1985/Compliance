@@ -30,29 +30,36 @@
           </nav>
         </div>
 
-        <div [ngClass]="{'alert-danger': operation.fiuReported == '0' && operation.thresholdex == '1' ||  operation.fiuReported == '0' && operation.suspicious == '1'}"
+        <div
+          [ngClass]="{'alert-danger': operation.fiuReported == '0' && operation.thresholdex == '1' ||  operation.fiuReported == '0' && operation.suspicious == '1'}"
           class="alert alert-success" role="alert">
           <h4 class="alert-heading">Operation Information </h4>
-          <div *ngIf="operation">On {{operation.formattedDateCreated}}, an operation was <span class="alert-link">created
+          <div *ngIf="operation">On {{operation.formattedDateCreated}}, an operation was <span
+              class="alert-link">created
               by
               {{operation.createdByName}}</span>.&nbsp;The operation consists of 1 transaction and
             {{operation.amountReports}} report<span *ngIf="operation.amountReports != '0'">s</span>. <br />
             <span *ngIf="operation.suspicious == '0'">{{operation.createdByName}} stated that the customer
               has not behaved unusual. </span><span *ngIf="operation.suspicious == '1'">{{transaction.createdByName}}
-              stated that the <span class="alert-link">customer has an unusual behaviour</span>. </span><span *ngIf="operation.fiuReported == '1'">The
+              stated that the <span class="alert-link">customer has an unusual behaviour</span>. </span><span
+              *ngIf="operation.fiuReported == '1'">The
               transaction attached to this operation has been reported to FIU
-              Cura&ccedil;ao.</span><span *ngIf="operation.fiuReported == '0'">This <span [ngClass]="{'alert-link': operation.reported == '0' && operation.thresholdex == '1' || operation.suspicious == '1'}">operation
+              Cura&ccedil;ao.</span><span *ngIf="operation.fiuReported == '0'">This <span
+                [ngClass]="{'alert-link': operation.reported == '0' && operation.thresholdex == '1' || operation.suspicious == '1'}">operation
                 is not reported</span> to FIU Cura&ccedil;ao. </span> <span *ngIf="operation.thresholdex == '1'">The
-              <span class="alert-link">transaction amount exceeded</span> the threshold. </span> <span *ngIf="operation.thresholdex == '0'">
+              <span class="alert-link">transaction amount exceeded</span> the threshold. </span> <span
+              *ngIf="operation.thresholdex == '0'">
               The
               transaction amount did not exceed the threshold. </span>Below you will find
-            more information about the transaction<span *ngIf="operation.reported == '1'"> and the report<span *ngIf="operation.amountReports != '0'">s</span></span>.
+            more information about the transaction<span *ngIf="operation.reported == '1'"> and the report<span
+                *ngIf="operation.amountReports != '0'">s</span></span>.
           </div>
         </div>
 
         <div *ngIf="operation" class="section section-bottom-margin">
           <div class="section-title">Customer Information</div>
-          <div class="section-item"><span class="topic">ICS-No:</span><span routerLink="/business/user/{{operation.userIcsNo}}"
+          <div class="section-item"><span class="topic">ICS-No:</span><span
+              routerLink="/business/user/{{operation.userIcsNo}}"
               class="hyperlink txt-spacing">{{operation.userIcsNo}}</span></div>
           <div class="section-item">
             <span class="topic">Customer Name:</span><span class="txt-spacing">{{operation.customername}}</span>
@@ -63,7 +70,9 @@
           </div>
           <div class="section-item" *ngFor="let item of attachedDocs; let i = index">
             <div *ngIf="item.documentType == 'id'"><span class="topic">Identification:</span>
-              <span class="hyperlink" routerLink="/business/userid/{{operation.userIcsNo}}/{{item.documentId}}">{{item.documentName}}</span></div>
+              <span class="hyperlink"
+                routerLink="/business/userid/{{operation.userIcsNo}}/{{item.documentId}}">{{item.documentName}}</span>
+            </div>
           </div>
         </div>
 
@@ -71,7 +80,8 @@
           <div class="section-title">Transaction Details</div>
           <!-- <div class="section-item">Customer Name: {{transaction.customername}}</div> -->
           <!-- <div class="section-item">Suspicious Behaviour: {{transaction.suspicious == '1' ? 'Yes' : 'No'}}</div> -->
-          <div class="section-item">Transaction Id: <span routerLink="/usertransaction/{{transaction.uuid}}" class="link">{{transaction.uuid}}</span></div>
+          <div class="section-item">Transaction Id: <span routerLink="/usertransaction/{{transaction.uuid}}"
+              class="link">{{transaction.uuid}}</span></div>
           <div class="section-item">Transaction Date: {{transaction.formattedDate}}</div>
           <div class="section-item">Phase: {{operation.hastransaction == '0' ? 'Intended' : 'Executed'}}</div>
           <div class="section-item">Place: {{transaction.island}}</div>
@@ -81,7 +91,7 @@
           <div *ngIf="transaction.transactionType == 'Giro'" class="section-item">From Account:
             {{transaction.fromAccount}}</div>
           <div class="section-item">To Account: {{transaction.toAccount}}</div>
-          
+
           <div class="section-item">Funds Source: {{transaction.fundsSrc}}</div>
           <div class="section-item">Service: {{transaction.service}}</div>
           <div class="section-item">Description: {{transaction.description}}</div>
@@ -92,19 +102,54 @@
         </div>
 
 
-
-
-
-
+        <!-- <div *ngIf="attachedDocs'" class="center"> -->
+        <!-- <div class="row-header">
+            <div class="row-cols col-doc-name">Documents attached to the transaction</div>
+          </div> -->
+        <!-- <div *ngIf="!attachedDocs">
+            <div style="padding: 15px;" class="row row-items">
+              No documents available
+            </div>
+          </div> -->
         <!-- <div *ngIf="attachedDocs">
-          <div class="row-block set-cursor" *ngFor="let item of attachedDocs; let i = index">
-            <a download="{{item.documentName}}.jpg" href="data:image/png;base64,{{item.path}}">
-              <div class="row-block-single">
-                {{item.documentName}}
-              </div>
-            </a>
-          </div>
-        </div> -->
+            <div *ngFor="let item of attachedDocs; let i = index" class="row row-items">
+              <table width="100%">
+                <tr>
+                  <td width="50" style="height: 51px; padding: 0 15px;">
+                    <i *ngIf="item.documentExtension === 'docx'" class="fad fa-file-word docIcon"></i>
+                    <i *ngIf="item.documentExtension === 'pdf'" class="fad fa-file-pdf docIcon"></i>
+                    <i *ngIf="item.documentExtension === 'xlsx'" class="fad fa-file-excel docIcon"></i>
+                    <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'"
+                      class="fad fa-file-image docIcon"></i>
+                  </td>
+                  <td (click)="openDoc(item, action)" width="214">
+                    {{item.documentName}}
+                  </td>
+                  <td (click)="openDoc(item, action)" width="200">
+                    <span>
+                      {{item.documentNr}}
+                    </span>
+                  </td>
+                  <td (click)="openDoc(item, action)" width="200">
+                    <span>
+                      {{item.formattedExpirationDate}}
+                    </span>
+                  </td>
+                  <td width="200" (click)="openDoc(item, action)">
+                    <span>{{item.uploadAccount}}</span>
+                  </td>
+                  <td>
+                    <span>{{item.verified == '1' ? 'Yes' : 'No'}}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div> -->
+        <!-- </div> -->
+
+
+
+        
 
         <div *ngIf="operation" class="section section-bottom-margin">
           <div class="section-title">Case Description</div>
@@ -116,6 +161,36 @@
           <div>{{operation.additional ? operation.additional : 'No additional information.'}}</div>
         </div>
 
+        <div *ngIf="attachedDocs">
+          <div class="row-header">
+            <div class="row-cols col-doc-name">Documents attached to the transaction</div>
+          </div>
+          <div *ngFor="let item of attachedDocs; let i = index" class="row row-items">
+            <table width="100%">
+              <tr>
+                <td width="50" style="height: 51px; padding: 0 15px;">
+                  <i *ngIf="item.documentExtension === 'docx'" class="fad fa-file-word docIcon"></i>
+                  <i *ngIf="item.documentExtension === 'pdf'" class="fad fa-file-pdf docIcon"></i>
+                  <i *ngIf="item.documentExtension === 'xlsx'" class="fad fa-file-excel docIcon"></i>
+                  <i *ngIf="item.documentExtension === 'png' || item.documentExtension === 'jpg'"
+                    class="fad fa-file-image docIcon"></i>
+                </td>
+                <td (click)="openDoc(item, action)" width="214">
+                  {{item.documentName}}
+                </td>
+                <td (click)="openDoc(item, action)" width="200">
+                  <span>
+                    {{item.documentNr}}
+                  </span>
+                </td>             
+                <td>
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
         <div *ngIf="transactionReports" class="center">
           <div class="row-header">
             Reports attached to the transaction ({{transactionReports.length}})
@@ -123,7 +198,8 @@
           <div *ngFor="let item of transactionReports; let i = index" class="row row-items">
             <div class="row-wrapper">
               <div class="row-single">
-                <span style="font-weight: 600;">Reporting Date:</span> {{item.formattedDate}}<br /><span style="font-weight: 600;">Reported
+                <span style="font-weight: 600;">Reporting Date:</span> {{item.formattedDate}}<br /><span
+                  style="font-weight: 600;">Reported
                   By:</span> {{item.reportedByName}}
               </div>
               <div class="row-single">
@@ -133,7 +209,8 @@
                 <span style="font-weight: 600;">Indicator:</span> {{item.indicator}}<br />
                 {{item.definition}}
               </div>
-              <div class="row-single" *ngIf="item.subindicatorId != '0' && item.subindicatorId != null"><span style="font-weight: 600;">Subindicator:</span>
+              <div class="row-single" *ngIf="item.subindicatorId != '0' && item.subindicatorId != null"><span
+                  style="font-weight: 600;">Subindicator:</span>
                 {{item.subindicatorId}}<br />
                 {{item.subdefinition}}
               </div>
@@ -177,7 +254,8 @@
             <div style="padding: 0px;" class="row-wrapper">
               <table width="100%" cellspacing="0" cellpadding="15">
                 <tr>
-                  <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''" [ngClass]="{'on': item.selected, 'off': !item.selected }"
+                  <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''"
+                    [ngClass]="{'on': item.selected, 'off': !item.selected }"
                     style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
                     valign="middle" width="30">
                     <div style="float:left; width: 30px;" id="{{item.indicator}}">
@@ -201,8 +279,8 @@
                                 class="radiobutton">
                                 <div class="checked">&nbsp;</div>
                               </div>
-                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
-                                class="radiobutton">
+                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)"
+                                *ngIf="!subInd.selected" class="radiobutton">
                                 &nbsp;
                               </div>
                             </td>
@@ -229,7 +307,8 @@
             <div style="padding: 0px;" class="row-wrapper">
               <table width="100%" cellspacing="0" cellpadding="15">
                 <tr>
-                  <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''" [ngClass]="{'on': item.selected, 'off': !item.selected }"
+                  <td (click)="!item.subIndicator || item.selected ? test(item, i) : ''"
+                    [ngClass]="{'on': item.selected, 'off': !item.selected }"
                     style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
                     valign="middle" width="30">
                     <div style="float:left; width: 30px;" id="{{item.indicator}}">
@@ -253,8 +332,8 @@
                                 class="radiobutton">
                                 <div class="checked">&nbsp;</div>
                               </div>
-                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)" *ngIf="!subInd.selected"
-                                class="radiobutton">
+                              <div (click)="selectSubIndicator(subInd, item.subIndicator, item)"
+                                *ngIf="!subInd.selected" class="radiobutton">
                                 &nbsp;
                               </div>
                             </td>
@@ -281,7 +360,8 @@
 
 
 
-        <div *ngIf="reportCustomerForm.value.hasreport == '1' || reportCustomerForm.value.fiureport == '1'" style="text-align: center; padding: 0 0 20px 0;">
+        <div *ngIf="reportCustomerForm.value.hasreport == '1' || reportCustomerForm.value.fiureport == '1'"
+          style="text-align: center; padding: 0 0 20px 0;">
           <button class="button lime-green">
             <span *ngIf="reportCustomerForm.value.fiureport == '1'">Save</span>
             <span *ngIf="reportCustomerForm.value.fiureport != '1'">Submit report to FIU</span>

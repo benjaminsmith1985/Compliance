@@ -1,0 +1,50 @@
+<div class="wrap">
+  <form [formGroup]="branchForm" (ngSubmit)="submitBranch()">
+    <div class="cnt">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/merchantaccount" class="breadcrumb-item grey-txt cursor underline">Merchant Account</li>
+                  <li routerLink="/merchantaccount/branches" class="breadcrumb-item grey-txt cursor underline"
+                    aria-current="page">Branches</li>
+                  <li class="breadcrumb-item grey-txt-active" aria-current="page">
+                    Add Branch</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+      </div>    
+
+      <div class="center">
+        <div class="section">
+          <div class="section-title">Branch Information</div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Branch Name
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="branchName" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Branch Address
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="branchAddress" type="text" />
+            </div>
+          </div>
+        </div>
+        <button class="button lime-green">Add Branch</button>
+      </div>
+      <div style="height: 150px;">
+        &nbsp;
+      </div>
+    </div>
+  </form>
+</div>
+

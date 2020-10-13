@@ -29,7 +29,7 @@ export class MerchantService {
   }
 
   getMerchantById(data): any {
-    return this.http.post(`${this.globals.serverlink}get_merchant_by_id`, { data });
+    return this.http.post(`${this.globals.serverlink}get_merchant_by_id_short`, { data });
   }
 
   updateMerchantUser(data: any) {

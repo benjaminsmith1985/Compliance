@@ -1,0 +1,92 @@
+<div *ngIf="user" class="wrap">
+  <form [formGroup]="requestDocForm" (ngSubmit)="submit()">
+    <div class="cnt">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My
+                    Customers</li>
+                  <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">
+                    {{user.customerName}}</li>
+                  <li class="breadcrumb-item grey-txt-active" aria-current="page">Request Document</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+        <div>
+          <div class="section section-bottom-margin">
+            <div style="overflow: hidden;" class="section-title">
+              <div style="float:left;">
+                Customer Information
+              </div>
+              <div style="float: right;">
+                <!-- <i class="fas fa-trash"></i> --> &nbsp;
+              </div>
+            </div>
+            <div class="section-item">
+              <span class="topic">ICS-No:</span><span routerLink="/business/user/{{user.icsNo}}"
+                class="txt-spacing hyperlink">{{user.icsNo}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Full Name:</span><span class="txt-spacing">{{user.customerName}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="section section-bottom-margin">
+          <div class="section-title">Requested Document</div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Document Type
+            </div>
+            <div style="float: right; width: 900px;">
+              <select class="custom-select" formControlName="documentType">
+                <option value="id">Identification Document</option>
+                <option value="other">Other Document</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="requestDocForm.value.documentType == 'id'" class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Document Name
+            </div>
+            <div style="float: right; width: 900px;">
+              <select class="custom-select" formControlName="documentName">
+                <option value="Passport">Passport</option>
+                <option value="Identity Card">Identity Card</option>
+                <option value="Driver's License">Driver's License</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="requestDocForm.value.documentType == 'other'" class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Document Name
+            </div>
+            <div class="section-input-area">
+              <input class="input" formControlName="documentName" type="text" />
+            </div>
+          </div>
+          <div class="section-input-wrapper">
+            <div class="section-input-text-area">
+              Request
+            </div>
+            <div class="section-input-area">
+              <textarea class="materialize-textarea" formControlName="request" id="textareaExampleSmall"
+                rows="1"></textarea>
+            </div>
+          </div>
+         
+        </div>
+        <button class="button dark-orange">
+          <span>
+            Send Request
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

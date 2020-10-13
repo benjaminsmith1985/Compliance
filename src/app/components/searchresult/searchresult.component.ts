@@ -104,7 +104,7 @@ export class SearchresultComponent implements OnInit {
   }
 
   searchUser(data) {
-    this.globals.isLoading = true;
+    // this.globals.isLoading = true;
     this.userService.searchUser(data)
       .pipe(first())
       .subscribe(

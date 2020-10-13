@@ -48,8 +48,7 @@ export class SearchComponent implements OnInit {
       transactionId: [''],
       amount: [''],
       customerName: [''],
-      transactionDate: [''],
-      risk: ['']
+      transactionDate: ['']
     });
     this.getPaymentExpiration();
   }
@@ -112,7 +111,7 @@ export class SearchComponent implements OnInit {
     //   console.log('invalid');
     //   return;
     // }
-
+ 
 
     var url_generating = "search/1/10/";
 

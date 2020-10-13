@@ -251,21 +251,21 @@
                 Send customer an activation link?
               </div>
               <div class="section-input-area">
-                <select class="custom-select" formControlName="gender">
+                <select class="custom-select" formControlName="sendActivation">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
               </div>
             </div>
           </div>
-          <div *ngIf="!globals.expired">
+          <div>
             <button class="button lime-green">Add Customer</button>
           </div>
-          <button routerLink="/billing/payment" *ngIf="globals.expired" class="button dark-orange">
+          <!-- <button routerLink="/billing/payment" *ngIf="globals.expired" class="button dark-orange">
             <span>
               Please activate your account to proceed
             </span>
-          </button>
+          </button> -->
         </form>
       </div>
     </div>

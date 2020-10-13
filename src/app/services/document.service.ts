@@ -22,5 +22,9 @@ export class DocumentService {
   fydoc(item, fy):any {
     return this.http.post(`${this.globals.serverlink}fy_user_documents.php`, { item, fy });
   }
+
+  requestDocument(data):any {
+    return this.http.post(`${this.globals.serverlink}request_document.php`, data);
+  }
   
 }

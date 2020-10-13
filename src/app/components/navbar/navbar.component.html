@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light">
+<nav *ngIf="authenticationService && authenticationService.currentUserValue"  class="navbar navbar-light">
   <div style="padding-left: 300px">
     <img src="../../../assets/logo.jpg" height="80" alt="Card image cap">
   </div>

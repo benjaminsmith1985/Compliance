@@ -39,9 +39,9 @@ export class IndexComponent implements OnInit {
 
 
     this.loginForm = this.formBuilder.group({
-      icsNo: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['']
+      icsNo: [null,[Validators.required, Validators.minLength(2)]],
+      password: [null,[Validators.required, Validators.minLength(2)]],
+      email: [null,[Validators.required, Validators.minLength(2)]]
     });
 
     this.registerCustomerForm = this.formBuilder.group({
@@ -72,7 +72,7 @@ export class IndexComponent implements OnInit {
       address: [''],
       nationality: [''],
       gender: ['']
-    });
+    }); 
 
     this.currentUser = this.authenticationService.currentUserValue;
     if(this.currentUser){
@@ -81,14 +81,19 @@ export class IndexComponent implements OnInit {
   }
 
   onSubmit(role) {
-    this.globals.isLoading = true;
+    
 
     this.submitted = true;
    
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      alert('The information you provided is icorrect.');
       return;
     }
+
+    this.globals.isLoading = true;
+
+   
 
    
     this.loading = true;    
@@ -113,7 +118,7 @@ export class IndexComponent implements OnInit {
 
           this.loginForm.reset();
          
-
+          this.globals.isLoading = false;
         },
         error => {
           // this.alertService.error(error);

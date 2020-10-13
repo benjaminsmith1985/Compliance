@@ -1,0 +1,70 @@
+<div class="wrap">
+  <form [formGroup]="checkinForm">
+    <div class="cnt">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li class="breadcrumb-item grey-txt-active">Check In's</li>
+                </ol>
+              </nav>
+            </div>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+              <li class="nav-item">
+                <i (click)="getMerchantUsers()" class="fas fa-redo"></i>
+              </li>
+              <li class="nav-item">
+                <i (click)="d.toggle()" class="fas fa-calendar"></i>
+                <input class="date-p" (dateSelect)="onDateSelect()" formControlName="checkinDate" ngbDatepicker
+                  #d="ngbDatepicker" type="text" />
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="row-header">
+          <div class="row-cols col-icsno">ICS-No</div>
+          <div class="row-cols col-customer">Customer</div>
+          <div class="row-cols col-customer">Telephone</div>
+          <div class="row-cols col-customer">Date</div>
+          <div class="row-cols col-customer">Time</div>
+        </div>
+        <div (click)="userClick(item, action)" *ngFor="let item of customers; let i = index" class="row row-items">
+          <div class="row-wrapper small-col">
+            <div class="row-cols col-icsno">
+              {{item.customerIcsNo}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.customerName}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.telephoneNo}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.formattedDate}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.formattedTime}}
+            </div>
+            <div class="right-col">
+              <span *ngIf="item.granted == 0 " class="grey-txt">Pending Authorization</span>
+            </div>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+        <!-- <div>
+        <div *ngIf="amountPages > 1" class="pagination-wrapper">
+          <span *ngFor='let in of counter(amountPages);let i = index; let last = last'>
+            <span class="span" routerLink="/business/customers/{{i+1}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
+          </span>
+          <span (click)="open(searchPage)" *ngIf="amountPagingBtns < amountPages" class="span">
+            ...
+          </span>
+          <span class="span" routerLink="/business/customers/{{amountPages}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
+        </div>
+      </div> -->
+      </div>
+    </div>
+  </form>
+</div>

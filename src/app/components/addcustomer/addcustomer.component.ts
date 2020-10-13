@@ -42,6 +42,7 @@ export class AddcustomerComponent implements OnInit {
       streetName: [''],
       streetNumber: [''],
       reportersCode: [''],
+      sendActivation: ['Yes'],
       place: [''],
       country: [''],
       birthCountry: [''],

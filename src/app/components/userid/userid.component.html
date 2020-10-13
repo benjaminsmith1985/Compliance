@@ -6,8 +6,10 @@
           <div class="mr-auto">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
-                <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My Customers</li>
-                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">{{user.customerName}}</li>
+                <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My Customers
+                </li>
+                <li routerLink="/business/user/{{user.icsNo}}" class="breadcrumb-item grey-txt cursor underline">
+                  {{user.customerName}}</li>
                 <li class="breadcrumb-item grey-txt-active" aria-current="page">{{doc.documentName}}</li>
               </ol>
             </nav>
@@ -20,12 +22,15 @@
         </nav>
       </div>
 
-      <div [ngClass]="{'alert-danger': doc.expired == '1' && doc.documentType === 'id' || doc.docVerified == '0'}" class="alert alert-success" role="alert">
+      <div [ngClass]="{'alert-danger': doc.expired == '1' && doc.documentType === 'id' || doc.docVerified == '0'}"
+        class="alert alert-success" role="alert">
         <h4 class="alert-heading">Notice</h4>
         <div>
-          <span *ngIf="doc.expired == '1' && doc.documentType === 'id'">This identification document<span class="alert-link"> expired on
+          <span *ngIf="doc.expired == '1' && doc.documentType === 'id'">This identification document<span
+              class="alert-link"> expired on
               {{doc.formattedExpirationDate}}.</span></span>
-          <span *ngIf="doc.expired == '0' && doc.documentType === 'id'">This identification document is up to date.</span>
+          <span *ngIf="doc.expired == '0' && doc.documentType === 'id'">This identification document is up to
+            date.</span>
           <span *ngIf="doc.docVerified == '0'"> The document has not been verified.</span>
           <span *ngIf="doc.docVerified == '1'"> The document has been verified on {{doc.formattedDateVerified}} by
             {{doc.verifiedUser}}.</span>
@@ -51,7 +56,7 @@
             <div class="section-item">
               <span class="topic">Document Name:</span><span class="txt-spacing">{{doc.documentName}}</span>
             </div>
-            <div class="section-item">  
+            <div class="section-item">
               <span class="topic">Date of Issue:</span><span class="txt-spacing">{{doc.formattedDateIssue}}</span>
             </div>
             <div *ngIf="doc.documentType === 'id'" class="section-item">
@@ -61,24 +66,27 @@
               <span class="topic">Country Issued:</span><span class="txt-spacing">{{doc.countryIssue}}</span>
             </div>
             <div *ngIf="doc.documentType === 'id'" class="section-item">
-              <span class="topic">Expiration Date:</span><span class="txt-spacing">{{doc.formattedExpirationDate}}</span>
+              <span class="topic">Expiration Date:</span><span
+                class="txt-spacing">{{doc.formattedExpirationDate}}</span>
             </div>
             <div class="section-item">
               <span class="topic">Document No:</span><span class="txt-spacing">{{doc.documentNr}}</span>
             </div>
-          </div> 
-          <div style="float: right;"> 
-            <span style="display: inline-block; padding: 15px; border: 2px dotted #adadad; border-radius: 10px;"><img style="border-radius: 10px; height: 200px;" src="{{doc.path}}" alt="{{doc.documentName}}" /></span>
-      
-           
-          </div> 
+          </div>
+          <div style="float: right;">
+            <span style="display: inline-block; padding: 15px; border: 2px dotted #adadad; border-radius: 10px;">
+              <img style="border-radius: 10px; height: 200px;" src="{{doc.path}}" alt="{{doc.documentName}}" /></span>
+          </div>
         </div>
 
       </div>
       <span class="bottom-button">
-        <a [href]="sanitizer.bypassSecurityTrustUrl(doc.path)" download="{{doc.documentName}}.{{doc.documentExtension}}">Download Document&nbsp;&nbsp;<i class="fas fa-arrow-to-bottom"></i></a> 
+        <a [href]="sanitizer.bypassSecurityTrustUrl(doc.path)"
+          download="{{doc.documentName}}.{{doc.documentExtension}}">Download Document&nbsp;&nbsp;<i
+            class="fas fa-arrow-to-bottom"></i></a>
       </span><br /><br />
-      <button (click)="verifyDocument()" *ngIf="doc.docVerified == '0'" class="button lime-green"><span>Verify Document</span></button>
+      <button (click)="verifyDocument()" *ngIf="doc.docVerified == '0'" class="button lime-green"><span>Verify
+          Document</span></button>
       <button *ngIf="doc.used == '0'" class="button lime-green"><span>Delete Document</span></button>
     </div>
   </div>

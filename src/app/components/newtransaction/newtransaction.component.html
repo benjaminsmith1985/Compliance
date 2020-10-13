@@ -410,7 +410,7 @@
               <div *ngFor="let item of userDocuments.id; let i = index" class="row">
                 <div style="padding: 0px;" class="row-wrapper">
                   <table width="100%" cellspacing="0" cellpadding="15">
-                    <tr (click)="selectDocument(item, userDocuments.id)">
+                    <tr (click)="selectDocument(item, userDocuments.id)"> 
                       <td [ngClass]="{'on': item.selected, 'off': !item.selected }"
                         style="border-style: solid; text-align: center; padding: 0; border-width: 0 1px 0 0; border-color: #efefef;"
                         valign="middle" width="30">
@@ -419,7 +419,7 @@
                         </div>
                       </td>
                       <td>
-                        <div>
+                        <div> 
                           {{item.documentName}}
                         </div>
                       </td>
@@ -435,10 +435,7 @@
                 </div>
               </div>
             </div>
-
           </div>
-
-
 
           <div>
             <div class="row-header">
@@ -958,8 +955,6 @@
               <div class="section-input-area">
                 <textarea class="materialize-textarea" formControlName="caseDescription" id="textareaExampleSmall"
                   rows="1"></textarea>
-                <!-- <textarea class="form-control textarea-autosize" id="textareaExampleField" rows="1" placeholder="Try this textarea with textfield box"></textarea> -->
-
               </div>
             </div>
           </div>

@@ -8,10 +8,6 @@ import { User } from '../models/user';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private link: String = "http://localhost/complianceServer";
-
-  // private link: String = 'http://108.179.196.226/~ics';
-
   constructor(
     private http: HttpClient,
     private globals: Globals) { }
@@ -29,7 +25,6 @@ export class UserService {
   }
 
   openPdf(data): any {
-    console.log('test');
     window.open(`${this.globals.serverlink}manual_reporting.php`);
 
   }
@@ -50,8 +45,12 @@ export class UserService {
     return this.http.post(`${this.globals.serverlink}get_customer_by_id.php`, { data });
   }
 
-  getSeats(amount): any {
+  getSeats(amount = null): any {
     return this.http.post(`${this.globals.serverlink}get_merchant_seats`, { amount });
+  }
+
+  getBranches(amount = null): any {
+    return this.http.post(`${this.globals.serverlink}get_merchant_branches`, { amount });
   }
 
   requestpermission(documentId, userIcsNo): any {
@@ -106,7 +105,7 @@ export class UserService {
     return this.http.post(`${this.globals.serverlink}get_user_reports`, { data });
   }
 
-  getBankAccounts(amount): any {
+  getBankAccounts(amount = null): any {
     return this.http.post(`${this.globals.serverlink}get_merchant_bankaccounts`, { amount });
   }
 
@@ -210,6 +209,10 @@ export class UserService {
     return this.http.post(`${this.globals.serverlink}get_operation_by_uuid.php`, { data });
   }
 
+  confirmActivationCode(data): any {
+    return this.http.post(`${this.globals.serverlink}confirm_activation_code.php`, { data });
+  }
+
   getAccountInfo(): any {
     return this.http.post(`${this.globals.serverlink}get_merchant_account`, {});
   }
@@ -236,6 +239,10 @@ export class UserService {
 
   update(user: User) {
     return this.http.put(`${this.globals.serverlink}users/${user.id}`, user);
+  }
+
+  resetPassword(data: any):any {
+    return this.http.post(`${this.globals.serverlink}user_reset_password`, data);
   }
 
   delete(id: number) {

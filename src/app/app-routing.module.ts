@@ -46,11 +46,20 @@ import { AddbankaccountComponent } from './components/addbankaccount/addbankacco
 import { AddseatsComponent } from './components/addseats/addseats.component';
 import { MerchantseatsComponent } from './components/merchantseats/merchantseats.component';
 import { MerchanteditaccountComponent } from './components/merchanteditaccount/merchanteditaccount.component';
+import { AccountactivationComponent } from './components/accountactivation/accountactivation.component';
+import { PasswordsetComponent } from './components/passwordset/passwordset.component';
+import { CheckinComponent } from './components/checkin/checkin.component';
+import { AddbranchComponent } from './components/addbranch/addbranch.component';
+import { MerchantbranchesComponent } from './components/merchantbranches/merchantbranches.component';
+import { CheckinformComponent } from './components/checkinform/checkinform.component';
+import { RequestdocumentComponent } from './components/requestdocument/requestdocument.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   { path: 'login', component: IndexComponent },
+  { path: 'checkinform/:m', component: CheckinformComponent },
+  { path: 'checkinform/:m/:b', component: CheckinformComponent },
   { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], data: { expectedRole: 'customer' } },
   { path: 'customerbusiness', component: CustomerbusinessComponent, canActivate: [AuthGuard], data: { expectedRole: 'customer' } },
   { path: 'customerbusiness/add', component: AddbusinessComponent, canActivate: [AuthGuard], data: { expectedRole: 'customer' } },
@@ -65,14 +74,18 @@ const routes: Routes = [
   { path: 'business/employees', component: BusinessemployeesComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount', component: MerchantaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount/bankaccounts', component: MerchantbankaccountsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/branches', component: MerchantbranchesComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount/bankaccounts/add', component: AddbankaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount/seats', component: MerchantseatsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount/seats/add', component: AddseatsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'merchantaccount/branch/add', component: AddbranchComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount/edit', component: MerchanteditaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/accounts', component: BusinessaccountsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/user/:id', component:  BusinessuserComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'accountactivation/:userType/:icsNo/:code', component:  AccountactivationComponent, data: { expectedRole: 'business' } },
   { path: 'business/addcustomer', component:  AddcustomerComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'usertransactions/:userIcs', component:  UsertransactionsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'requestdocument/:userIcs', component:  RequestdocumentComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'usertransaction/:transactionId', component:  UsertransactionComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'userreport/:transactionId', component:  UserreportComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/transaction/:id', component:  BusinesstransactionComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
@@ -94,7 +107,9 @@ const routes: Routes = [
   { path: 'billing/invoice/:invoiceNo', component: CurrentinvoiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'billing/invoice/:invoiceNo/:return', component: CurrentinvoiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'checkin', component: CheckinComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'userreports/:userIcs', component:  UserreportsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'passwordset/:userType/:icsNo/:code', component:  PasswordsetComponent, data: { expectedRole: 'business' } },
   { path: 'register', component:  RegisterComponent },
   { path: 'documents/add/:docType/:userIcs', component:  AdddocumentsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } }
 ]; 

@@ -1,0 +1,21 @@
+<div class="logo-area">
+  <img src="../../../assets/midLogo.svg" />
+</div>
+<div class="header-txt">
+  Welcome to MiID check-in page
+</div>
+<div class="input-content">
+  <div *ngIf="merchant">
+    <div>Checkin Location: {{merchant.name}}</div>
+    <div *ngIf="merchant.branchName">
+      Branch: {{merchant.branchName}}
+    </div>
+  </div>
+  <form [formGroup]="checkinForm" (ngSubmit)="onSubmit()">
+    <input formControlName="firstname" class="login-input" type="text" placeholder="First name" />
+    <input formControlName="lastname" class="login-input" type="text" placeholder="Last name" />
+    <input formControlName="email" class="login-input" type="text" placeholder="E-mail" />
+    <input formControlName="telephone" class="login-input" type="text" placeholder="Telephone No." />
+    <button class="submit-btn" expand="block">Check-In</button>
+  </form>
+</div>

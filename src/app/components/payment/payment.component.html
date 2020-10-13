@@ -132,7 +132,7 @@
         </table>
 
       </div>
-      <button (click)="goTo()" class="button lime-green">Make Payment</button>
+      <button [ngClass]="this.totalDue <= 0 ? 'dark-orange' : 'lime-green'" (click)="goTo()" class="button lime-green">Make Payment</button>
       <div style="height: 150px">
         &nbsp;
       </div>

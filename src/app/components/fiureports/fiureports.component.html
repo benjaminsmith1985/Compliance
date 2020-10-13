@@ -45,12 +45,14 @@
       <div>
         <div *ngIf="amountPages > 1" class="pagination-wrapper">
           <span *ngFor='let in of counter(amountPages);let i = index; let last = last'>
-            <span class="span" routerLink="/business/fiureports/{{i+1}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
+            <span class="span" routerLink="/business/fiureports/{{i+1}}/{{amountPerPage}}"
+              [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
           </span>
           <span *ngIf="amountPagingBtns < amountPages" class="span">
             ...
           </span>
-          <span class="span" routerLink="/business/fiureports/{{amountPages}}/{{amountPerPage}}" [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
+          <span class="span" routerLink="/business/fiureports/{{amountPages}}/{{amountPerPage}}"
+            [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
         </div>
       </div>
     </div>

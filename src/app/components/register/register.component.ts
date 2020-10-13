@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
       lastName: [null,[Validators.required, Validators.minLength(2)]],
       firstName: [null,[Validators.required, Validators.minLength(2)]],
       phone: [null,[Validators.required, Validators.minLength(5)]],
-      occgroup: [null,[Validators.required, Validators.minLength(2)]],
+      occgroup: [null,[Validators.required, Validators.minLength(1)]],
       password: [null,[Validators.required, Validators.minLength(2)]],
       retypedPassword: [null,[Validators.required, Validators.minLength(2)]],
       streetName: [null,[Validators.required, Validators.minLength(2)]],
@@ -76,6 +76,7 @@ export class RegisterComponent implements OnInit {
 
   submitCustomerForm(): void {
     if (this.registerForm.invalid) {
+      console.log(this.registerForm.value);
       alert('Please fill in all the required fields');
       return;
     }

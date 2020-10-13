@@ -21,6 +21,7 @@ export class MerchantaccountComponent implements OnInit {
   bankAccounts: any;
   seats: any;
   thresholds : any;
+  branches: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class MerchantaccountComponent implements OnInit {
     this.getBankAccounts();
     this.getMerchantThreshold();
     this.getSeats();
+    this.getBranches();
     this.bankAccountForm = this.formBuilder.group({
       bankaccountnr: [''],
       bank: ['']
@@ -84,6 +86,14 @@ export class MerchantaccountComponent implements OnInit {
     this.userService.getSeats(amount)
       .subscribe(data => {
         this.seats = data.data;
+      });
+  }
+
+  getBranches() {
+    var amount = 5;
+    this.userService.getBranches(amount)
+      .subscribe(data => {
+        this.branches = data.data;
       });
   }
  

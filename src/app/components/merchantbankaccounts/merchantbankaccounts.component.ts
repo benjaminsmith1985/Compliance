@@ -26,11 +26,6 @@ export class MerchantbankaccountsComponent implements OnInit {
   }
 
 
-  // getUserByIcsNo(icsNo) {
-  //   this.userService.getUserByIcsNo(icsNo)
-  //     .subscribe(data => {
-  //       this.user = data.data;
-  //     });
-  // }
+
 
 }

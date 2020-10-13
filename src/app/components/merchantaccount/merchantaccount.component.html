@@ -16,57 +16,63 @@
     </div>
     <div class="center">
       <div class="section">
-        <div class="section-title">Account Information</div>
-        <div class="section-item">
-          <span class="topic">ICS-No:</span><span class="txt-spacing">{{user.icsNo}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">ICS Expiration Date:</span><span class="txt-spacing">{{user.formattedExpDate}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">FIU Reporters Code:</span><span class="txt-spacing">{{user.reportersCode}}</span>
-        </div>
-        <div style="margin-top: 20px;" class="section-item">
-          <span class="topic">Chamber Of Commerce No:</span><span class="txt-spacing">{{user.chamberNo}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Statutory Name:</span><span class="txt-spacing">{{user.name}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Business Name:</span><span class="txt-spacing">{{user.tradeName}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Legal Form:</span><span class="txt-spacing">{{user.legalName}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Street Name:</span>{{user.address}}<span class="txt-spacing"></span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Street Number:</span><span class="txt-spacing">{{user.streetNumber}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Place:</span><span class="txt-spacing">{{user.place}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Country:</span><span class="txt-spacing">{{user.country}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Email:</span><span class="txt-spacing">{{user.email}}</span>
-        </div>
-        <div class="section-item">
-          <span class="topic">Telephone:</span><span class="txt-spacing">{{user.telephone}}</span>
-        </div>
-        <div style="margin-top: 20px;">
+        <div>
+          <div class="section-title">Account Information</div>
           <div class="section-item">
-            <span class="topic">Sector:</span><span class="txt-spacing">{{user.sector}}</span>
+            <span class="topic">ICS-No:</span><span class="txt-spacing">{{user.icsNo}}</span>
           </div>
           <div class="section-item">
-            <span class="topic">Business Activity:</span><span class="txt-spacing">{{user.businessActivity}}</span>
+            <span class="topic">ICS Expiration Date:</span><span class="txt-spacing">{{user.formattedExpDate}}</span>
           </div>
+          <div class="section-item">
+            <span class="topic">FIU Reporters Code:</span><span class="txt-spacing">{{user.reportersCode}}</span>
+          </div>
+          <div style="margin-top: 20px;" class="section-item">
+            <span class="topic">Chamber Of Commerce No:</span><span class="txt-spacing">{{user.chamberNo}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Statutory Name:</span><span class="txt-spacing">{{user.name}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Business Name:</span><span class="txt-spacing">{{user.tradeName}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Legal Form:</span><span class="txt-spacing">{{user.legalName}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Street Name:</span>{{user.address}}<span class="txt-spacing"></span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Street Number:</span><span class="txt-spacing">{{user.streetNumber}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Place:</span><span class="txt-spacing">{{user.place}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Country:</span><span class="txt-spacing">{{user.country}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Email:</span><span class="txt-spacing">{{user.email}}</span>
+          </div>
+          <div class="section-item">
+            <span class="topic">Telephone:</span><span class="txt-spacing">{{user.telephone}}</span>
+          </div>
+          <div style="margin-top: 20px;">
+            <div class="section-item">
+              <span class="topic">Sector:</span><span class="txt-spacing">{{user.sector}}</span>
+            </div>
+            <div class="section-item">
+              <span class="topic">Business Activity:</span><span class="txt-spacing">{{user.businessActivity}}</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-left: auto;">
+          <img [src]="user.qrImage" title="Link to Google.com" />
         </div>
       </div>
       <div class="row-footer">
-        <span routerLink="/merchantaccount/edit" class="bottom-button">Edit Account&nbsp;&nbsp;<i class="fas fa-pen"></i></span>
+        <span routerLink="/merchantaccount/edit" class="bottom-button">Edit Account&nbsp;&nbsp;<i
+            class="fas fa-pen"></i></span>
       </div>
 
       <div>
@@ -107,7 +113,29 @@
           </div>
         </div>
         <div class="row-footer">
-          <span routerLink="/merchantaccount/bankaccounts"  class="bottom-button">All My Bank Accounts&nbsp;&nbsp;<i class="far fa-external-link"></i></span>
+          <span routerLink="/merchantaccount/bankaccounts" class="bottom-button">All My Bank Accounts&nbsp;&nbsp;<i
+              class="far fa-external-link"></i></span>
+        </div>
+      </div>
+
+      <div>
+        <div class="row-header">
+          <div class="row-cols col-doc-name">Branch <span *ngIf="seats">({{branches.length}})</span></div>
+          <div class="add-btn"><i routerLink="/merchantaccount/branch/add" class="fad fa-plus-circle"></i></div>
+        </div>
+        <div *ngFor="let item of branches; let i = index" class="row row-items">
+          <div class="row-wrapper">
+            <div class="row-cols col-doc-name big-col">
+              {{item.branchName}}
+            </div>
+            <div class="row-cols col-date big-col">
+              {{item.branchAddress}}
+            </div>
+          </div>
+        </div>
+        <div class="row-footer">
+          <span routerLink="/merchantaccount/branches" class="bottom-button">All Branch&nbsp;&nbsp;<i
+              class="far fa-external-link"></i></span>
         </div>
       </div>
 
@@ -127,7 +155,8 @@
           </div>
         </div>
         <div class="row-footer">
-          <span routerLink="/merchantaccount/seats" class="bottom-button">All Seats&nbsp;&nbsp;<i class="far fa-external-link"></i></span>
+          <span routerLink="/merchantaccount/seats" class="bottom-button">All Seats&nbsp;&nbsp;<i
+              class="far fa-external-link"></i></span>
         </div>
       </div>
 

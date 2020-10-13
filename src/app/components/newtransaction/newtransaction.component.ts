@@ -343,6 +343,27 @@ export class NewtransactionComponent implements OnInit {
             this.attachedDocuments.push(item);
         }
 
+        console.log(this.attachedDocuments);
+
+    }
+
+    attachDocument(item): void {
+        if (item.selected) {
+            item.selected = false;
+        } else {
+            item.selected = true;
+        }
+
+        var response = this.documentExists(this.attachedDocuments, item);
+        console.log('docExists', response);
+
+        if (!response) {
+            console.log('se');
+            this.attachedDocuments.push(item);
+        }
+
+        console.log(this.attachedDocuments);
+
     }
 
 
@@ -420,21 +441,7 @@ export class NewtransactionComponent implements OnInit {
                 });
     }
 
-    attachDocument(item): void {
-        if (item.selected) {
-            item.selected = false;
-        } else {
-            item.selected = true;
-        }
-
-        var response = this.documentExists(this.attachedDocuments, item);
-        console.log('docExists', response);
-
-        if (!response) {
-            this.attachedDocuments.push(item);
-        }
-
-    }
+    
 
     uploadDocument(data, file): void {
         this.userService.merchantUploadUserDocument(data, file)
@@ -517,7 +524,9 @@ export class NewtransactionComponent implements OnInit {
         var i;
         for (i = 0; i < arrayToSearch.length; i++) {
 
-            if (arrayToSearch[i].value == itemPushed.value) {
+            // console.log(arrayToSearch[i]);
+
+            if (arrayToSearch[i] == itemPushed) {
 
                 if (arrayToSearch.length == 1) {
                     this.attachedDocuments = [];

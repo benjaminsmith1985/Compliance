@@ -1,0 +1,39 @@
+<div class="wrap">
+  <div class="cnt">
+    <div class="center">
+      <div class="navbar-inline">
+        <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+          <div class="mr-auto">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                <li routerLink="/merchantaccount" class="breadcrumb-item grey-txt cursor underline">Merchant Account</li>
+                <li class="breadcrumb-item grey-txt-active">Branches</li>
+              </ol>
+            </nav>
+          </div>
+        </nav>
+      </div>
+
+    
+      <div>
+        <div class="row-header">
+          <div class="row-cols col-doc-name">Branch Name</div>
+          <div class="row-cols col-date">Branch Address</div>
+          <div routerLink="/merchantaccount/branch/add" class="add-btn"><i class="fad fa-plus-circle"></i></div>
+        </div>
+        <div *ngFor="let item of branches; let i = index" class="row row-items">
+          <div class="row-wrapper">
+            <div class="row-cols col-doc-name big-col">
+              {{item.branchName}}
+            </div>
+            <div class="row-cols col-date big-col">
+              {{item.branchAddress}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

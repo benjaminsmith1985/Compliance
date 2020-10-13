@@ -26,7 +26,7 @@ export class PaymentComponent implements OnInit {
   packages: any;
   user: any;
   currentItem: any;
-  paidNotification : any = null;
+  paidNotification: any = null;
 
 
   constructor(
@@ -42,8 +42,8 @@ export class PaymentComponent implements OnInit {
     this.getAccountInfo();
     this.getOpenBalance();
     this.getPackages();
-    this.route.params.subscribe(routeParams => {      
-      if(routeParams.return){
+    this.route.params.subscribe(routeParams => {
+      if (routeParams.return) {
         this.paidNotification = routeParams.return;
       }
     });
@@ -51,9 +51,9 @@ export class PaymentComponent implements OnInit {
 
   getPaymentExpiration(): void {
     this.paymentService.getPaymentExpiration()
-    .subscribe(data => {
-      this.globals.expired = data.expired;
-    });
+      .subscribe(data => {
+        this.globals.expired = data.expired;
+      });
   }
 
   setPackage(item): void {
@@ -78,9 +78,13 @@ export class PaymentComponent implements OnInit {
 
     this.totalDue = (balance + this.totalDueInvoice).toFixed(2);
 
-  } 
+  }
 
-  goTo() { 
+  goTo() {
+    if (this.totalDue <= 0) {
+      alert('Please choose a package.');
+      return;
+    }
     window.location.href = "https://www.ics-caribbean.com/complianceServer/mollieTest.php?m=" + this.user.merchantId + "&p=" + this.currentItem.packageId;
     //window.location.href = "https://www.basilachill.com";
   }
