@@ -18,6 +18,7 @@ import { Globals } from '../../globals';
 export class SearchresultComponent implements OnInit {
   currentUser: any = false;
   searchResult: any;
+  searchType: any = null;
   amountPages: any = false;
   currentPage: any = null;
   amountPerPage: any = false;
@@ -103,7 +104,7 @@ export class SearchresultComponent implements OnInit {
     return x;
   }
 
-  searchUser(data) {
+  searchUser(data: any) {
     // this.globals.isLoading = true;
     this.userService.searchUser(data)
       .pipe(first())
@@ -112,12 +113,28 @@ export class SearchresultComponent implements OnInit {
           this.searchResult = data.data;
           this.amountPages = data.pages;
           this.amountResults = data.amountResults;
+          this.searchType = data.searchType;
           this.globals.isLoading = false;
         },
         error => {
           // this.alertService.error(error);
           // this.loading = false;
         });
+  }
+
+  userClick(item: any, ref: any) {
+    switch (ref) {
+      case 'user':
+        this.router.navigate(['/business/user/' + item.icsNo]);
+        break;
+      case 'checkins':
+        this.router.navigate(['/checkin/' + item.checkinId]);
+        break;
+      case 'transactions':
+        this.router.navigate(['/checkin/' + item.checkinId]);
+        break;
+    }
+
   }
 
   openDialog(content, item) {

@@ -6,7 +6,7 @@
     <div class="title">Please choose a password for your account.</div>
     <div class="index-form">
       <form [formGroup]="setPasswordForm" (ngSubmit)="onSubmit('business')">        
-        <input formControlName="icsNo" placeholder="ICS-No." type="hiden" />        
+        <input formControlName="icsNo" placeholder="MiID No" type="hiden" />        
         <input formControlName="password" type="password" name="password" required placeholder="Password" />
         <input formControlName="retypepassword" placeholder="Retype Password" required type="password" />
         <button class="button light-blue">Set Password</button> 

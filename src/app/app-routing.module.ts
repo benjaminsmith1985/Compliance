@@ -12,6 +12,7 @@ import { DatasharingoptionsComponent } from './components/datasharingoptions/dat
 import { DatasharingrequestComponent } from './components/datasharingrequest/datasharingrequest.component';
 import { SearchcustomerComponent } from './components/searchcustomer/searchcustomer.component';
 import { SearchComponent } from './components/search/search.component';
+import { PendingcustomersComponent } from './components/pendingcustomers/pendingcustomers.component';
 import { BusinesscustomerComponent } from './components/businesscustomer/businesscustomer.component';
 import { BusinesstransactionComponent } from './components/businesstransaction/businesstransaction.component';
 import { BusinessuserComponent } from './components/businessuser/businessuser.component';
@@ -53,6 +54,7 @@ import { AddbranchComponent } from './components/addbranch/addbranch.component';
 import { MerchantbranchesComponent } from './components/merchantbranches/merchantbranches.component';
 import { CheckinformComponent } from './components/checkinform/checkinform.component';
 import { RequestdocumentComponent } from './components/requestdocument/requestdocument.component';
+import { CustomercheckinComponent } from './components/customercheckin/customercheckin.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -71,6 +73,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'search/:page/:amount/:data', component: SearchresultComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/customers/:page/:amount', component: BusinesscustomerComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'business/pendingcustomers/:page/:amount', component: PendingcustomersComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'business/employees', component: BusinessemployeesComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount', component: MerchantaccountComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'merchantaccount/bankaccounts', component: MerchantbankaccountsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
@@ -100,7 +103,7 @@ const routes: Routes = [
   { path: 'business/newtransaction/:icsNo', component:  NewtransactionComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'businessreport/:id/:type', component: BusinessreportComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'privacy', component: PrivacyComponent, canActivate: [AuthGuard], data: { expectedRole: 'customer' } },
-  { path: 'terms', component: TermsComponent, canActivate: [AuthGuard], data: { expectedRole: 'customer' } },
+  { path: 'terms', component: TermsComponent },
   { path: 'billing/history', component: BillingComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'billing/payment', component: PaymentComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'billing/payment/:return', component: PaymentComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
@@ -108,6 +111,7 @@ const routes: Routes = [
   { path: 'billing/invoice/:invoiceNo/:return', component: CurrentinvoiceComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'checkin', component: CheckinComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
+  { path: 'checkin/:checkinId', component: CustomercheckinComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'userreports/:userIcs', component:  UserreportsComponent, canActivate: [AuthGuard], data: { expectedRole: 'business' } },
   { path: 'passwordset/:userType/:icsNo/:code', component:  PasswordsetComponent, data: { expectedRole: 'business' } },
   { path: 'register', component:  RegisterComponent },

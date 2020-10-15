@@ -7,11 +7,11 @@ import { PaymentService } from '../../services/payment.service';
 import { Globals } from '../../globals';
 
 @Component({
-  selector: 'app-businesscustomer',
-  templateUrl: './businesscustomer.component.html',
-  styleUrls: ['./businesscustomer.component.less']
+  selector: 'app-pendingcustomers',
+  templateUrl: './pendingcustomers.component.html',
+  styleUrls: ['./pendingcustomers.component.less']
 })
-export class BusinesscustomerComponent implements OnInit {
+export class PendingcustomersComponent implements OnInit {
 
   merchantUsers: any;
   amountPages: any = false;
@@ -41,7 +41,7 @@ export class BusinesscustomerComponent implements OnInit {
 
     this.route.params.subscribe(routeParams => {
       if (routeParams.page && routeParams.amount) {
-        var data: any = { amount: routeParams.amount, page: routeParams.page, granted: '1' }
+        var data: any = { amount: routeParams.amount, page: routeParams.page, granted: '0' }
         this.getMerchantUsers(data);
         this.currentPage = routeParams.page;
         this.amountPerPage = routeParams.amount;
@@ -49,7 +49,7 @@ export class BusinesscustomerComponent implements OnInit {
     });
   }
 
-  userClick(item, content) {
+  userClick(item) {
     this.router.navigate(['/business/user/' + item.icsNo]);
   }
 
@@ -117,3 +117,5 @@ export class BusinesscustomerComponent implements OnInit {
   }
 
 }
+
+

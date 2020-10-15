@@ -19,4 +19,12 @@ export class CheckinService {
     return this.http.post(`${this.globals.serverlink}checkinCustomerForm.php`, { data });
   }
 
+  getByCheckinId(id):any{
+    return this.http.post(`${this.globals.serverlink}get_checkin_by_id.php`, {id});
+  }
+
+  updateCheckinCustomer(data):any{
+    return this.http.post(`${this.globals.serverlink}update_checkin_customer.php`, {data});
+  }
+
 }

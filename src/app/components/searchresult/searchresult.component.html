@@ -7,38 +7,100 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
                 <li routerLink="/search" class="breadcrumb-item grey-txt cursor underline">Search</li>
-                <li class="breadcrumb-item grey-txt-active">Result<span *ngIf="amountResults > 1">s</span>
+                <li class="breadcrumb-item grey-txt-active">{{searchType | titlecase}} Result <span *ngIf="amountResults > 1">s</span>
                   ({{amountResults}})</li>
               </ol>
             </nav>
           </div>
         </nav>
       </div>
-      <div *ngFor="let item of searchResult; let i = index" class="search-row">
-        <div style="float:left;">
-          <div style="font-weight: 600;">{{item.focusType}} - {{item.focusType == 'Transaction' ? item.fwdId :
-            item.customerName}}</div>
-          <div class="searched-content">{{item.content}}</div>
+      <div *ngIf="searchType === 'user'">
+        <div class="row-header">
+          <div class="row-cols col-icsno">MiID No</div>
+          <div class="row-cols col-customer">User Name</div>
+          <div class="row-cols col-customer">Is Customer?</div>
         </div>
-        <div *ngIf="item.isCustomer != 'Pending'" style="float:right; width: 70px;">
-          <span (click)="openDialog(content, item)" class="action-btn">
-            <!-- ACTION --><i style="font-size: 18px;" class="far fa-ellipsis-h"></i>
-          </span>
+        <div (click)="userClick(item, 'user')" *ngFor="let item of searchResult; let i = index" class="row row-items">
+          <div class="row-wrapper small-col">
+            <div class="row-cols col-icsno">
+              {{item.icsNo}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.customerName}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.isCustomer}}
+            </div>
+          </div>
         </div>
-        <div *ngIf="item.isCustomer == 'Pending'" class="grey-txt" style="float:right; padding-top: 16px; font-size: 12px; text-align: right; width: 150px;">
-          Pending Authorization
+      </div>
+      <div *ngIf="searchType === 'transactions'">
+        <div class="row-header">
+          <div class="row-cols col-customer">Transaction Id</div>
+          <div class="row-cols col-customer">Customer</div>
+          <div class="row-cols col-customer">Date Created</div>
+          <div class="row-cols col-customer">Transaction Date</div>
+          <div class="row-cols col-icsno">Ccy</div>
+          <div class="row-cols col-icsno">Amount</div>          
+        </div>
+        <div class="row row-items">
+          <div class="row-wrapper small-col">
+            <div class="row-cols col-icsno">
+              &nbsp;
+            </div>
+            <div class="row-cols col-customer">
+              &nbsp;
+            </div>
+            <div class="row-cols col-customer">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="searchType === 'checkins'">
+        <div class="row-header">
+          <div class="row-cols col-icsno">MiID No</div>
+          <div class="row-cols col-customer">Customer</div>
+          <div class="row-cols col-customer">Telephone</div>
+          <div class="row-cols col-customer">Date</div>
+          <div class="row-cols col-icsno">Time</div>
+          <div class="row-cols col-customer">Is Customer?</div>
+        </div>
+        <div (click)="userClick(item, 'checkins')" *ngFor="let item of searchResult; let i = index" class="row row-items">
+          <div class="row-wrapper small-col">
+            <div class="row-cols col-icsno">
+              {{item.icsNo ? item.icsNo : 'n.a.'}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.firstname}} {{item.lastname}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.telephoneNo}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.checkinDate}}
+            </div>
+            <div class="row-cols col-icsno">
+              {{item.checkinTime}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.isCustomer}}
+            </div>
+          </div>
         </div>
       </div>
       <div>&nbsp;</div>
       <div>
         <div *ngIf="amountPages > 1" class="pagination-wrapper">
           <span *ngFor='let in of counter(amountPages);let i = index; let last = last'>
-            <span class="span" routerLink="/search/{{i+1}}/{{amountPerPage}}/{{urlData}}" [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
+            <span class="span" routerLink="/search/{{i+1}}/{{amountPerPage}}/{{urlData}}"
+              [ngClass]="{'selectedPage': currentPage == (i+1), 'last' : last}">{{i+1}}</span>
           </span>
           <span *ngIf="amountPagingBtns < amountPages" class="span">
             ...
           </span>
-          <span class="span" routerLink="/search/{{amountPages}}/{{amountPerPage}}/{{urlData}}" [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
+          <span class="span" routerLink="/search/{{amountPages}}/{{amountPerPage}}/{{urlData}}"
+            [ngClass]="{'selectedPage': currentPage == amountPages}">{{amountPages}}</span>
         </div>
       </div>
     </div>

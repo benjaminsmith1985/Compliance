@@ -1,0 +1,68 @@
+<div *ngIf="checkinUser" class="wrap">
+  <form [formGroup]="editUserCheckinForm" (ngSubmit)="update()">
+    <div class="cnt">
+      <div class="center">
+        <div class="navbar-inline">
+          <nav class="navbar navbar-expand-md navbar-dark primary-color mb-5 no-content">
+            <div class="mr-auto">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
+                  <li routerLink="/checkin" class="breadcrumb-item grey-txt cursor underline">Check In's
+                  </li>
+                  <li class="breadcrumb-item grey-txt-active">{{checkinUser.customerName}}</li>
+                </ol>
+              </nav>
+            </div>
+          </nav>
+        </div>
+
+        <div>
+          <div class="center">
+            <div class="section section-bottom-margin">
+              <div class="section-title">Check-in Information</div>
+              <div class="section-item">
+                <span class="topic">MiId No:</span><span class="txt-spacing">{{checkinUser.customerIcsNo}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">First Name:</span><span class="txt-spacing">{{checkinUser.firstname}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Last Name:</span><span class="txt-spacing">{{checkinUser.lastname}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Telephone Nr:</span><span class="txt-spacing">{{checkinUser.telephoneNo}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Check-in Date</span><span class="txt-spacing">{{checkinUser.formattedDate}}</span>
+              </div>
+              <div class="section-item">
+                <span class="topic">Check-in Time:</span><span class="txt-spacing">{{checkinUser.formattedTime}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section section-bottom-margin">
+            <div class="section-title">Remarks</div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Enter your text here
+              </div>
+              <div class="section-input-area">
+                <textarea class="materialize-textarea" formControlName="remarks" id="remarks"
+                  rows="1"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button class="button lime-green">Update Remarks</button>
+        </div>
+
+
+      </div>
+
+      <div style="height: 150px;">
+        &nbsp;
+      </div>
+    </div>
+  </form>
+</div>

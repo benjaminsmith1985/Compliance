@@ -7,8 +7,11 @@
           <div class="mr-auto">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb clearfix d-none d-md-inline-flex pt-0">
-                <li routerLink="/business/customers/1/10" class="breadcrumb-item grey-txt cursor underline">My
+                <li *ngIf="user.isCustomer === 'Yes'" routerLink="/business/customers/1/10"
+                  class="breadcrumb-item grey-txt cursor underline">My
                   Customers</li>
+                <li *ngIf="user.isCustomer !== 'Yes'" 
+                  class="breadcrumb-item grey-txt">User</li>
                 <li class="breadcrumb-item grey-txt-active" aria-current="page">{{user.customerName}}</li>
               </ol>
             </nav>
@@ -25,11 +28,11 @@
     </div>
     <div class="center" *ngIf="user && user.userType == 'natural'">
       <div class="section section-bottom-margin">
-        <div class="section-title">Customer Information</div>
+        <div class="section-title">{{user.isCustomer === 'Yes' ? 'Customer' : 'User'}} Information</div>
         <div class="section-item">
-          <span class="topic">ICS-No:</span><span class="txt-spacing">{{user.icsNo}}</span>
+          <span class="topic">MiID No:</span><span class="txt-spacing">{{user.icsNo}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.email" class="section-item">
           <span class="topic">Email:</span><span class="txt-spacing">{{user.email}}</span>
         </div>
         <div class="section-item">
@@ -38,75 +41,78 @@
         <div class="section-item">
           <span class="topic">Last Name:</span><span class="txt-spacing">{{user.lastname}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.initials" class="section-item">
           <span class="topic">Initials:</span><span class="txt-spacing">{{user.initials}}</span>
         </div>
         <div *ngIf="user.marriedName" class="section-item">
           <span class="topic">Married Name:</span><span class="txt-spacing">{{user.marriedName}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.gender" class="section-item">
           <span class="topic">Gender:</span><span class="txt-spacing">{{user.gender}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.birthDate" class="section-item">
           <span class="topic">Date of Birth:</span><span class="txt-spacing">{{user.birthDate}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.birthCountry" class="section-item">
           <span class="topic">Birth Country:</span><span class="txt-spacing">{{user.birthCountry}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.nationality" class="section-item">
           <span class="topic">Nationality:</span><span class="txt-spacing">{{user.nationality}}</span>
         </div>
         <div>&nbsp;</div>
-        <div class="section-item">
+        <div *ngIf="user.address" class="section-item">
           <span class="topic">Street Name:</span><span class="txt-spacing">{{user.address}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.streetNumber" class="section-item">
           <span class="topic">Street Number:</span><span class="txt-spacing">{{user.streetNumber}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.place" class="section-item">
           <span class="topic">Place:</span><span class="txt-spacing">{{user.place}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.country" class="section-item">
           <span class="topic">Country:</span><span class="txt-spacing">{{user.country}}</span>
         </div>
-        <div class="section-item">
+        <!-- <div class="section-item">
           <span class="topic">High Risk Country:</span><span class="txt-spacing">No</span>
-        </div>
+        </div> -->
       </div>
     </div>
 
 
-    <div class="center">
-      <div class="section" *ngIf="user && user.userType == 'legal'">
+    <div class="center" *ngIf="user && user.userType == 'legal'">
+      <div class="section section-bottom-margin">
         <div class="section-title">Account Information</div>
         <div class="section-item">
-          <span class="topic">ICS-No:</span><span class="txt-spacing">{{user.icsNo}}</span>
+          <span class="topic">MiID No:</span><span class="txt-spacing">{{user.icsNo}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.chamberNo" class="section-item">
           <span class="topic">Chamber Of Commerce No:</span><span class="txt-spacing">{{user.chamberNo}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.customerName" class="section-item">
           <span class="topic">Statutory Name:</span><span class="txt-spacing">{{user.customerName}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.tradeName" class="section-item">
           <span class="topic">Trade Name:</span><span class="txt-spacing">{{user.tradeName}}</span>
         </div>
-        <div class="section-item">
-          <span class="topic">Legal Form:</span><span class="txt-spacing">Sole Proprietorship</span>
+        <div *ngIf="user.legalForm" class="section-item">
+          <span class="topic">Legal Form:</span><span class="txt-spacing">{{user.legalForm}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.address" class="section-item">
           <span class="topic">Street Name:</span>{{user.address}}<span class="txt-spacing"></span>
         </div>
         <div class="section-item">
           <span class="topic">Street Number:</span><span class="txt-spacing">{{user.streetNumber}}</span>
         </div>
-        <div class="section-item">
-          <span class="topic">Country:</span><span class="txt-spacing">Cura&ccedil;ao</span>
+        <div *ngIf="user.country" class="section-item">
+          <span class="topic">Country:</span><span class="txt-spacing">{{user.country}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.place" class="section-item">
+          <span class="topic">Place:</span><span class="txt-spacing">{{user.place}}</span>
+        </div>
+        <div *ngIf="user.email" class="section-item">
           <span class="topic">Email:</span><span class="txt-spacing">{{user.email}}</span>
         </div>
-        <div class="section-item">
+        <div *ngIf="user.telephoneNo" class="section-item">
           <span class="topic">Telephone:</span><span class="txt-spacing">{{user.telephoneNo}}</span>
         </div>
         <div style="margin-top: 20px;">
@@ -121,7 +127,7 @@
     </div>
 
 
-    <div class="center">
+    <div *ngIf="user.isCustomer === 'Yes'" class="center">
       <div class="row-header">
         <div class="row-cols col-invNo">Risk Rating</div>
       </div>
@@ -155,14 +161,15 @@
     </div>
 
 
-    <div *ngIf="user && user.userType == 'natural'" class="center">
+    <div *ngIf="user && user.userType == 'natural' && user.isCustomer === 'Yes'" class="center">
       <div class="row-header">
         <div class="row-cols col-doc-name">Identification Document</div>
         <div class="row-cols col-date">Document No</div>
         <div class="row-cols col-date">Expiration Date</div>
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
-        <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+        <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/id/{{user.icsNo}}"
+            class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!identificationDocuments">
         <div style="padding: 15px;" class="row row-items">
@@ -210,14 +217,15 @@
     </div>
 
 
-    <div class="center">
+    <div *ngIf="user.isCustomer === 'Yes'" class="center">
       <div class="row-header">
         <div class="row-cols col-doc-name">Other Documents</div>
         <div class="row-cols col-date">Document No</div>
         <div class="row-cols col-date">Date of Issue</div>
         <div class="row-cols col-date">Upload By</div>
         <div class="row-cols col-indicator">Verified</div>
-        <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}" class="fad fa-plus-circle"></i></div>
+        <div *ngIf="!globals.expired" class="add-btn"><i routerLink="/documents/add/other/{{user.icsNo}}"
+            class="fad fa-plus-circle"></i></div>
       </div>
       <div *ngIf="!otherDocuments">
         <div style="padding: 15px;" class="row row-items">
@@ -260,7 +268,8 @@
         </div>
 
         <div class="row-footer">
-          <span routerLink="/business/userdocuments/{{user.icsNo}}" class="bottom-button">All Documents&nbsp;&nbsp;<i class="fas fa-external-link"></i></span>
+          <span routerLink="/business/userdocuments/{{user.icsNo}}" class="bottom-button">All Documents&nbsp;&nbsp;<i
+              class="fas fa-external-link"></i></span>
         </div>
       </div>
     </div>
@@ -270,21 +279,36 @@
       <div class="center row-header">
         Actions
       </div>
-      <div routerLink="/requestdocument/{{user.icsNo}}" class="row row-items">
+      <div (click)="addCustomer(user.icsNo)" *ngIf="user.isCustomer === 'No'"
+        routerLink="/requestdocument/{{user.icsNo}}" class="row row-items">
+        <div class="row-wrapper">
+          <div class="row-left">
+            Request user permission
+          </div>
+        </div>
+      </div>
+      <div *ngIf="user.isCustomer === 'Yes'" routerLink="/requestdocument/{{user.icsNo}}" class="row row-items">
         <div class="row-wrapper">
           <div class="row-left">
             Request Document
           </div>
         </div>
       </div>
-      <div routerLink="/business/newtransaction/{{user.icsNo}}" class="row row-items">
+      <div *ngIf="user.userType == 'natural'" class="row row-items">
+        <div class="row-wrapper">
+          <div class="row-left">
+            View Check-ins
+          </div>
+        </div>
+      </div>
+      <div *ngIf="user.isCustomer === 'Yes'" routerLink="/business/newtransaction/{{user.icsNo}}" class="row row-items">
         <div class="row-wrapper">
           <div class="row-left">
             Create New Transaction
           </div>
         </div>
       </div>
-      <div (click)="goToTransactions(transactions, user)" class="row row-items">
+      <div *ngIf="user.isCustomer === 'Yes'" (click)="goToTransactions(transactions, user)" class="row row-items">
         <div class="row-wrapper">
           <div class="row-left">
             View Past Transaction
@@ -299,7 +323,7 @@
           </div>
         </div>
       </div>
-      <div (click)="goToReports(reports, user)" class="row row-items">
+      <div *ngIf="user.isCustomer === 'Yes'" (click)="goToReports(reports, user)" class="row row-items">
         <div class="row-wrapper">
           <div class="row-left">
             View Saved Reports
@@ -314,7 +338,7 @@
           </div>
         </div>
       </div>
-      <div (click)="goToReports(reports, user)" class="row row-items">
+      <div *ngIf="user.isCustomer === 'Yes'" (click)="goToReports(reports, user)" class="row row-items">
         <div class="row-wrapper">
           <div class="row-left">
             View FIU Reports

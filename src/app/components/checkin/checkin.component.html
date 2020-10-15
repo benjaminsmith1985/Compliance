@@ -24,13 +24,13 @@
           </nav>
         </div>
         <div class="row-header">
-          <div class="row-cols col-icsno">ICS-No</div>
+          <div class="row-cols col-icsno">MiID No</div>
           <div class="row-cols col-customer">Customer</div>
           <div class="row-cols col-customer">Telephone</div>
           <div class="row-cols col-customer">Date</div>
           <div class="row-cols col-customer">Time</div>
         </div>
-        <div (click)="userClick(item, action)" *ngFor="let item of customers; let i = index" class="row row-items">
+        <div (click)="userClick(item)" *ngFor="let item of customers; let i = index" class="row row-items">
           <div class="row-wrapper small-col">
             <div class="row-cols col-icsno">
               {{item.customerIcsNo}}

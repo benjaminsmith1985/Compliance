@@ -40,15 +40,17 @@ export class SearchComponent implements OnInit {
       lastName: [''],
       idType: [''],
       docNo: [''],
-      search: ['all'],
+      search: ['user'],
       transactionType: [''],
+      phone: [''],
       island: [''],
+      temperature: [''],
       hasReport: [''],
       fiuReported: [''],
       transactionId: [''],
-      amount: [''],
-      customerName: [''],
-      transactionDate: ['']
+      transactionAmount: [''],
+      transactionDate: [''],
+      checkinDate: ['']
     });
     this.getPaymentExpiration();
   }
@@ -64,6 +66,9 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  resetForm(){
+    // this.searchForm.reset();
+  }
 
   addCustomer(icsNo): void {
     // console.log(icsNo);

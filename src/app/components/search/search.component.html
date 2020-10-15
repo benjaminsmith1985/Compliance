@@ -20,9 +20,9 @@
             </div>
             <div class="section-input-area">
               <select class="custom-select" formControlName="search">
-                <option value="all">All</option>
                 <option value="user">User</option>
                 <option value="transactions">Transaction</option>
+                <option value="checkins">Check-ins</option>
               </select>
             </div>
           </div>
@@ -47,7 +47,7 @@
                 User type
               </div>
               <div class="section-input-area">
-                <select class="custom-select" formControlName="userType">
+                <select (change)="resetForm()" class="custom-select" formControlName="userType">
                   <option value="all">All</option>
                   <option value="natural">Natural Person</option>
                   <option value="legal">Legal Entity</option>
@@ -68,7 +68,7 @@
             </div>
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
-                User ICS-No.
+                User MiID No
               </div>
               <div class="section-input-area">
                 <input class="input" formControlName="icsNo" type="text" />
@@ -151,28 +151,21 @@
                 </div>
               </div>
             </div>
-            <!-- End Legal Entity -->
-<!-- 
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Risk Rating
-              </div>
-              <div class="section-input-area">
-                <select class="custom-select" formControlName="risk">
-                  <option value="">Select Rating</option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
-                  <option value="Unkown">Unkown</option>
-                </select>
-              </div>
-            </div> -->
+
           </div>
           <!-- End Search User -->
 
           <!-- Begin Transactions -->
 
           <div *ngIf="searchForm.value.search == 'transactions'">
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Transaction Id
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="transactionId" type="text" />
+              </div>
+            </div>
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
                 Transaction Type
@@ -228,30 +221,16 @@
               </div>
             </div>
 
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Transaction Id
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="transactionId" type="text" />
-              </div>
-            </div>
+          
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
                 Amount
               </div>
               <div class="section-input-area">
-                <input class="input" formControlName="amount" type="number" />
+                <input class="input" formControlName="transactionAmount" type="number" />
               </div>
             </div>
-            <div class="section-input-wrapper">
-              <div class="section-input-text-area">
-                Customer Name
-              </div>
-              <div class="section-input-area">
-                <input class="input" formControlName="customerName" type="text" />
-              </div>
-            </div>
+
             <div class="section-input-wrapper">
               <div class="section-input-text-area">
                 Transaction Date
@@ -264,6 +243,65 @@
           </div>
 
           <!-- End Transactions -->
+
+
+          <!-- Begin Checkin -->
+
+          <div *ngIf="searchForm.value.search == 'checkins'">            
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                User MiID No
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="icsNo" type="text" />
+              </div>
+            </div>         
+            <div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Firstname
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="firstName" type="text" />
+                </div>
+              </div>
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Lastname
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="lastName" type="text" />
+                </div>
+              </div> 
+              <div class="section-input-wrapper">
+                <div class="section-input-text-area">
+                  Telephone
+                </div>
+                <div class="section-input-area">
+                  <input class="input" formControlName="phone" type="text" />
+                </div>
+              </div> 
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Check-in Date
+              </div>
+              <div class="section-input-area">
+                <input (click)="d.toggle()" formControlName="checkinDate" class="input" ngbDatepicker #d="ngbDatepicker"
+                  type="text" />
+              </div>
+            </div>
+            <div class="section-input-wrapper">
+              <div class="section-input-text-area">
+                Temperature
+              </div>
+              <div class="section-input-area">
+                <input class="input" formControlName="temperature" type="text" />
+              </div>
+            </div>
+
+          </div>
+          <!-- End Checkin -->
         </div>
         <button *ngIf="!globals.expired" class="button lime-green">Search</button>
         <button routerLink="/billing/payment" *ngIf="globals.expired" class="button dark-orange">

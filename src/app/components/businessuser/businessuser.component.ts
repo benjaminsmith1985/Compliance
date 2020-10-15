@@ -7,7 +7,7 @@ import { MerchantService } from '../../services/merchant.service';
 import { CustomerService } from '../../services/customer.service';
 import { DocumentService } from '../../services/document.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { switchMapTo } from 'rxjs/operators';
+import { switchMapTo, first } from 'rxjs/operators';
 import { Globals } from '../../globals';
 import { PaymentService } from '../../services/payment.service';
 
@@ -87,14 +87,33 @@ export class BusinessuserComponent implements OnInit {
 
   getPaymentExpiration(): void {
     this.paymentService.getPaymentExpiration()
-    .subscribe(data => {
-      this.globals.expired = data.expired;
-    });
+      .subscribe(data => {
+        this.globals.expired = data.expired;
+      });
+  }
+
+  addCustomer(icsNo): void {
+    var r = confirm("Are you sure you want to add this user as a customer?");
+
+    if (r == false) {
+      return;
+    } 
+
+    this.userService.addCustomer(icsNo).pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/business/pendingcustomers/1/10']);
+          this.modalService.dismissAll();
+        },
+        error => {
+
+        });
   }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
+
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
     this.insertIdForm.value.base64 = event.base64;
@@ -206,7 +225,7 @@ export class BusinessuserComponent implements OnInit {
       this.insertIdForm.reset();
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-     // this.insertIdForm.reset();
+      // this.insertIdForm.reset();
       return 'by clicking on a backdrop';
     } else {
       this.insertIdForm.reset();

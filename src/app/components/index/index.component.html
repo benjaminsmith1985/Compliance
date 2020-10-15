@@ -7,7 +7,7 @@
     <div class="index-form">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit('business')">
         <input formControlName="email" placeholder="Email" type="text" />
-        <input formControlName="icsNo" placeholder="Merchant ICS-No." type="text" />
+        <input formControlName="icsNo" placeholder="Merchant MiID No" type="text" />
         <input formControlName="password" type="password" name="password" required placeholder="Password" />
         <button class="button light-blue">Sign In</button>
         <div routerLink="/register" class="button grey">Register</div>

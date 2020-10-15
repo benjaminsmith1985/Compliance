@@ -15,30 +15,35 @@ export class CheckinComponent implements OnInit {
   checkinForm: FormGroup;
 
   constructor(
+    private router: Router,
     private checkinService: CheckinService,
     public globals: Globals,
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {   
-    this.getMerchantUsers();   
+  ngOnInit() {
+    this.getMerchantUsers();
     this.checkinForm = this.formBuilder.group({
       checkinDate: ['']
     });
-  }  
+  }
 
-  getMerchantUsers(date = null) {  
+  userClick(item) {
+    this.router.navigate(['/checkin/' + item.checkinId]);
+  }
+
+  getMerchantUsers(date = null) {
     this.checkinService.getCheckInsByMerchant(date)
       .subscribe(data => {
-        if(data.data){
+        if (data.data) {
           this.customers = data.data;
-        }       
+        }
       });
   }
 
-  onDateSelect(){
-    let date = this.checkinForm.value.checkinDate;  
-    this.getMerchantUsers(date); 
+  onDateSelect() {
+    let date = this.checkinForm.value.checkinDate;
+    this.getMerchantUsers(date);
   }
 
 }
