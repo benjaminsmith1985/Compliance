@@ -50,7 +50,10 @@ export class SearchComponent implements OnInit {
       transactionId: [''],
       transactionAmount: [''],
       transactionDate: [''],
-      checkinDate: ['']
+      checkinDate: [''],
+      month: [],
+      day: [],
+      year: []
     });
     this.getPaymentExpiration();
   }
@@ -64,6 +67,10 @@ export class SearchComponent implements OnInit {
     .subscribe(data => {
       this.globals.expired = data.expired;
     });
+  }
+
+  arrayOne(n: number): any[] {
+    return Array(n);
   }
 
   resetForm(){

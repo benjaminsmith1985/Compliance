@@ -131,7 +131,7 @@ export class SearchresultComponent implements OnInit {
         this.router.navigate(['/checkin/' + item.checkinId]);
         break;
       case 'transactions':
-        this.router.navigate(['/checkin/' + item.checkinId]);
+        this.router.navigate(['/usertransaction/' + item.uuid]);
         break;
     }
 

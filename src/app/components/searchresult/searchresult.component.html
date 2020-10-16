@@ -40,19 +40,24 @@
           <div class="row-cols col-customer">Customer</div>
           <div class="row-cols col-customer">Date Created</div>
           <div class="row-cols col-customer">Transaction Date</div>
-          <div class="row-cols col-icsno">Ccy</div>
-          <div class="row-cols col-icsno">Amount</div>          
+          <div class="row-cols col-icsno">FIU Reported</div>      
         </div>
-        <div class="row row-items">
+        <div (click)="userClick(item, 'transactions')" *ngFor="let item of searchResult; let i = index" class="row row-items">
           <div class="row-wrapper small-col">
-            <div class="row-cols col-icsno">
-              &nbsp;
+            <div class="row-cols col-customer">
+              {{item.uuid}}
             </div>
             <div class="row-cols col-customer">
-              &nbsp;
+              {{item.customerName}}
             </div>
             <div class="row-cols col-customer">
-              &nbsp;
+              {{item.dateCreated}}
+            </div>
+            <div class="row-cols col-customer">
+              {{item.transactionDate}}
+            </div>
+            <div class="row-cols col-customer">
+               {{item.fiuReported}}
             </div>
           </div>
         </div>

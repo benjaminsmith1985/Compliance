@@ -188,7 +188,7 @@
                   class="fad fa-file-image docIcon"></i>
               </td>
               <td (click)="openDoc(item, action)" width="214">
-                {{item.documentName}}
+                 {{item.documentName}}
               </td>
               <td (click)="openDoc(item, action)" width="200">
                 <span>
@@ -197,7 +197,7 @@
               </td>
               <td (click)="openDoc(item, action)" width="200">
                 <span>
-                  {{item.formattedExpirationDate}}
+                  <span [ngClass]="item.expired == '1' ? 'expired' : ''"> {{item.formattedExpirationDate}}</span>
                 </span>
               </td>
               <td width="200" (click)="openDoc(item, action)">
